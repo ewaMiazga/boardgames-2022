@@ -1,0 +1,41 @@
+#pragma once
+#include <iostream>
+#include <utility>
+
+#define N 3
+#define rows  3
+#define columns 3
+#define emptySquare '_'
+
+#define findWin(row1, col1, row2, col2, row3, col3) ((board[row1][col1] == board[row2][col2]) && (board[row2][col2] == board[row3][col3]) && (board[row1][col1] != emptySquare))
+
+#define willWin(row1, col1, row2, col2, row3, col3, value) ((board[row1][col1] == board[row2][col2] && board[row1][col1] == value) || (board[row2][col2] == board[row3][col3] && board[row3][col3] == value) || (board[row1][col1] == board[row3][col3] && board[row1][col1] == value))
+
+#define findChanceToWin(row1, col1, row2, col2, row3, col3, value) (((board[row1][col1] == value) && (board[row2][col2] == board[row3][col3] && board[row2][col2] == emptySquare)) || ((board[row2][col2] == value) && (board[row1][col1] == board[row3][col3] && board[row1][col1] == emptySquare))  || ((board[row3][col3] == value) && (board[row2][col2] == board[row1][col1] && board[row2][col2] == emptySquare)))
+
+
+class TicTacToe
+{
+private:
+	char board[rows][columns];
+public:
+	TicTacToe();
+
+	bool isEmpty(int row, int column);
+
+	void insert(int row, int column, char value);
+
+	char getWinner();
+
+	bool fullBoard();
+
+	bool gameOver();
+
+	std::pair<int, int> checkWillWin(char value);
+
+	std::pair<int, int> chooseInitialMove(char value);
+
+	void moveAI(char value, char opponentValue);
+
+	void display();
+};
