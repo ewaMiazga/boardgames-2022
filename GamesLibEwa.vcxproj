@@ -140,12 +140,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Crossword.cpp" />
+    <ClCompile Include="Source2.cpp" />
     <ClCompile Include="TicTacToe.cpp" />
     <ClCompile Include="Sudoku.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Crossword.h" />
     <ClInclude Include="Sudoku.h" />
+    <ClInclude Include="Sudoku2.h" />
     <ClInclude Include="TicTacToe.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

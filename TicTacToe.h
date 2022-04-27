@@ -13,6 +13,8 @@
 
 #define findChanceToWin(row1, col1, row2, col2, row3, col3, value) (((board[row1][col1] == value) && (board[row2][col2] == board[row3][col3] && board[row2][col2] == emptySquare)) || ((board[row2][col2] == value) && (board[row1][col1] == board[row3][col3] && board[row1][col1] == emptySquare))  || ((board[row3][col3] == value) && (board[row2][col2] == board[row1][col1] && board[row2][col2] == emptySquare)))
 
+#define findEmptyLine(row1, col1, row2, col2, row3, col3)  ((board[row1][col1] == board[row2][col2]) && (board[row2][col2] == board[row3][col3]) && (board[row1][col1] == emptySquare))
+
 
 class TicTacToe
 {
@@ -33,7 +35,9 @@ public:
 
 	std::pair<int, int> checkWillWin(char value);
 
-	std::pair<int, int> chooseInitialMove(char value);
+	std::pair<int, int> chooseSecondMove(char value);
+
+	std::pair<int, int> emptyLineFullOpponentSq(char value);
 
 	void moveAI(char value, char opponentValue);
 

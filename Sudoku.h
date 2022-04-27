@@ -11,37 +11,38 @@
 class Sudoku
 {
 private:
-	//int board[N][N];
-	//int (*board)[rows];
-	int board[rows][columns];
+
+	int** board;
 	int difficultyLevel;
 
 public:
 	Sudoku(int difficultyLevelValue);
 
-	void fillBoard(int board[][N]);
+	void fillBoard(int** tab);
 
-	bool usedInRow(int row, int value);
+	void createEmptyBoard(int** tab);
 
-	bool usedInColumn(int row, int value);
+	bool usedInRow(int row, int value, int** tab);
 
-	bool usedInBox(int row, int column, int value);
+	bool usedInColumn(int row, int value, int** tab);
 
-	bool checkRepetition(int row, int column, int value);
+	bool usedInBox(int row, int column, int value, int** tab);
 
-	std::vector<int> generateNumbers(int row, int column);
+	bool checkRepetition(int row, int column, int value, int** tab);
 
-	void removeNumber(int row, int column);
+	std::vector<int> generateNumbers(int row, int column, int** tab);
 
-	bool isEmpty(int row, int column);
+	void removeNumber(int row, int column, int** tab);
 
-	bool isSolved();
+	bool isEmpty(int& row, int& column, int** tab);
+
+	bool isSolved(int** tab, int& i, int& j);
 
 	void generateSolvedBoard();
 
 	void generateStartBoard();
 
-	bool solve();
+	bool solve(int row, int col);
 
 	void displaySudoku();
 };

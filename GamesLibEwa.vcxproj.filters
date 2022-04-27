@@ -24,12 +24,24 @@
     <ClCompile Include="TicTacToe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Crossword.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sudoku.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TicTacToe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Crossword.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sudoku2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
