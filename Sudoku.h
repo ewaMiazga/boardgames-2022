@@ -14,11 +14,15 @@ private:
 
 	int** board;
 	int difficultyLevel;
+	int guessNum[9] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+	int gridPos[81];
 
 public:
 	Sudoku(int difficultyLevelValue);
 
 	void fillBoard(int** tab);
+
+	void calcDifficultyLevel(int** tab);
 
 	void createEmptyBoard(int** tab);
 
@@ -42,7 +46,9 @@ public:
 
 	void generateStartBoard();
 
-	bool solve(int row, int col);
+	void countSolutions(int& number, int row, int col);
+
+	bool solve(int row, int col, int** tab);
 
 	void displaySudoku();
 };
