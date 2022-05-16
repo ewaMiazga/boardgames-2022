@@ -5,31 +5,41 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <algorithm>
+#include <random>
+
+#define empty "lol ";
 
 
 class Crossword
 {
 private:
-	std::string crosswordClue;
-	std::string crosswordClueInfo;
-	std::vector<std::pair<char, std::pair<std::string, std::string>>> crosswordClues;
-	std::map<std::string, std::string> clues;
+	std::pair<std::string, std::string> crosswordClue; //glowne haslo
+	std::vector<std::pair<int, std::pair<std::string, std::string>>> crosswordClues; //hasla w krzyzowkce
+	std::vector<std::pair<int, std::pair<std::string, std::string>>> crosswordCluesUser; // wyniki uzytkownika
+	std::vector<std::pair<std::string, std::string>> clues;
 public:
 	Crossword();
 
-	std::string getCrosswordClue();
-
 	std::string getClue();
 
-	std::pair<std::string, std::string> findLetter(char letter, std::string word);
+	std::string getClueInfo();
+
+	std::vector<std::pair<std::string, std::string>> getClues();
+
+	std::vector<std::pair<int, std::pair<std::string, std::string>>> getCrosswordCluesUser();
+
+	void addClue(std::string Clue, std::string ClueInfo);
+
+	bool findLetter(char letter, std::pair<std::string, std::string> word);
 
 	int findLetterPos(char letter, std::string word);
 
 	int findMaxLetterPos();
 
-	void chooseCrosswordClue(std::string crosswordClueValue);
-
 	void chooseCrosswordClues();
+
+	void insert(int num, std::string clueValue);
 
 	std::string encryptClue(std::string clue);
 
@@ -37,9 +47,11 @@ public:
 
 	friend std::istream& operator>>(std::istream& CIN, Crossword& crossword);
 
-	void generateCrossword();
-
 	void display();
+
+	void solveCrossword();
+
+	bool checkCorrectness();
 };
 
-void readFromFile(std::string fileName);
+void readFromFile(std::string fileName, Crossword& crosswordTemp);

@@ -2,26 +2,58 @@
 
 Crossword::Crossword()
 {
-}
-
-std::string Crossword::getCrosswordClue()
-{
-    return crosswordClue;
+    std::string fileName = "C:/Users/a.miazga/Desktop/CrosswordData";
+    readFromFile(fileName, *this); // call its own 
+    std::random_device rd;
+    std::mt19937 g(rd());
+    std::shuffle(std::begin(clues), std::end(clues), g);
+    //std::cout << clues[0].first << std::endl;
+    int i = rand() % clues.size();
+    crosswordClue = clues[i];
+    clues.erase(clues.begin() + i);
+    chooseCrosswordClues();
+    for (int i = 0; i < crosswordClues.size(); i++)
+    {   
+        std::string clueInfo = crosswordClues.at(i).second.second;
+        //std::string clue = encryptClue(crosswordClues.at(i).second.first);
+        std::string clue = "_";
+        crosswordCluesUser.push_back(std::make_pair(i + 1, std::make_pair(clue, clueInfo)));
+    }
 }
 
 std::string Crossword::getClue()
 {
-    return crosswordClueInfo;
+    return crosswordClue.first;
 }
 
-std::pair<std::string, std::string> Crossword::findLetter(char letter, std::string word)
+std::string Crossword::getClueInfo()
 {
-    for (int i = 0; i < word.size(); i++)
+    return crosswordClue.second;
+}
+
+std::vector<std::pair<std::string, std::string>> Crossword::getClues()
+{
+    return clues;
+}
+
+std::vector<std::pair<int, std::pair<std::string, std::string>>> Crossword::getCrosswordCluesUser()
+{
+    return crosswordCluesUser;
+}
+
+void Crossword::addClue(std::string Clue, std::string ClueInfo)
+{
+    clues.push_back(std::make_pair(Clue, ClueInfo));
+}
+
+bool Crossword::findLetter(char letter, std::pair<std::string, std::string> word)
+{
+    for (int i = 0; i < word.first.size(); i++)
     {
-        if (word[i] == letter)
-            return std::make_pair(word, clues.at(word));
+        if (word.first[i] == letter)
+            return true;
     }
-    return std::make_pair("error", "error");
+    return false;
 }
 
 int Crossword::findLetterPos(char letter, std::string word)
@@ -31,60 +63,56 @@ int Crossword::findLetterPos(char letter, std::string word)
         if (word[i] == letter)
             return i;
     }
-    return -1;
 }
 
 int Crossword::findMaxLetterPos()
 {
     int maxPos = 0;
+    int i = 0;
     for (auto clue : crosswordClues)
     {
-        int pos = findLetterPos(clue.first, (clue.second).first);
+        char letter = crosswordClue.first[i];
+        int pos = findLetterPos(letter, (clue.second).first);
         if (pos > maxPos)
             maxPos = pos;
+        i++;
     }
     return maxPos;
 }
 
-void  Crossword::chooseCrosswordClue(std::string crosswordClueValue)
-{
-    crosswordClue = crosswordClue;
-    crosswordClueInfo = clues.at(crosswordClueValue); // try except because clue can not be in map
-    clues.erase(crosswordClueValue);
-}
-
 void  Crossword::chooseCrosswordClues()
 {
-    std::pair<std::string, std::string> LetterNotOccur = std::make_pair("error", "error");
-    std::vector<std::pair<char, std::pair<std::string, std::string>>>  choosenClues;
-    for (int i = 0; i < crosswordClue.size(); i++)
+    for (int i = 0; i < crosswordClue.first.size(); i++)
     {
-        char letter = crosswordClue.at(i);
-        for (std::map<std::string, std::string>::iterator it = clues.begin(); it != clues.end(); it++)
+        char letter = crosswordClue.first[i];
+        for (std::vector<std::pair<std::string, std::string>>::iterator it = clues.begin(); it != clues.end(); it++)
         {
-            if (findLetter(letter, it->first) != LetterNotOccur)
+            if (findLetter(letter, *it))
             {
-                choosenClues.push_back(std::make_pair(letter, findLetter(letter, it->first)));
+                crosswordClues.push_back(std::make_pair(i+1, *it));
                 break;
             }
         }
     }
-    crosswordClues = choosenClues;
+}
+
+void Crossword::insert(int num, std::string clueValue)
+{
+    if (crosswordCluesUser[num - 1].second.first == "_")
+        crosswordCluesUser[num - 1].second.first = clueValue;
 }
 
 std::string Crossword::encryptClue(std::string clue)
 {
     std::string s;
     for (int i = 0; i < clue.size(); i++)
-    {
-        s += "_";
-    }
+        s += "_ ";
     return s;
 }
 
 std::ostream& operator<<(std::ostream& COUT, Crossword& crossword)
 {
-    for (std::map<std::string, std::string>::iterator it = crossword.clues.begin(); it != crossword.clues.end(); it++)
+    for (std::vector<std::pair<std::string, std::string>>::iterator it = crossword.clues.begin(); it != crossword.clues.end(); it++)
     {
         COUT << it->first << std::endl;
         COUT << it->second << std::endl;
@@ -96,84 +124,84 @@ std::istream& operator>>(std::istream& CIN, Crossword& crossword)
 {
     std::string clue;
     std::string clueInfo;
-    CIN >> clue;
-    CIN >> clueInfo;
-    crossword.clues.insert({ clue, clueInfo });
+    std::getline(CIN, clue);
+    std::getline(CIN, clueInfo);
+    crossword.clues.push_back(std::make_pair(clue, clueInfo));
     return CIN;
-}
-
-void Crossword::generateCrossword()
-{
-    int maxPos = findMaxLetterPos();
-    int i = 0;
-    int num = 1;
-    while (i < maxPos)
-    {
-        std::cout << " ";
-        i++;
-    }
-    std::cout << " #" << std::endl;
-    for (auto clue : crosswordClues)
-    {
-        if (findLetterPos(clue.first, (clue.second).first) < maxPos)
-        {
-            int gap = maxPos - findLetterPos(clue.first, (clue.second).first);
-            while (gap > 0)
-            {
-                std::cout << " ";
-                gap--;
-            }
-        }
-        std::cout << num << encryptClue((clue.second).first) << std::endl;
-
-    }
-    while (i > 0)
-    {
-        std::cout << " ";
-        i--;
-    }
-    std::cout << " #" << std::endl;
-    for (auto clue : crosswordClues)
-    {
-        std::cout << std::endl;
-        std::cout << std::endl;
-        std::cout << (clue.second).second << std::endl;
-    }
 }
 
 void Crossword::display()
 {
     int maxPos = findMaxLetterPos();
+    //std::cout << maxPos;
     int i = 0;
-    int num = 1;
-    while (i < maxPos)
+    int j = 0;
+    while (i <= maxPos)
     {
-        std::cout << " ";
+        std::cout << "  ";
         i++;
     }
-    std::cout << " #" << std::endl;
+    std::cout << "#" << std::endl;
     for (auto clue : crosswordClues)
     {
-        if (findLetterPos(clue.first, (clue.second).first) < maxPos)
+        if (findLetterPos(crosswordClue.first[j], (clue.second).first) < maxPos)
         {
-            int gap = maxPos - findLetterPos(clue.first, (clue.second).first);
+            int gap = maxPos - findLetterPos(crosswordClue.first[j], (clue.second).first);
             while (gap > 0)
             {
-                std::cout << " ";
+                std::cout << "  ";
                 gap--;
             }
         }
-        std::cout << num << encryptClue((clue.second).first) << std::endl;
+        std::cout << clue.first << ".";
+        //if ((clue.second).first))
+        //    encryptClue((clue.second).first) << std::endl;
+        auto userClue = crosswordCluesUser[clue.first - 1];
+        if (clue.second == userClue.second)
+        {
+            for (int k = 0; k < userClue.second.first.size(); k++)
+                std::cout << userClue.second.first[k] << " ";
+        }
+        else if(userClue.second.first == "_" && clue.first == userClue.first)
+            std::cout << encryptClue((clue.second).first);
+        std::cout << std::endl;
+        j++;
     }
     while (i > 0)
     {
-        std::cout << " ";
+        std::cout << "  ";
         i--;
     }
-    std::cout << " #" << std::endl;
+    std::cout << "#" << std::endl;
+    std::cout << std::endl;
+    std::cout << std::endl;
+    for (auto clue : crosswordClues)
+    {
+        std::cout << std::endl;
+        std::cout << clue.first << ". " << (clue.second).second << std::endl;
+    }
 }
 
-void readFromFile(std::string fileName)
+void Crossword::solveCrossword()
+{
+    for (int i = 0; i < crosswordCluesUser.size(); i++)
+    {
+        if (crosswordCluesUser[i].second.first == "_") // why cant I write empty instead of "_"
+            insert(i, crosswordClues[i].second.first);
+    }
+}
+
+bool Crossword::checkCorrectness()
+{
+    for (int i = 0; i < crosswordCluesUser.size(); i++)
+    {
+        if (crosswordCluesUser[i].second.first != crosswordClues[i].second.first)
+            return false;
+    }
+    return true;
+}
+
+void readFromFile(std::string fileName, Crossword& crosswordTemp)
 {
     fileName += ".txt";
     std::ifstream fileHandleOpen(fileName);
@@ -185,7 +213,6 @@ void readFromFile(std::string fileName)
     {
         while (!fileHandleOpen.eof())
         {
-            Crossword crosswordTemp;
             fileHandleOpen >> crosswordTemp;
         }
         fileHandleOpen.close();
