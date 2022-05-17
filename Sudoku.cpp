@@ -284,8 +284,13 @@ void Sudoku::generateStartBoard()
 		{
 			board[x][y] = temp;
 		}
-
 	}
+	//if (!solve(0, 0, board))
+	//	generateStartBoard();
+	//displaySudoku();
+	//std::cout << "solved: " << std::endl;
+	//solve(0, 0, board);
+	//displaySudoku();
 	//fillBoard(temp);
 }
 
@@ -379,8 +384,27 @@ bool Sudoku::solve(int row, int col, int** tab)
 	return false;
 }
 
+void Sudoku::solve1()
+{
+	for(int row = 0; row < rows; row++)
+		for (int col = 0; col < columns; col++)
+			if (isEmpty(row, col, board))
+				for (int num = 1; num <= N; num++)
+					if (!checkRepetition(row, col, num, board))
+					{
+						board[row][col] = num;
+						if (!solve(row, col + 1, board))
+						{
+							board[row][col] = emptySquare;
+							solve1();
+						}
+
+					}
+}
+
 void Sudoku::play()
 {
+	generateStartBoard();
 	int i = 0;
 	int j = 0;
 	while (!isSolved(board, i, j))
@@ -393,7 +417,7 @@ void Sudoku::play()
 		std::cin >> col;
 		std::cout << "Enter the number" << std::endl;
 		std::cin >> num;
-		insert(row, col, num);
+		insert(row - 1, col - 1, num);
 	}
 }
 

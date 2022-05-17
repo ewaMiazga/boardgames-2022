@@ -50,7 +50,9 @@ public:
 
 	void countSolutions(int& number, int row, int col);
 
-	bool solve(int row, int col, int** tab);
+	bool solve(int row, int col, int** tab); //isSolvable
+
+	void solve1();
 
 	void play();
 

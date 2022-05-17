@@ -40,33 +40,34 @@ int main()
     //    {8, 2, 5, 6, 3, 9, 7, 1, 4}
     //};
 
-    int arr[9][9] = { {1 , 8 , 7 , 9 , 6 , 4 , 3 , 5 , 2 },
-        {2, 3, 6, 1, 8, 5, 9, 4, 7},
-        {5 , 4 , 9 , 2 , 3 , 7 , 6 , 1 , 8} ,
-        {6 , 9 , 4 , 7 , 2 , 1 , 5 , 8 , 3} ,
-        {3 , 1 , 5 , 4 , 9 , 8 , 2 , 7 , 6} ,
-        {7 , 2 , 8 , 6 , 5 , 3 , 4 , 9 , 1} ,
-        {4 , 5 , 3 , 8 , 1 , 2 , 7 , 6 , 9} ,
-        {8 , 6 , 2 , 5 , 7 , 9 , 1 , 3 , 4} ,
-        {9 , 7 , 1 , 3 , 4 , 6 , 8 , 2 , 5} 
-};
-
-    Sudoku s1(50);
-    int** mat;
-    mat = new int* [10];
-    for (int i = 0; i < 9; i++)
-        mat[i] = new int[10];
-    for (int i = 0; i < 9; i++)
-        mat[i] = arr[i];
-    s1.displaySudoku();
+//    int arr[9][9] = { {1 , 8 , 7 , 9 , 6 , 4 , 3 , 5 , 2 },
+//        {2, 3, 6, 1, 8, 5, 9, 4, 7},
+//        {5 , 4 , 9 , 2 , 3 , 7 , 6 , 1 , 8} ,
+//        {6 , 9 , 4 , 7 , 2 , 1 , 5 , 8 , 3} ,
+//        {3 , 1 , 5 , 4 , 9 , 8 , 2 , 7 , 6} ,
+//        {7 , 2 , 8 , 6 , 5 , 3 , 4 , 9 , 1} ,
+//        {4 , 5 , 3 , 8 , 1 , 2 , 7 , 6 , 9} ,
+//        {8 , 6 , 2 , 5 , 7 , 9 , 1 , 3 , 4} ,
+//        {9 , 7 , 1 , 3 , 4 , 6 , 8 , 2 , 5} 
+//};
+//
+//    Sudoku s1(50);
+//    int** mat;
+//    mat = new int* [10];
+//    for (int i = 0; i < 9; i++)
+//        mat[i] = new int[10];
+//    for (int i = 0; i < 9; i++)
+//        mat[i] = arr[i];
+    //s1.displaySudoku();
     //s1.fillBoard(mat);
-    std::cout << std::endl;
+    //std::cout << std::endl;
     //s1.solve(0, 0);
-    s1.generateSolvedBoard();
-    s1.displaySudoku();
-    std::cout << std::endl;
-    s1.generateStartBoard();
-    s1.play();
+    //s1.generateSolvedBoard();
+    //s1.displaySudoku();
+    //std::cout << std::endl;
+    //s1.generateStartBoard();
+    //s1.play();
+    //s1.solve(0, 0, )
 
     //if (1 == 0 == 0)
     //   std::cout << "ewa" << std::endl;
@@ -110,7 +111,8 @@ int main()
     ////t1.display();
     //t1.gameOver();
 
-   // TicTacToe board;
+   TicTacToe board;
+   board.play();
    // board.insert(1, 1, 'O');
    // //board.insert(0, 2, 'O');
    // board.insert(1, 0, 'X');

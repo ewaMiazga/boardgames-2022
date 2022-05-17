@@ -275,3 +275,32 @@ void TicTacToe::display()
 	}
 	std::cout << std::endl;
 }
+
+void TicTacToe::play()
+{
+	char playerCounter;
+	char AICounter;
+	std::cout << "Choose counter ( 'O' or 'X' )" << std::endl;
+	std::cin >> playerCounter;
+	if (playerCounter == 'X')
+		AICounter = 'O';
+	else
+		AICounter = 'X';
+	int move = 1;
+	while (!gameOver())
+	{
+		if (move % 2 == 1)
+		{
+			display();
+			int row, col;
+			std::cout << "Choose row" << std::endl;
+			std::cin >> row;
+			std::cout << "Choose column" << std::endl;
+			std::cin >> col;
+			insert(row - 1, col - 1, playerCounter);
+		}
+		else
+			moveAI(AICounter, playerCounter);
+		move++;
+	}
+}

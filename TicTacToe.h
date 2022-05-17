@@ -42,4 +42,6 @@ public:
 	void moveAI(char value, char opponentValue);
 
 	void display();
+
+	void play();
 };
