@@ -8,7 +8,7 @@
 #include <algorithm>
 #include <random>
 
-#define empty "lol ";
+//#define empty "lol ";
 
 
 class Crossword
@@ -24,6 +24,8 @@ public:
 	std::string getClue();
 
 	std::string getClueInfo();
+
+	void chooseClueRandomly();
 
 	std::vector<std::pair<std::string, std::string>> getClues();
 
@@ -51,7 +53,11 @@ public:
 
 	void solveCrossword();
 
+	bool isSolved();
+
 	bool checkCorrectness();
+
+	void play();
 };
 
 void readFromFile(std::string fileName, Crossword& crosswordTemp);

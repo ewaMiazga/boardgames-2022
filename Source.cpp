@@ -126,13 +126,15 @@ int main()
     std::cout << c1.getClue() << std::endl;
     std::cout << c1.getClueInfo() << std::endl;
     c1.display();
-    std::cout << "write clue" << std::endl;
-    int num;
-    std::string clue;
-    std::cin >> num;
-    std::cin >> clue;
-    c1.insert(num, clue);
-    c1.display();
+    //std::cout << "write clue" << std::endl;
+    //int num;
+    //std::string clue;
+    //std::cin >> num;
+    //std::cin >> clue;
+    //c1.insert(num, clue);
+    //c1.solveCrossword();
+    c1.play();
+    c1.checkCorrectness();
     system("pause 0");
     return 0;
 }
