@@ -51,6 +51,12 @@ public:
 
 	void display();
 
+	void display2();
+
+	void printVert(int allignment, std::string word);
+
+	void printHoriz(int allignment, std::string word);
+
 	void solveCrossword();
 
 	bool isSolved();

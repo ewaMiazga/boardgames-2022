@@ -198,6 +198,56 @@ void Crossword::display()
     }
 }
 
+void Crossword::display2()
+{
+    //int horzPos = findLetterPos(letter, crosswordClues[1].second.first);
+    //printVert(horzPos, crosswordClues[0].second.first);
+    for (int i = 1; i < crosswordClues.size(); i++)
+    {
+        for (int j = 0; j < crosswordClues[i].second.first.size(); j++)
+        {
+            char letter = crosswordClues[i].second.first[j];
+            if (findLetter(letter, crosswordClues[i - 1].second))
+            {
+                int horzPos = findLetterPos(letter, crosswordClues[i - 1].second.first);
+                if (i % 2 == 0)
+                    printVert(horzPos, crosswordClues[i].second.first);
+                else
+                    printHoriz(horzPos, crosswordClues[i - 1].second.first);
+                //printVert(horzPos, crosswordClues[i].second.first);
+                //printHoriz(horzPos, crosswordClues[i - 1].second.first);
+            }
+        }
+
+    }
+}
+
+void Crossword::printVert(int allignment, std::string word)
+{
+    for (int i = 0; i < word.size(); i++)
+    {
+        int j = 0;
+        while (j < allignment)
+        {
+            std::cout << " ";
+            j++;
+        }
+        std::cout << word[i] << std::endl;
+    }
+}
+
+void Crossword::printHoriz(int allignment, std::string word)
+{
+    int j = 0;
+    while (j < allignment)
+    {
+        std::cout << " ";
+        j++;
+    }
+    for (int i = 0; i < word.size(); i++)
+        std::cout << word[i] << std::endl;
+}
+
 void Crossword::solveCrossword()
 {
     for (int i = 0; i < crosswordCluesUser.size(); i++)

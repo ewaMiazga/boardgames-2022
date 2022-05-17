@@ -40,6 +40,8 @@ public:
 
 	bool isEmpty(int& row, int& column, int** tab);
 
+	void insert(int row, int column, int num);
+
 	bool isSolved(int** tab, int& i, int& j);
 
 	void generateSolvedBoard();
@@ -49,6 +51,8 @@ public:
 	void countSolutions(int& number, int row, int col);
 
 	bool solve(int row, int col, int** tab);
+
+	void play();
 
 	void displaySudoku();
 };

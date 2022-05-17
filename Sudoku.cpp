@@ -20,8 +20,12 @@ Sudoku::Sudoku(int difficultyLevelValue)
 	{
 		gridPos[i] = i;
 	}
-	std::random_shuffle(guessNum, guessNum + N, myrandom);
-	std::random_shuffle(gridPos, gridPos + N*N, myrandom);
+	std::random_device rd;
+	std::mt19937 g(rd());
+	std::shuffle(std::begin(guessNum), std::end(guessNum), g);
+	std::shuffle(std::begin(gridPos), std::end(gridPos), g);
+	//std::random_shuffle(guessNum, guessNum + N, myrandom);
+	//std::random_shuffle(gridPos, gridPos + N*N, myrandom);
 }
 
 void Sudoku::fillBoard(int** tab)
@@ -142,6 +146,11 @@ bool Sudoku::isEmpty(int& row, int& column, int** tab)
 	return false;
 }
 
+void Sudoku::insert(int row, int column, int num)
+{
+	board[row][column] = num;
+}
+
 bool Sudoku::isSolved(int** tab, int& i, int& j)
 {
 	for (int i = 0; i < rows; i++)
@@ -195,9 +204,19 @@ void Sudoku::generateSolvedBoard()
 	for (int i = 0; i < 10; i++)
 		temp[i] = new int[10];
 	createEmptyBoard(temp);
-	int numberRow = (rand() % N * N) / N;
-	int numberCol = (rand() % N * N) / N;
-	int number = rand() % N + 1;
+	std::random_device rd;
+	std::mt19937 g(rd());
+	std::vector<int> num(N * N);
+	std::vector<int> num1(N);
+	int n = 0;
+	int k = 1;
+	std::generate(num.begin(), num.end(), [&n] {return n++; });
+	std::shuffle(std::begin(num), std::end(num), g);
+	std::generate(num1.begin(), num1.end(), [&k] {return k++; });
+	std::shuffle(std::begin(num1), std::end(num1), g);
+	int numberRow = num[(rand() % num.size())] / N;
+	int numberCol = num[(rand() % num.size())] / N;
+	int number = num1[rand() % num1.size()];
 	temp[numberRow][numberCol] = number;
 	std::cout << numberRow << " " << numberCol << " " << number << std::endl;
 	while (!solve(0, 0, temp))
@@ -358,6 +377,24 @@ bool Sudoku::solve(int row, int col, int** tab)
 		tab[row][col] = emptySquare;
 	}
 	return false;
+}
+
+void Sudoku::play()
+{
+	int i = 0;
+	int j = 0;
+	while (!isSolved(board, i, j))
+	{
+		displaySudoku();
+		int row, col, num;
+		std::cout << "Choose the row" << std::endl;
+		std::cin >> row;
+		std::cout << "Choose the column" << std::endl;
+		std::cin >> col;
+		std::cout << "Enter the number" << std::endl;
+		std::cin >> num;
+		insert(row, col, num);
+	}
 }
 
 void Sudoku::displaySudoku()
