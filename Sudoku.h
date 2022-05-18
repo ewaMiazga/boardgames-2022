@@ -8,21 +8,27 @@
 #define rows  9
 #define columns 9
 
+#define solvable 18
+#define hard 40
+#define medium 65
+
 class Sudoku
 {
 private:
 
 	int** board;
-	int difficultyLevel;
+	std::pair<int, int> difficultyLevel;
 	int guessNum[9] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
 	int gridPos[81];
 
 public:
-	Sudoku(int difficultyLevelValue);
+	Sudoku(std::string difficultyLevelValue);
 
 	void fillBoard(int** tab);
 
-	void calcDifficultyLevel(int** tab);
+	void assignDiffcultyLevel(std::string difficultyLevelValue);
+
+	int calcDifficultyLevel(int** tab);
 
 	void createEmptyBoard(int** tab);
 

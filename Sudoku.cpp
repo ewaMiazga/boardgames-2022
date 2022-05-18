@@ -7,9 +7,9 @@
 
 int myrandom(int i) { return std::rand() % i; }
 
-Sudoku::Sudoku(int difficultyLevelValue)
+Sudoku::Sudoku(std::string difficultyLevelValue)
 {
-	difficultyLevel = difficultyLevelValue;
+	assignDiffcultyLevel(difficultyLevelValue);
 	int** array;
 	array = new int* [10];
 	for (int i = 0; i < 10; i++)
@@ -24,8 +24,6 @@ Sudoku::Sudoku(int difficultyLevelValue)
 	std::mt19937 g(rd());
 	std::shuffle(std::begin(guessNum), std::end(guessNum), g);
 	std::shuffle(std::begin(gridPos), std::end(gridPos), g);
-	//std::random_shuffle(guessNum, guessNum + N, myrandom);
-	//std::random_shuffle(gridPos, gridPos + N*N, myrandom);
 }
 
 void Sudoku::fillBoard(int** tab)
@@ -46,14 +44,32 @@ void Sudoku::fillBoard(int** tab)
 	board = tab;
 }
 
-void Sudoku::calcDifficultyLevel(int** tab)
+void Sudoku::assignDiffcultyLevel(std::string difficultyLevelValue)
+{
+	std::pair<int, int> diff;
+	if (difficultyLevelValue == "easy")
+	{
+		diff = std::make_pair(medium + 1, N*N);
+	}
+	else if (difficultyLevelValue == "medium")
+	{
+		diff = std::make_pair(hard + 1, medium);
+	}
+	else if(difficultyLevelValue == "hard")
+	{
+		diff = std::make_pair(solvable, hard);
+	}
+	difficultyLevel = diff;
+}
+
+int Sudoku::calcDifficultyLevel(int** tab)
 {
 	int emptySquares = 0;
 	for (int i = 0; i < rows; i++)
 		for (int j = 0; j < columns; j++)
 			if (tab[i][j] == emptySquare)
 				emptySquares++;
-	difficultyLevel = N * N - emptySquares;
+	return N * N - emptySquares;
 }
 
 void Sudoku::createEmptyBoard(int** tab)
@@ -398,13 +414,18 @@ void Sudoku::solve1()
 							board[row][col] = emptySquare;
 							solve1();
 						}
-
 					}
 }
 
 void Sudoku::play()
 {
-	generateStartBoard();
+	int k = 0;
+	while (!(k >= difficultyLevel.first && k <= difficultyLevel.second))
+	{
+		generateStartBoard();
+		k = calcDifficultyLevel(board);
+	}
+	std::cout << k << std::endl;
 	int i = 0;
 	int j = 0;
 	while (!isSolved(board, i, j))

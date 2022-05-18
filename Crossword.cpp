@@ -2,7 +2,8 @@
 
 Crossword::Crossword()
 {
-    std::string fileName = "C:/Users/a.miazga/Desktop/CrosswordData";
+    //std::string fileName = "C:/Users/a.miazga/Desktop/CrosswordData";
+    std::string fileName = "C:/Users/a.miazga/Desktop/CrosswordDataUTF";
     //std::string fileName = "C:/Users/a.miazga/Desktop/nowiutkitxt";
     readFromFile(fileName, *this); // call its own 
     chooseClueRandomly();
@@ -138,7 +139,6 @@ std::istream& operator>>(std::istream& CIN, Crossword& crossword)
 void Crossword::display()
 {
     int maxPos = findMaxLetterPos();
-    //std::cout << maxPos;
     int i = 0;
     int j = 0;
     while (i < maxPos)
@@ -281,16 +281,24 @@ void Crossword::play()
 {
     while (!isSolved() && !checkCorrectness())
     {
+        display();
         int num;
+        std::cout << std::endl;
         std::cout << "choose number: " << std::endl;
         std::string clue;
         std::cin >> num;
         std::cout << "write clue: " << std::endl;
         std::cin >> clue;
         insert(num, clue);
-        display();
     }
     display();
+    std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << "Crossword is solved" << std::endl;
+    std::cout << std::endl;
+    std::cout << "CLUE: " << crosswordClue.first << std::endl;
+    std::cout << "CLUE INFO: " << crosswordClue.second << std::endl;
+    std::cout << std::endl;
 }
 
 void readFromFile(std::string fileName, Crossword& crosswordTemp)
