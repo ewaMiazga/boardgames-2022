@@ -64,8 +64,8 @@ int main()
     //s1.play();
 
     //PLAY CROSSWORD
-    //Crossword c1;
-    //c1.play();
+    Crossword c1;
+    c1.play();
 
     system("pause 0");
     return 0;

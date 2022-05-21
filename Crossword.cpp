@@ -160,14 +160,6 @@ void Crossword::display()
         }
         //std::cout << clue.first << ".";
         auto userClue = crosswordCluesUser[clue.first - 1];
-        //if (clue.second == userClue.second)
-        //{
-        //    for (int k = 0; k < userClue.second.first.size(); k++)
-        //        std::cout << userClue.second.first[k] << " ";
-        //}
-        ////else if(userClue.second.first == "_" && clue.first == userClue.first)
-        //else
-        //    std::cout << encryptClue((clue.second).first);
         if (userClue.second.first == "_")
         {
             std::cout << encryptClue((clue.second).first);

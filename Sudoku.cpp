@@ -164,7 +164,8 @@ bool Sudoku::isEmpty(int& row, int& column, int** tab)
 
 void Sudoku::insert(int row, int column, int num)
 {
-	board[row][column] = num;
+	if (num <= N && num >= 0)
+		board[row][column] = num;
 }
 
 bool Sudoku::isSolved(int** tab, int& i, int& j)
@@ -234,7 +235,6 @@ void Sudoku::generateSolvedBoard()
 	int numberCol = num[(rand() % num.size())] / N;
 	int number = num1[rand() % num1.size()];
 	temp[numberRow][numberCol] = number;
-	std::cout << numberRow << " " << numberCol << " " << number << std::endl;
 	while (!solve(0, 0, temp))
 		generateSolvedBoard();
 	fillBoard(temp);
@@ -425,7 +425,6 @@ void Sudoku::play()
 		generateStartBoard();
 		k = calcDifficultyLevel(board);
 	}
-	std::cout << k << std::endl;
 	int i = 0;
 	int j = 0;
 	while (!isSolved(board, i, j))

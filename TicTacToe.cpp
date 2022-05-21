@@ -50,7 +50,7 @@ char TicTacToe::getWinner()
 	return winner;
 }
 
-bool TicTacToe::fullBoard()
+bool TicTacToe::isFullBoard()
 {
 	for (int i = 0; i < rows; i++)
 		for (int j = 0; j < columns; j++)
@@ -70,7 +70,7 @@ bool TicTacToe::gameOver()
 		std::cout << "The winner is: " << winner << std::endl;
 		return true;
 	}
-	else if (!fullBoard()) // continue to play
+	else if (!isFullBoard()) // continue to play
 		return false;
 	else
 	{

@@ -8,8 +8,6 @@
 #include <algorithm>
 #include <random>
 
-//#define empty "lol ";
-
 
 class Crossword
 {

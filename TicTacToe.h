@@ -29,7 +29,7 @@ public:
 
 	char getWinner();
 
-	bool fullBoard();
+	bool isFullBoard();
 
 	bool gameOver();
 

@@ -44,5 +44,11 @@
     <ClInclude Include="Sudoku2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Games.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Square.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
