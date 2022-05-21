@@ -46,6 +46,13 @@ std::vector<std::pair<int, std::pair<std::string, std::string>>> Crossword::getC
     return crosswordCluesUser;
 }
 
+bool Crossword::isEmpty(int num)
+{
+    if (crosswordCluesUser[num].second.first[0] == emptySquare)
+        return true;
+    return false;
+}
+
 void Crossword::addClue(std::string Clue, std::string ClueInfo)
 {
     clues.push_back(std::make_pair(Clue, ClueInfo));
@@ -252,10 +259,8 @@ void Crossword::solveCrossword()
 bool Crossword::isSolved()
 {
     for (int i = 0; i < crosswordCluesUser.size(); i++)
-    {
-        if (crosswordCluesUser[i].second.first == "_")
+        if (isEmpty(i))
             return false;
-    }
     return true;
 }
 

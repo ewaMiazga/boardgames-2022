@@ -8,7 +8,7 @@
 #include <algorithm>
 #include <random>
 
-
+#define emptySquare '_'
 class Crossword
 {
 private:
@@ -29,6 +29,8 @@ public:
 
 	std::vector<std::pair<int, std::pair<std::string, std::string>>> getCrosswordCluesUser();
 
+	bool isEmpty(int num);
+	
 	void addClue(std::string Clue, std::string ClueInfo);
 
 	bool findLetter(char letter, std::pair<std::string, std::string> word);

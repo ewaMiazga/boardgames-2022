@@ -7,7 +7,9 @@ class Games
 
 	void insert(int num, std::string clueValue);
 
+	bool isEmpty(int& row, int& column);
 
+	bool isEmpty(int& row, int& column, int** tab);
 
 
 };
