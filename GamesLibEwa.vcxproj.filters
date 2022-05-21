@@ -30,6 +30,9 @@
     <ClCompile Include="Source2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Games.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sudoku.h">
@@ -45,9 +48,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Games.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Square.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

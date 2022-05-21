@@ -1,15 +1,28 @@
 #pragma once
+#include <iostream>
 #include <string>
+
+#define emptySquare
 
 class Games
 {
-	void insert(int row, int column, int num);
+private:
+	std::string game;
+	char** board;
+	int rows;
+	int columns;
 
-	void insert(int num, std::string clueValue);
+public:
+	Games(std::string gameValue);
 
-	bool isEmpty(int& row, int& column);
+	void calc_emptySquare();
 
-	bool isEmpty(int& row, int& column, int** tab);
+	void insert(int row = 0, int column = 0, char value = '_', int num = 0, std::string clueValue = "_");
 
+	bool isEmpty(int& num, int& row, int& column, int** tab); // there should be default arguments
+
+	void play();
+
+	void display();
 
 };

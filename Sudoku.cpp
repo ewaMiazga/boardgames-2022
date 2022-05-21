@@ -454,6 +454,5 @@ void Sudoku::displaySudoku()
 		std::cout << std::endl;
 		if ((i + 1) % 3 == 0 && i != rows - 1)
 			std::cout << "----------------------" << std::endl;
-		//std::cout << std::endl;
 	}
 }

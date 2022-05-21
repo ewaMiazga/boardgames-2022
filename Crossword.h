@@ -29,7 +29,7 @@ public:
 
 	std::vector<std::pair<int, std::pair<std::string, std::string>>> getCrosswordCluesUser();
 
-	bool isEmpty(int num);
+	bool isEmpty(int& num);
 	
 	void addClue(std::string Clue, std::string ClueInfo);
 

@@ -46,7 +46,7 @@ std::vector<std::pair<int, std::pair<std::string, std::string>>> Crossword::getC
     return crosswordCluesUser;
 }
 
-bool Crossword::isEmpty(int num)
+bool Crossword::isEmpty(int& num)
 {
     if (crosswordCluesUser[num].second.first[0] == emptySquare)
         return true;
