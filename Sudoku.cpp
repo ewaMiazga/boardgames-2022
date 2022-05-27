@@ -429,7 +429,7 @@ void Sudoku::play()
 	int j = 0;
 	while (!isSolved(board, i, j))
 	{
-		displaySudoku();
+		display();
 		int row, col, num;
 		std::cout << "Choose the row" << std::endl;
 		std::cin >> row;
@@ -441,7 +441,7 @@ void Sudoku::play()
 	}
 }
 
-void Sudoku::displaySudoku()
+void Sudoku::display()
 {
 	for (int i = 0; i < rows; i++)
 	{
