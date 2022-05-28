@@ -29,7 +29,7 @@ set_target_properties(sfml-graphics PROPERTIES CXX_STANDARD 17 CXX_STANDARD_REQU
 #==========================================
 
 #file(GLOB_RECURSE BoardGamesLib_SRC "BoardGamesLib/*.h" "BoardGamesLib/*.cpp")
-file(GLOB_RECURSE BoardGamesLib_SRC "test.h" "test.cpp")
+file(GLOB_RECURSE BoardGamesLib_SRC "tile.h" "tile.cpp")
 
 add_library(BoardGamesLib ${BoardGamesLib_SRC})
 
@@ -60,6 +60,7 @@ target_link_libraries(BoardGamesUnitTest BoardGamesLib)
 set_property(TARGET BoardGamesUnitTest PROPERTY CXX_STANDARD 17)
 
 target_link_libraries(BoardGamesApp sfml-graphics sfml-system sfml-window) 
+target_link_libraries(BoardGamesLib sfml-graphics sfml-system sfml-window) 
 
 
 

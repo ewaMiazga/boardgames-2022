@@ -17,7 +17,7 @@ private:
 public:
 	Games() = default;
 
-	//Games(std::string gameValue);
+	Games(std::string gameValue);
 
 	void calc_emptySquare();
 
