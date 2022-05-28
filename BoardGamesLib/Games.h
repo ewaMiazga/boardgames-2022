@@ -12,17 +12,21 @@ private:
 	int rows;
 	int columns;
 
+	static int** r;
+
 public:
-	Games(std::string gameValue);
+	Games() = default;
+
+	//Games(std::string gameValue);
 
 	void calc_emptySquare();
 
 	void insert(int row = 0, int column = 0, char value = '_', int num = 0, std::string clueValue = "_");
 
-	bool isEmpty(int& num, int& row, int& column, int** tab); // there should be default arguments
+	virtual bool isEmpty(int row, int column, char value = ' ', int** tab = r); // there should be default arguments
 
-	void play();
+	virtual void play();
 
-	void display();
+	virtual void display();
 
 };

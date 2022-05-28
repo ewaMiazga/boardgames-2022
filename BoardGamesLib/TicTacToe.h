@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <utility>
+#include "Games.h"
 
 #define N 3
 #define rows  3
@@ -16,7 +17,7 @@
 #define findEmptyLine(row1, col1, row2, col2, row3, col3)  ((board[row1][col1] == board[row2][col2]) && (board[row2][col2] == board[row3][col3]) && (board[row1][col1] == emptySquare))
 
 
-class TicTacToe
+class TicTacToe:public Games
 {
 private:
 	char board[rows][columns];
@@ -41,7 +42,7 @@ public:
 
 	void moveAI(char value, char opponentValue);
 
-	void display();
+	void display() override;
 
-	void play();
+	void play() override;
 };

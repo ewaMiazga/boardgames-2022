@@ -7,9 +7,10 @@
 #include <vector>
 #include <algorithm>
 #include <random>
+#include "Games.h"
 
 #define emptySquare '_'
-class Crossword
+class Crossword:public Games
 {
 private:
 	std::pair<std::string, std::string> crosswordClue; //glowne haslo
@@ -49,7 +50,7 @@ public:
 
 	friend std::istream& operator>>(std::istream& CIN, Crossword& crossword);
 
-	void display();
+	void display() override;
 
 	void display2();
 
@@ -63,7 +64,7 @@ public:
 
 	bool checkCorrectness();
 
-	void play();
+	void play() override;
 };
 
 void readFromFile(std::string fileName, Crossword& crosswordTemp);

@@ -2,6 +2,8 @@
 #include <iostream>
 #include <random>
 #include <vector>
+#include "Games.h"
+
 
 #define emptySquare 0
 #define N 9
@@ -12,7 +14,7 @@
 #define hard 40
 #define medium 65
 
-class Sudoku
+class Sudoku:public Games
 {
 private:
 
@@ -60,7 +62,7 @@ public:
 
 	void solve1();
 
-	void play();
+	void play() override;
 
-	void displaySudoku();
+	void display() override;
 };
