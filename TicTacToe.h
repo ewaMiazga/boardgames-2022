@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
 #include <utility>
+#include <random>
+#include <vector>
 #include "Games.h"
 
 #define N 3
@@ -50,6 +52,8 @@ public:
 	std::pair<int, int> defaultMove();
 
 	void moveAI(char value, char opponentValue);
+
+	int chooseStartingPlayer();
 
 	void display() override;
 

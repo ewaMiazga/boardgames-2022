@@ -24,8 +24,9 @@ bool TicTacToe::isEmpty(int row, int column)
 
 void TicTacToe::insert(int row, int column, char value)
 {
-	if (isEmpty(row, column))
+	while (isEmpty(row, column))
 		board[row][column] = value;
+
 	//else exception
 }
 
@@ -294,6 +295,14 @@ void TicTacToe::moveAI(char value, char opponentValue)
 	}
 }
 
+int TicTacToe::chooseStartingPlayer()
+{
+	std::random_device rd;
+	std::mt19937 g(rd());
+	std::vector nums = { 0, 1 };
+	std::shuffle(std::begin(nums), std::end(nums), g);
+	return nums[0];
+}
 void TicTacToe::display()
 {
 	for (int i = 0; i < rows; i++)
@@ -311,26 +320,56 @@ void TicTacToe::play()
 {
 	char playerCounter;
 	char AICounter;
-	std::cout << "Choose counter ( 'O' or 'X' )" << std::endl;
+	std::string request;
+	std::cout << "Player1: Choose counter ( 'O' or 'X' )" << std::endl;
 	std::cin >> playerCounter;
+	std::cout << "Do you want to play with AI? yes/no" << std::endl;
+	std::cin >> request;
 	if (playerCounter == 'X')
 		AICounter = 'O';
 	else
 		AICounter = 'X';
-	int move = 1;
+	if (request == "no")
+		std::cout << "Player2's counter = " << AICounter << std::endl;
+	int move = chooseStartingPlayer();
 	while (!gameOver())
 	{
-		if (move % 2 == 1)
+		bool inserted = false;
+		while (move % 2 == 1 && !inserted)
 		{
 			display();
 			int row, col;
+			std::cout << "Player" << " " << playerCounter << std::endl;
 			std::cout << "Choose row" << std::endl;
 			std::cin >> row;
 			std::cout << "Choose column" << std::endl;
 			std::cin >> col;
-			insert(row - 1, col - 1, playerCounter);
+			if (!isEmpty(row - 1, col - 1))
+				std::cout << "This square is not empty!" << std::endl;
+			else
+			{
+				insert(row - 1, col - 1, playerCounter);
+				inserted = true;
+			}
 		}
-		else
+		while (request == "no" && move % 2 == 0 && !inserted)
+		{
+			display();
+			int row, col;
+			std::cout << "Player" << " " << AICounter << std::endl;
+			std::cout << "Choose row" << std::endl;
+			std::cin >> row;
+			std::cout << "Choose column" << std::endl;
+			std::cin >> col;
+			if (!isEmpty(row - 1, col - 1))
+				std::cout << "This square is not empty!" << std::endl;
+			else
+			{
+				insert(row - 1, col - 1, AICounter);
+				inserted = true;
+			}
+		}
+		if (request == "yes" && move % 2 == 0)
 			moveAI(AICounter, playerCounter);
 		move++;
 	}
