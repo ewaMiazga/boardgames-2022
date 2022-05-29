@@ -96,16 +96,22 @@ int Crossword::findMaxLetterPos()
 
 void  Crossword::chooseCrosswordClues()
 {
-    for (int i = 0; i < crosswordClue.first.size(); i++)
+    bool created  = false; 
+    while (!created)
     {
-        char letter = crosswordClue.first[i];
-        for (std::vector<std::pair<std::string, std::string>>::iterator it = clues.begin(); it != clues.end(); it++)
+        for (int i = 0; i < crosswordClue.first.size(); i++)
         {
-            if (findLetter(letter, *it))
+            char letter = crosswordClue.first[i];
+            for (std::vector<std::pair<std::string, std::string>>::iterator it = clues.begin(); it != clues.end(); it++)
             {
-                crosswordClues.push_back(std::make_pair(i+1, *it));
-                clues.erase(it);
-                break;
+                if (findLetter(letter, *it))
+                {
+                    crosswordClues.push_back(std::make_pair(i + 1, *it));
+                    clues.erase(it);
+                    if (i == crosswordClue.first.size() - 1)
+                        created = true;
+                    break;
+                }
             }
         }
     }
