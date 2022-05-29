@@ -26,6 +26,8 @@ private:
 public:
 	Sudoku(std::string difficultyLevelValue);
 
+	~Sudoku();
+
 	void fillBoard(int** tab);
 
 	void assignDiffcultyLevel(std::string difficultyLevelValue);

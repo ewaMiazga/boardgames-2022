@@ -28,8 +28,8 @@ set_target_properties(sfml-graphics PROPERTIES CXX_STANDARD 17 CXX_STANDARD_REQU
 #   BoardGamesLib
 #==========================================
 
-#file(GLOB_RECURSE BoardGamesLib_SRC "BoardGamesLib/*.h" "BoardGamesLib/*.cpp")
-file(GLOB_RECURSE BoardGamesLib_SRC "tile.h" "tile.cpp")
+file(GLOB_RECURSE BoardGamesLib_SRC "BoardGamesLib/*.h" "BoardGamesLib/*.cpp")
+#file(GLOB_RECURSE BoardGamesLib_SRC "tile.h" "tile.cpp")
 
 add_library(BoardGamesLib ${BoardGamesLib_SRC})
 

@@ -8,11 +8,12 @@ public:
     Tile() = default;
     Tile(
         sf::Vector2f position, 
-        sf::Color color, 
+        sf::Color color,
+        sf::Font &font,
         double size, 
         bool isVisible,
-        char shown,
-        char real
+        char shown = 'e',
+        char real = 0
     );
     ~Tile();
 
@@ -26,4 +27,5 @@ private:
     sf::Vector2f position;
     char shown;
     char real;
+    sf::Text displayValue;
 };

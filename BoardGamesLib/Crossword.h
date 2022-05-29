@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include <map>
+//#include <map>
 #include <ostream>
 #include <iostream>
 #include <fstream>
@@ -19,6 +19,8 @@ private:
 	std::vector<std::pair<std::string, std::string>> clues;
 public:
 	Crossword();
+
+	~Crossword();
 
 	std::string getClue();
 

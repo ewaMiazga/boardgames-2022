@@ -16,6 +16,8 @@ Crossword::Crossword()
     }
 }
 
+Crossword::~Crossword() {}
+
 std::string Crossword::getClue()
 {
     return crosswordClue.first;

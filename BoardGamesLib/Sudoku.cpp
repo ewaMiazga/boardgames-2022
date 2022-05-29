@@ -26,6 +26,13 @@ Sudoku::Sudoku(std::string difficultyLevelValue)
 	std::shuffle(std::begin(gridPos), std::end(gridPos), g);
 }
 
+Sudoku::~Sudoku()
+{
+	for (int i = 0; i < 10; i++)
+		delete[] board[i];
+	delete[] board;
+}
+
 void Sudoku::fillBoard(int** tab)
 {
 	/*int sudokuBoard[rows][columns] =
