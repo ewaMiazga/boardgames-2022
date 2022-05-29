@@ -135,7 +135,9 @@ std::pair<int, int> TicTacToe::chooseSecondMove(char value)
 {
 	for (int i = 0; i < N; i++)
 	{
-		if (findChanceToWin(i, 0, i, 1, i, 2, value)) //check rows
+		if (findDoubleChanceToWin(i, 0, i, 1, i, 2) && (i != 1))
+			return std::make_pair(i, 1);
+		else if (findChanceToWin(i, 0, i, 1, i, 2, value)) //check rows
 		{
 			int j = 0;
 			while (j < N)
@@ -145,6 +147,8 @@ std::pair<int, int> TicTacToe::chooseSecondMove(char value)
 				j++;
 			}
 		}
+		else if (findDoubleChanceToWin(0, i, 1, i, 2, i) && (i != 1))
+			return std::make_pair(1, i);
 		else if(findChanceToWin(0, i, 1, i, 2, i, value)) // check columns
 		{
 			int j = 0;
@@ -155,7 +159,6 @@ std::pair<int, int> TicTacToe::chooseSecondMove(char value)
 				j++;
 			}
 		}
-		//else if (findChanceToWin(0, i, 1, 1, 2, 2 - i, value) && (i != 1)) //check diagonals
 		else if (findChanceToWin(0, i, 1, 1, 2, 2 - i, value) && (i != 1))
 		{
 			int j = 0;
