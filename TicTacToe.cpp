@@ -8,12 +8,7 @@ TicTacToe::TicTacToe()
 			board[i][j] = '_';
 }
 
-TicTacToe::~TicTacToe()
-{
-	for (int i = 0; i < rows; ++i) 
-		delete[] board[i];
-	delete[] board;
-}
+TicTacToe::~TicTacToe() {}
 
 bool TicTacToe::isEmpty(int row, int column)
 {
@@ -248,7 +243,7 @@ std::pair<int, int> TicTacToe::defaultMove()
 	}
 }
 
-void TicTacToe::moveAI(char value, char opponentValue)
+void TicTacToe::moveAIHard(char value, char opponentValue)
 {
 	std::pair<int, int> notWillWin = std::make_pair(-1, -1); // it can be one part in witch i want to enter AI symbol
 	if (isEmpty(1, 1))
@@ -295,6 +290,37 @@ void TicTacToe::moveAI(char value, char opponentValue)
 	}
 }
 
+void TicTacToe::moveAIMedium(char value, char opponentValue)
+{
+	std::pair<int, int> notWillWin = std::make_pair(-1, -1); // it can be one part in witch i want to enter AI symbol
+	if (checkWillWin(value) != notWillWin)
+	{
+		std::pair<int, int> coordinates = checkWillWin(value);
+		insert(coordinates.first, coordinates.second, value);
+	}
+	else if (checkWillWin(opponentValue) != notWillWin)
+	{
+		std::pair<int, int> coordinates = checkWillWin(opponentValue);
+		insert(coordinates.first, coordinates.second, value);
+	}
+	else if (chooseSecondMove(opponentValue) != notWillWin)
+	{
+		std::pair<int, int> coordinates = chooseSecondMove(opponentValue);
+		insert(coordinates.first, coordinates.second, value);
+	}
+	else
+	{
+		std::pair<int, int> coordinates = defaultMove();
+		insert(coordinates.first, coordinates.second, value);
+	}
+}
+
+void TicTacToe::moveAIEasy(char value, char opponentValue)
+{
+	std::pair<int, int> coordinates = defaultMove();
+	insert(coordinates.first, coordinates.second, value);
+}
+
 int TicTacToe::chooseStartingPlayer()
 {
 	std::random_device rd;
@@ -321,10 +347,16 @@ void TicTacToe::play()
 	char playerCounter;
 	char AICounter;
 	std::string request;
+	std::string lvl;
 	std::cout << "Player1: Choose counter ( 'O' or 'X' )" << std::endl;
 	std::cin >> playerCounter;
 	std::cout << "Do you want to play with AI? yes/no" << std::endl;
 	std::cin >> request;
+	if (request == "yes")
+	{
+		std::cout << "Choose difficulty lvl hard/medium/easy" << std::endl;
+		std::cin >> lvl;
+	}
 	if (playerCounter == 'X')
 		AICounter = 'O';
 	else
@@ -369,8 +401,12 @@ void TicTacToe::play()
 				inserted = true;
 			}
 		}
-		if (request == "yes" && move % 2 == 0)
-			moveAI(AICounter, playerCounter);
+		if (request == "yes" && move % 2 == 0 && lvl == "easy")
+			moveAIEasy(AICounter, playerCounter);
+		else if (request == "yes" && move % 2 == 0 && lvl == "medium")
+			moveAIMedium(AICounter, playerCounter);
+		else if (request == "yes" && move % 2 == 0 && lvl == "hard")
+			moveAIHard(AICounter, playerCounter);
 		move++;
 	}
 }

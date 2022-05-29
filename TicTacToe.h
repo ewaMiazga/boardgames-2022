@@ -51,7 +51,11 @@ public:
 
 	std::pair<int, int> defaultMove();
 
-	void moveAI(char value, char opponentValue);
+	void moveAIHard(char value, char opponentValue);
+
+	void moveAIMedium(char value, char opponentValue);
+
+	void moveAIEasy(char value, char opponentValue);
 
 	int chooseStartingPlayer();
 

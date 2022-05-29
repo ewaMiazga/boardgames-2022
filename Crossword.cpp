@@ -16,17 +16,7 @@ Crossword::Crossword()
     }
 }
 
-Crossword::~Crossword()
-{
-    std::pair<std::string, std::string>* ptr = &crosswordClue;
-    delete[] ptr;
-    crosswordClues.clear();
-    crosswordClues.shrink_to_fit();
-    crosswordCluesUser.clear();
-    crosswordCluesUser.shrink_to_fit();
-    clues.clear();
-    clues.shrink_to_fit();
-}
+Crossword::~Crossword() {}
 
 std::string Crossword::getClue()
 {
