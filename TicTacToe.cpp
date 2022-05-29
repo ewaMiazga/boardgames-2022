@@ -135,7 +135,23 @@ std::pair<int, int> TicTacToe::chooseSecondMove(char value)
 {
 	for (int i = 0; i < N; i++)
 	{
-		if (findDoubleChanceToWin(i, 0, i, 1, i, 2) && (i != 1))
+		if (findChanceToWin(0, i, 1, 1, 2, 2 - i, value) && (i != 1)) //diagonals
+		{
+		int j = 0;
+		while (j < N && i == 0)
+		{
+			if (isEmpty(j, j))
+				return std::make_pair(j, j);
+			j++;
+		}
+		while (j < N && i == 2)
+		{
+			if (isEmpty(j, 2 - j))
+				return std::make_pair(j, 2 - j);
+			j++;
+		}
+		}
+		else if (findDoubleChanceToWin(i, 0, i, 1, i, 2) && (i != 1))
 			return std::make_pair(i, 1);
 		else if (findChanceToWin(i, 0, i, 1, i, 2, value)) //check rows
 		{
@@ -159,36 +175,20 @@ std::pair<int, int> TicTacToe::chooseSecondMove(char value)
 				j++;
 			}
 		}
-		else if (findChanceToWin(0, i, 1, 1, 2, 2 - i, value) && (i != 1))
-		{
-			int j = 0;
-			while (j < N && i == 0)
-			{
-				if (isEmpty(j, j))
-					return std::make_pair(j, j);
-				j++;
-			}
-			while (j < N && i == 2)
-			{
-				if (isEmpty(j, 2 - j))
-					return std::make_pair(j, 2 - j);
-				j++;
-			}
-		}
 	}
 	return std::make_pair(-1, -1);
 }
 
-std::pair<int, int> TicTacToe::chooseThirdMove() // find case when opponet try to get to positions to win
-{
-	std::pair<int, int> notWillWin = std::make_pair(-1, -1);
-	for (int i = 0; i < N; i++)
-	{
-		if (findSameCorners(i, 0, i, 1, i, 2))
-			return std::make_pair(2, 2);
-	}
-	return notWillWin;
-}
+//std::pair<int, int> TicTacToe::chooseThirdMove() // find case when opponet try to get to positions to win
+//{
+//	std::pair<int, int> notWillWin = std::make_pair(-1, -1);
+//	for (int i = 0; i < N; i++)
+//	{
+//		if (findSameCorners(i, 0, i, 1, i, 2) && i==0)
+//			return std::make_pair(2, 2);
+//	}
+//	return notWillWin;
+//}
 
 std::pair<int, int> TicTacToe::emptyLineFullOpponentSq(char value)
 {
@@ -235,6 +235,18 @@ std::pair<int, int> TicTacToe::emptyLineFullOpponentSq(char value)
 	return notWillWin;
 }
 
+std::pair<int, int> TicTacToe::defaultMove()
+{
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < columns; j++)
+		{
+			if (isEmpty(i, j))
+				return std::make_pair(i, j);
+		}
+	}
+}
+
 void TicTacToe::moveAI(char value, char opponentValue)
 {
 	std::pair<int, int> notWillWin = std::make_pair(-1, -1); // it can be one part in witch i want to enter AI symbol
@@ -250,7 +262,7 @@ void TicTacToe::moveAI(char value, char opponentValue)
 		std::pair<int, int> coordinates = checkWillWin(opponentValue);
 		insert(coordinates.first, coordinates.second, value);
 	}
-	else if (chooseSecondMove(opponentValue) == chooseSecondMove(value))
+	else if (chooseSecondMove(opponentValue) == chooseSecondMove(value) && chooseSecondMove(opponentValue) != notWillWin)
 	{
 		std::pair<int, int> coordinates = chooseSecondMove(opponentValue);
 		insert(coordinates.first, coordinates.second, value);
@@ -265,11 +277,11 @@ void TicTacToe::moveAI(char value, char opponentValue)
 		std::pair<int, int> coordinates = chooseSecondMove(value);
 		insert(coordinates.first, coordinates.second, value);
 	}
-	else if (chooseThirdMove() != notWillWin)
-	{
-		std::pair<int, int> coordinates = chooseThirdMove();
-		insert(coordinates.first, coordinates.second, value);
-	}
+	//else if (chooseThirdMove() != notWillWin)
+	//{
+	//	std::pair<int, int> coordinates = chooseThirdMove();
+	//	insert(coordinates.first, coordinates.second, value);
+	//}
 	else if (emptyLineFullOpponentSq(opponentValue) != notWillWin)  // check if is it possible to be this case
 	{
 		std::pair<int, int> coordinates = emptyLineFullOpponentSq(opponentValue);
@@ -277,18 +289,8 @@ void TicTacToe::moveAI(char value, char opponentValue)
 	}
 	else
 	{
-		bool inserted = false;
-		for (int i = 0; i < rows && !inserted; i++)
-		{
-			for (int j = 0; j < columns && !inserted; j++)
-			{
-				if (isEmpty(i, j))
-				{
-					insert(i, j, value);
-					inserted = true;
-				}
-			}
-		}
+		std::pair<int, int> coordinates = defaultMove();
+		insert(coordinates.first, coordinates.second, value);
 	}
 }
 
