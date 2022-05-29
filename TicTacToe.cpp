@@ -65,8 +65,6 @@ bool TicTacToe::isFullBoard()
 bool TicTacToe::gameOver()
 {
 	char winner;
-	//if (!fullBoard()) // continue to play
-	//	return false;
 	if (getWinner() != ' ')
 	{
 		winner = getWinner(); // one player win
@@ -147,8 +145,8 @@ std::pair<int, int> TicTacToe::chooseSecondMove(char value)
 			j++;
 		}
 		}
-		else if (findDoubleChanceToWin(i, 0, i, 1, i, 2) && (i != 1))
-			return std::make_pair(i, 1);
+		//else if (findDoubleChanceToWin(i, 0, i, 1, i, 2, value) && (i != 1))
+		//	return std::make_pair(i, 1);
 		else if (findChanceToWin(i, 0, i, 1, i, 2, value)) //check rows
 		{
 			int j = 0;
@@ -159,8 +157,8 @@ std::pair<int, int> TicTacToe::chooseSecondMove(char value)
 				j++;
 			}
 		}
-		else if (findDoubleChanceToWin(0, i, 1, i, 2, i) && (i != 1))
-			return std::make_pair(1, i);
+		//else if (findDoubleChanceToWin(0, i, 1, i, 2, i, value) && (i != 1))
+		//	return std::make_pair(1, i);
 		else if(findChanceToWin(0, i, 1, i, 2, i, value)) // check columns
 		{
 			int j = 0;
@@ -200,8 +198,11 @@ std::pair<int, int> TicTacToe::emptyLineFullOpponentSq(char value)
 					return std::make_pair(i, j);
 				j++;
 			}
+			j--;
+			return std::make_pair(i, j);
+
 		}
-		if (findWin(0, i, 1, i, 2, i)) // check columns
+		if (findEmptyLine(0, i, 1, i, 2, i)) // check columns
 		{
 			int j = 0;
 			while (j < N)
@@ -210,8 +211,10 @@ std::pair<int, int> TicTacToe::emptyLineFullOpponentSq(char value)
 					return std::make_pair(j, i);
 				j++;
 			}
+			j--;
+			return std::make_pair(i, j);
 		}
-		if (findWin(0, i, 1, 1, 2, 2 - i) && (i != 1)) //check diagonals
+		if (findEmptyLine(0, i, 1, 1, 2, 2 - i) && (i != 1)) //check diagonals
 		{
 			int j = 0;
 			while (j < N && i == 0)
@@ -226,6 +229,8 @@ std::pair<int, int> TicTacToe::emptyLineFullOpponentSq(char value)
 					return std::make_pair(j, 2 - j);
 				j++;
 			}
+			j--;
+			return std::make_pair(i, j);
 		}
 	}
 	return notWillWin;
