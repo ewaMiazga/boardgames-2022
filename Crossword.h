@@ -20,6 +20,8 @@ private:
 public:
 	Crossword();
 
+	~Crossword();
+
 	std::string getClue();
 
 	std::string getClueInfo();

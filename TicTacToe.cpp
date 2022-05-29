@@ -8,6 +8,13 @@ TicTacToe::TicTacToe()
 			board[i][j] = '_';
 }
 
+TicTacToe::~TicTacToe()
+{
+	for (int i = 0; i < rows; ++i) 
+		delete[] board[i];
+	delete[] board;
+}
+
 bool TicTacToe::isEmpty(int row, int column)
 {
 	if (board[row][column] == emptySquare)

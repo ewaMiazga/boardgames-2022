@@ -24,6 +24,8 @@ private:
 public:
 	TicTacToe();
 
+	~TicTacToe();
+
 	bool isEmpty(int row, int column);
 
 	void insert(int row, int column, char value);
