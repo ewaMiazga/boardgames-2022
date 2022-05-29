@@ -114,6 +114,8 @@ void  Crossword::chooseCrosswordClues()
                 }
             }
         }
+        std::string fileName = "C:/Users/a.miazga/Desktop/CrosswordDataUTF";
+        readFromFile(fileName, *this);
     }
 }
 
