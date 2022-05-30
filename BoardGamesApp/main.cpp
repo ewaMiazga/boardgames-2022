@@ -19,9 +19,7 @@ int main()
         sf::Color::Magenta,
         font, 
         300, 
-        true, 
-        'e', 
-        'a'
+        true
     );
 
     while (window.isOpen())

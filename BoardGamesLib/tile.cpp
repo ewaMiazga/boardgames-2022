@@ -42,9 +42,6 @@ Tile::Tile(
     this->real = real;
 }
 
-Tile::~Tile()
-{
-}
 
 void Tile::draw(sf::RenderWindow &window)
 {

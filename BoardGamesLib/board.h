@@ -2,31 +2,26 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-class Tile : public sf::RectangleShape
+class Board
 {
 public:
-    Tile() = default;
-    Tile(
+    Board() = default;
+    Board(
         sf::Vector2f position,
         sf::Color frameColor,
         sf::Color backgroundColor,
         sf::Color displayColor,
         sf::Font& font,
-        double size, 
-        bool isVisible,
-        char shown = 0,
-        char real = 0
+        double size
     );
+    ~Board();
 
     void draw(sf::RenderWindow& window);
 
-    char getShown();
-    char getReal();
-
 private:
-    bool isVisible;
     sf::Vector2f position;
-    char shown;
-    char real;
     sf::Text displayValue;
+    double size;
+    Tile **board;
+
 };
