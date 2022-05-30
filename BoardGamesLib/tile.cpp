@@ -2,10 +2,11 @@
 #include "tile.h"
 
 
-
 Tile::Tile(
     sf::Vector2f position,
-    sf::Color color,
+    sf::Color frameColor,
+    sf::Color backgroundColor,
+    sf::Color displayColor,
     sf::Font &font,
     double size,
     bool isVisible,
@@ -14,24 +15,27 @@ Tile::Tile(
 )
 {
     setPosition(position);
-    setFillColor(sf::Color::White);
+    setFillColor(backgroundColor);
     setSize(sf::Vector2f(size, size));
     setOutlineThickness(-10.f * size * 0.01);
-    setOutlineColor(color);
+    setOutlineColor(frameColor);
     
     displayValue.setFont(font);
-    displayValue.setString(std::to_string(shown));
-    displayValue.setCharacterSize(10.f);
+    displayValue.setString(std::string(1, shown));
+    displayValue.setCharacterSize(size*0.7);
+    displayValue.setFillColor(sf::Color::Blue);
     if (isVisible)
     {
-        displayValue.setFillColor(sf::Color::Blue);
+        displayValue.setFillColor(displayColor);
     }
     else
     {
-        displayValue.setFillColor(sf::Color::Green);
+        displayValue.setFillColor(backgroundColor);
     }
-    displayValue.setPosition(position + sf::Vector2f(12.0f, 2.0f));
-  
+    unsigned int x = (size - displayValue.getCharacterSize());
+    unsigned int y = (size - displayValue.getCharacterSize()) / 3.0;
+    displayValue.setPosition(position + sf::Vector2f(x, y));
+    
     this->isVisible = isVisible;
     this->position = position;
     this->shown = shown;

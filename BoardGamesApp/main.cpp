@@ -7,12 +7,22 @@ int main()
     sf::Font font;
     if (!font.loadFromFile("../resources/fonts/Qarolina.ttf"))
     {
-        std::cout<<"error loading the file";
+        std::cout << "error loading the file";
+        system("pause");
     }
 
     sf::RenderWindow window(sf::VideoMode(800, 800), "TEST");
-    Tile square(sf::Vector2f(300.f, 300.f), sf::Color::Red, font, 200, true);
-
+    Tile square(
+        sf::Vector2f(300.f, 300.f), 
+        sf::Color::Red, 
+        sf::Color::White,
+        sf::Color::Magenta,
+        font, 
+        300, 
+        true, 
+        'e', 
+        'a'
+    );
 
     while (window.isOpen())
     {
@@ -25,10 +35,8 @@ int main()
             }
         }
         window.clear();
-        window.draw(square);
+        square.draw(window);
         window.display();
     }
     return 0;
 }
-
-

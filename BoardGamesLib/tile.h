@@ -7,17 +7,19 @@ class Tile : public sf::RectangleShape
 public:
     Tile() = default;
     Tile(
-        sf::Vector2f position, 
-        sf::Color color,
-        sf::Font &font,
+        sf::Vector2f position,
+        sf::Color frameColor,
+        sf::Color backgroundColor,
+        sf::Color displayColor,
+        sf::Font& font,
         double size, 
         bool isVisible,
-        char shown = 'e',
+        char shown = 0,
         char real = 0
     );
     ~Tile();
 
-    void draw(sf::RenderWindow &window);
+    void draw(sf::RenderWindow& window);
 
     char getShown();
     char getReal();
