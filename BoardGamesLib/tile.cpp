@@ -58,3 +58,18 @@ char Tile::getReal()
 {
     return this->real;
 }
+
+void Tile::setShown(char character)
+{
+    shown = character;
+}
+
+void Tile::setReal(char character)
+{
+    real = character;
+}
+
+void Tile::setVisibility(bool visibility)
+{
+    isVisible = visibility;
+}

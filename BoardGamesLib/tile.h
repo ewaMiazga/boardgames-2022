@@ -23,6 +23,11 @@ public:
     char getShown();
     char getReal();
 
+    void setShown(char);
+    void setReal(char);
+    void setVisibility(bool);
+    
+
 private:
     bool isVisible;
     sf::Vector2f position;
