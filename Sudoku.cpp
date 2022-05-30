@@ -33,6 +33,16 @@ Sudoku::~Sudoku()
 	delete[] board;
 }
 
+int** Sudoku::getBoard()
+{
+	return board;
+}
+
+std::pair<int, int> Sudoku::getDifficultyLevel()
+{
+	return difficultyLevel;
+}
+
 void Sudoku::fillBoard(int** tab)
 {
 	/*int sudokuBoard[rows][columns] =
@@ -47,6 +57,10 @@ void Sudoku::fillBoard(int** tab)
 	{ 0, 0, 0, 0, 0, 0, 0, 7, 4 },
 	{ 0, 0, 5, 2, 0, 6, 3, 0, 0 }
 	};*/
+	//int** arr;
+	//arr = new int* [10];
+	//for (int i = 0; i < 10; i++)
+	//	arr[i] = sudokuBoard[i];
 
 	board = tab;
 }
@@ -144,23 +158,23 @@ bool Sudoku::checkRepetition(int row, int column, int value, int** tab) // retur
 //	return number;
 //}
 
-std::vector<int> Sudoku::generateNumbers(int row, int column, int** tab)
-{
-	std::vector<int> numbers;
-	for (int temp = 1; temp <= N; temp++)
-	{
-		if (!checkRepetition(row, column, temp, tab))
-		{
-			numbers.push_back(temp);
-		}
-	}
-	return numbers;
-}
+//std::vector<int> Sudoku::generateNumbers(int row, int column, int** tab)
+//{
+//	std::vector<int> numbers;
+//	for (int temp = 1; temp <= N; temp++)
+//	{
+//		if (!checkRepetition(row, column, temp, tab))
+//		{
+//			numbers.push_back(temp);
+//		}
+//	}
+//	return numbers;
+//}
 
-void Sudoku::removeNumber(int row, int column, int** tab)
-{
-	generateNumbers(row, column, tab).erase(generateNumbers(row, column, tab).begin());
-}
+//void Sudoku::removeNumber(int row, int column, int** tab)
+//{
+//	generateNumbers(row, column, tab).erase(generateNumbers(row, column, tab).begin());
+//}
 
 bool Sudoku::isEmpty(int& row, int& column, int** tab)
 {

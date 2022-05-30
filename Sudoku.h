@@ -28,6 +28,10 @@ public:
 
 	~Sudoku();
 
+	int** getBoard();
+
+	std::pair<int, int> getDifficultyLevel();
+
 	void fillBoard(int** tab);
 
 	void assignDiffcultyLevel(std::string difficultyLevelValue);
@@ -38,15 +42,15 @@ public:
 
 	bool usedInRow(int row, int value, int** tab);
 
-	bool usedInColumn(int row, int value, int** tab);
+	bool usedInColumn(int column, int value, int** tab);
 
 	bool usedInBox(int row, int column, int value, int** tab);
 
 	bool checkRepetition(int row, int column, int value, int** tab);
 
-	std::vector<int> generateNumbers(int row, int column, int** tab);
+	//std::vector<int> generateNumbers(int row, int column, int** tab);
 
-	void removeNumber(int row, int column, int** tab);
+	//void removeNumber(int row, int column, int** tab);
 
 	bool isEmpty(int& row, int& column, int** tab);
 
