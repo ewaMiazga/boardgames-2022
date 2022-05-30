@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "tile.h"
 
 class Board
 {
@@ -11,8 +12,9 @@ public:
         sf::Color frameColor,
         sf::Color backgroundColor,
         sf::Color displayColor,
-        sf::Font& font,
-        double size
+        sf::Font &font,
+        double size,
+        int elemNum
     );
     ~Board();
 
@@ -22,6 +24,7 @@ private:
     sf::Vector2f position;
     sf::Text displayValue;
     double size;
-    Tile **board;
+    int elemNum;
+    Tile ** board;
 
 };

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "../BoardGamesLib/tile.h"
+//#include "../BoardGamesLib/tile.h"
+#include "../BoardGamesLib/board.h"
 
 int main()
 {
@@ -12,14 +13,14 @@ int main()
     }
 
     sf::RenderWindow window(sf::VideoMode(800, 800), "TEST");
-    Tile square(
-        sf::Vector2f(300.f, 300.f), 
-        sf::Color::Red, 
+    Board square(
+        sf::Vector2f(100.f, 100.f), 
+        sf::Color::Yellow, 
         sf::Color::White,
-        sf::Color::Magenta,
+        sf::Color::Blue,
         font, 
-        300, 
-        true
+        500,
+        9
     );
 
     while (window.isOpen())

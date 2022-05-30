@@ -17,7 +17,7 @@ Tile::Tile(
     setPosition(position);
     setFillColor(backgroundColor);
     setSize(sf::Vector2f(size, size));
-    setOutlineThickness(-10.f * size * 0.01);
+    setOutlineThickness(1.f * size * -0.01);
     setOutlineColor(frameColor);
     
     displayValue.setFont(font);
