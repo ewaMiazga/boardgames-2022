@@ -1,30 +1,29 @@
-﻿/*#pragma once
+﻿#pragma once
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "tile.h"
+#include "board.h"
 
-class Board
+class GameWindow
 {
 public:
-    Board() = default;
-    Board(
-        sf::Vector2f position,
-        sf::Color frameColor,
-        sf::Color backgroundColor,
-        sf::Color displayColor,
-        sf::Font &font,
-        double size,
-        int elemNum
-    );
-    ~Board();
+    GameWindow() = default;
+    virtual void draw(sf::RenderWindow& window) = 0;
+
+protected:
+    Board* gameBoard = nullptr;
+    sf::RenderWindow window;
+    std::pair<int, int> selected;
+    double height;
+    double width;
+    sf::Font loadFont();
+};
+
+class SudokuWindow : public GameWindow
+{
+public:
+    SudokuWindow() = default;
+    SudokuWindow(double, double);
+    ~SudokuWindow();
 
     void draw(sf::RenderWindow& window);
-
-private:
-    sf::Vector2f position;
-    sf::Text displayValue;
-    double size;
-    int elemNum;
-    Tile ** board;
-
-};*/
+};

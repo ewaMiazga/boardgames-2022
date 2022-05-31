@@ -1,6 +1,5 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
-//#include "../BoardGamesLib/tile.h"
 #include "../BoardGamesLib/board.h"
 
 int main()

@@ -1,67 +1,39 @@
-﻿/*#include <SFML/Graphics.hpp>
-#include "board.h"
-#include "tile.h"
+﻿#include <SFML/Graphics.hpp>
+#include "game.h"
 
-
-Board::Board(
-    sf::Vector2f position,
-    sf::Color frameColor,
-    sf::Color backgroundColor,
-    sf::Color displayColor,
-    sf::Font &font,
-    double size,
-    int elemNum
-)
+sf::Font GameWindow::loadFont()
 {
-    this->position = position;
-    this->elemNum = elemNum;
-    this->board = new Tile* [elemNum];
-    for (int i = 0; i < elemNum; i++)
-    {
-        board[i] = new Tile[elemNum];
-    }
-
-    sf::Vector2f newPos = position;
-
-    double tileSize = size / elemNum;
-    for (int i = 0; i < elemNum; ++i)
-    {
-        for (int j = 0; j < elemNum; ++j)
-        {
-            newPos += sf::Vector2f(tileSize, 0);
-            board[i][j] = Tile(
-                newPos,
-                frameColor,
-                backgroundColor,
-                displayColor,
-                font,
-                tileSize,
-                true,
-                '6'
-            );
-        }
-        newPos += sf::Vector2f(-size, tileSize);
-    }
+	sf::Font font;
+	if (!font.loadFromFile("../resources/fonts/Qarolina.ttf"))
+	{
+		std::cout << "error loading the file";
+		system("pause");
+	}
+	return font;
 }
 
-Board::~Board()
+SudokuWindow::SudokuWindow(double height, double width)
 {
-    for (int i = 0; i < elemNum; i++)
-    {
-        delete[] board[i];
-    }
-    delete[] board;
+	this->height = height;
+	this->width = width;
+	sf::Font font = loadFont();
+	gameBoard = new Board(
+		sf::Vector2f(0, 0),
+		sf::Color::Black,
+		sf::Color::White,
+		sf::Color::Black,
+		font,
+		std::max(height, width),
+		9
+	);
 }
 
-void Board::draw(sf::RenderWindow& window)
+SudokuWindow::~SudokuWindow()
 {
-    for (int i = 0; i < elemNum; ++i)
-    {
-        for (int j = 0; j < elemNum; ++j)
-        {
-            board[i][j].draw(window);
-        }
-    }
-}*/
+	delete gameBoard;
+}
 
-
+void SudokuWindow::draw(sf::RenderWindow& window)
+{
+	gameBoard->draw(window);
+}
