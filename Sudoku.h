@@ -30,6 +30,8 @@ public:
 
 	int** getBoard();
 
+	std::string toString(int ** tab);
+
 	std::pair<int, int> getDifficultyLevel();
 
 	void fillBoard(int** tab);

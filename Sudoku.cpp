@@ -11,9 +11,9 @@ Sudoku::Sudoku(std::string difficultyLevelValue)
 {
 	assignDiffcultyLevel(difficultyLevelValue);
 	int** array;
-	array = new int* [10];
-	for (int i = 0; i < 10; i++)
-		array[i] = new int[10];
+	array = new int* [9];
+	for (int i = 0; i < 9; i++)
+		array[i] = new int[9];
 	createEmptyBoard(array);
 	board = array;
 	for (int i = 0; i < N * N; i++)
@@ -28,7 +28,7 @@ Sudoku::Sudoku(std::string difficultyLevelValue)
 
 Sudoku::~Sudoku()
 {
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 9; i++)
 		delete[] board[i];
 	delete[] board;
 }
@@ -36,6 +36,15 @@ Sudoku::~Sudoku()
 int** Sudoku::getBoard()
 {
 	return board;
+}
+
+std::string Sudoku::toString(int** tab)
+{
+	std::string s = "";
+	for (int i = 0; i < rows; i++) 
+		for (int j = 0; j < columns; j++)
+			s += tab[i][j];
+	return s;
 }
 
 std::pair<int, int> Sudoku::getDifficultyLevel()
@@ -61,7 +70,9 @@ void Sudoku::fillBoard(int** tab)
 	//arr = new int* [10];
 	//for (int i = 0; i < 10; i++)
 	//	arr[i] = sudokuBoard[i];
-
+	//for (int i = 0; i < 9; i++)
+	//	for (int j = 0; j < 9; j++)
+	//		board[i][j] = tab[i][j];
 	board = tab;
 }
 
