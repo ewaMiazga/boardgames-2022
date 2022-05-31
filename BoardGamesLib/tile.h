@@ -13,24 +13,19 @@ public:
         sf::Color displayColor,
         sf::Font& font,
         double size, 
-        bool isVisible,
-        char shown = 0,
-        char real = 0
+        bool isVisible = false,
+        char value = 0
     );
 
     void draw(sf::RenderWindow& window);
 
-    char getShown();
-    char getReal();
-
-    void setShown(char);
-    void setReal(char);
+    char getValue();
+    void setValue(char value);
     void setVisibility(bool);
    
 private:
     bool isVisible;
     sf::Vector2f position;
-    char shown;
-    char real;
+    char value;
     sf::Text displayValue;
 };

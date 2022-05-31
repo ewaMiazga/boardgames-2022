@@ -10,8 +10,7 @@ Tile::Tile(
     sf::Font &font,
     double size,
     bool isVisible,
-    char shown,
-    char real
+    char value
 )
 {
     setPosition(position);
@@ -21,7 +20,7 @@ Tile::Tile(
     setOutlineColor(frameColor);
     
     displayValue.setFont(font);
-    displayValue.setString(std::string(1, shown));
+    displayValue.setString(std::string(1, value));
     displayValue.setCharacterSize(size*0.7);
     displayValue.setFillColor(sf::Color::Blue);
     if (isVisible)
@@ -38,8 +37,7 @@ Tile::Tile(
     
     this->isVisible = isVisible;
     this->position = position;
-    this->shown = shown;
-    this->real = real;
+    this->value = value;
 }
 
 
@@ -49,24 +47,14 @@ void Tile::draw(sf::RenderWindow &window)
     window.draw(displayValue);
 }
 
-char Tile::getShown()
+char Tile::getValue()
 {
-    return this->shown;
+    return this->value;
 }
 
-char Tile::getReal()
+void Tile::setValue(char value)
 {
-    return this->real;
-}
-
-void Tile::setShown(char character)
-{
-    shown = character;
-}
-
-void Tile::setReal(char character)
-{
-    real = character;
+    this->value = value;
 }
 
 void Tile::setVisibility(bool visibility)

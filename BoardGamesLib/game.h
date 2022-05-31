@@ -6,16 +6,18 @@
 class GameWindow
 {
 public:
-    GameWindow() = default;
+    const GameWindow() = default;
     virtual void draw(sf::RenderWindow& window) = 0;
+   // sf::Font& loadFont();
+
 
 protected:
-    Board* gameBoard = nullptr;
+    Board gameBoard;
     sf::RenderWindow window;
     std::pair<int, int> selected;
-    double height;
-    double width;
-    sf::Font loadFont();
+    double height = 0;
+    double width = 0;
+    sf::Font *font = nullptr;
 };
 
 class SudokuWindow : public GameWindow
@@ -25,5 +27,8 @@ public:
     SudokuWindow(double, double);
     ~SudokuWindow();
 
+    void setup();
     void draw(sf::RenderWindow& window);
+    void play();
+    
 };
