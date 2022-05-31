@@ -12,14 +12,14 @@ int main()
         system("pause");
     }
 
-    sf::RenderWindow window(sf::VideoMode(800, 800), "Sudoku");
+    sf::RenderWindow window(sf::VideoMode(900, 900), "Sudoku");
     Board board(
-        sf::Vector2f(0.f, 0.f), 
+        sf::Vector2f(0, 0), 
         sf::Color::Black, 
         sf::Color(155, 155, 155, 100),
         sf::Color::Black,
         font, 
-        600,
+        900,
         9
     );
 
@@ -43,11 +43,13 @@ int main()
                 case sf::Event::MouseButtonPressed:
                     if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
                     {
-                        board.getTile(sf::Mouse::getPosition(window)).setOutlineColor(sf::Color::Red);
+                        board.getTile(
+                            sf::Mouse::getPosition(window), window).setOutlineColor(sf::Color::Red);
                     }
                     if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Right))
                     {
-                        board.getTile(sf::Mouse::getPosition(window)).setOutlineColor(sf::Color::Black);
+                        board.getTile(
+                            sf::Mouse::getPosition(window), window).setOutlineColor(sf::Color::Black);
                     }
                     
                     //board.update(); ?

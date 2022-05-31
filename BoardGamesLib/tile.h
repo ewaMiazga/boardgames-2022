@@ -26,8 +26,6 @@ public:
     void setShown(char);
     void setReal(char);
     void setVisibility(bool);
-
-    void highlight(sf::Color color);
    
 private:
     bool isVisible;

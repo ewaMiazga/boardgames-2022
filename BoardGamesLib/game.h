@@ -1,4 +1,4 @@
-﻿#pragma once
+﻿/*#pragma once
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "tile.h"
@@ -19,7 +19,6 @@ public:
     ~Board();
 
     void draw(sf::RenderWindow& window);
-    Tile& getTile(sf::Vector2i, sf::RenderWindow& window);
 
 private:
     sf::Vector2f position;
@@ -28,4 +27,4 @@ private:
     int elemNum;
     Tile ** board;
 
-};
+};*/

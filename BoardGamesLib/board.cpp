@@ -29,7 +29,6 @@ Board::Board(
     {
         for (int j = 0; j < elemNum; ++j)
         {
-            newPos += sf::Vector2f(tileSize, 0);
             board[i][j] = Tile(
                 newPos,
                 frameColor,
@@ -40,6 +39,7 @@ Board::Board(
                 true,
                 '6'
             );
+            newPos += sf::Vector2f(tileSize, 0);
         }
         newPos += sf::Vector2f(-size, tileSize);
     }
@@ -65,13 +65,15 @@ void Board::draw(sf::RenderWindow& window)
     }
 }
 
-Tile& Board::getTile(sf::Vector2i pos)
+Tile& Board::getTile(sf::Vector2i pos, sf::RenderWindow& window)
 {
-    //pos -= position;
+    //pos -= sf::Vector2i(position);
+    sf::Vector2f mousePos = window.mapPixelToCoords(pos);
+    mousePos -= position;
     std::cout << "size: " << size << std::endl;
     std::cout << "elemNum: " << elemNum << std::endl;
-    unsigned int column = pos.y / (size / elemNum);
-    unsigned int row = pos.x / (size / elemNum);
+    unsigned int column = mousePos.y / (size / elemNum);
+    unsigned int row = mousePos.x / (size / elemNum);
     std::cout << "column: " << column << std::endl;
     std::cout << "row: " << row << std::endl;
     std::cout << "pos.x: " << pos.x << std::endl;
