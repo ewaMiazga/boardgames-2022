@@ -1,13 +1,13 @@
 #include <array>
 #include <exception>
 #include "CppUnitTest.h"
-#include "../BoardGamesLib/test.h"
+#include "../BoardGamesLib/tile.h"
 
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 template<>
-inline std::wstring Microsoft::VisualStudio::CppUnitTestFramework::ToString<int>(const int& t)
+inline std::wstring Microsoft::VisualStudio::CppUnitTestFramework::ToString<Tile>(const Tile& t)
 {
 	std::wstring result;
 	result += L"{";

@@ -19,6 +19,7 @@ public:
     ~Board();
 
     void draw(sf::RenderWindow& window);
+    Tile& getTile(sf::Vector2i);
 
 private:
     sf::Vector2f position;

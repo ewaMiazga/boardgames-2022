@@ -1,4 +1,4 @@
-﻿#include <SFML/Graphics.hpp>
+﻿/*#include <SFML/Graphics.hpp>
 #include "board.h"
 #include "tile.h"
 
@@ -15,7 +15,6 @@ Board::Board(
 {
     this->position = position;
     this->elemNum = elemNum;
-    this->size = size;
     this->board = new Tile* [elemNum];
     for (int i = 0; i < elemNum; i++)
     {
@@ -60,21 +59,9 @@ void Board::draw(sf::RenderWindow& window)
     {
         for (int j = 0; j < elemNum; ++j)
         {
-            board[j][i].draw(window);
+            board[i][j].draw(window);
         }
     }
-}
+}*/
 
-Tile& Board::getTile(sf::Vector2i pos)
-{
-    //pos -= position;
-    std::cout << "size: " << size << std::endl;
-    std::cout << "elemNum: " << elemNum << std::endl;
-    unsigned int column = pos.y / (size / elemNum);
-    unsigned int row = pos.x / (size / elemNum);
-    std::cout << "column: " << column << std::endl;
-    std::cout << "row: " << row << std::endl;
-    std::cout << "pos.x: " << pos.x << std::endl;
-    std::cout << "pos.y: " << pos.y << std::endl << std::endl;
-    return board[column][row];
-}
+
