@@ -43,8 +43,6 @@ public:
 
 	std::pair<int, int> chooseSecondMove(char value);
 
-	std::pair<int, int> chooseThirdMove();
-
 	std::pair<int, int> emptyLineFullOpponentSq(char value);
 
 	std::pair<int, int> defaultMove();
