@@ -9,9 +9,9 @@ class Games
 public:
 	Games() = default;
 
+	~Games() {}
+
 	virtual void play() = 0;
 
 	virtual void display() = 0;
-
-	~Games() {}
 };
