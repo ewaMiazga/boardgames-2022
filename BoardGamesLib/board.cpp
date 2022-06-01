@@ -8,7 +8,7 @@ Board::Board(
     sf::Color frameColor,
     sf::Color backgroundColor,
     sf::Color displayColor,
-    sf::Font &font,
+    sf::Font& font,
     double size,
     int elemNum
 )
@@ -16,7 +16,7 @@ Board::Board(
     this->position = position;
     this->elemNum = elemNum;
     this->size = size;
-    this->board = new Tile* [elemNum];
+    this->board = new Tile * [elemNum];
     for (int i = 0; i < elemNum; i++)
     {
         board[i] = new Tile[elemNum];

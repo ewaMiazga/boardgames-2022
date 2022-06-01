@@ -12,9 +12,9 @@ public:
         sf::Color frameColor,
         sf::Color backgroundColor,
         sf::Color displayColor,
-        sf::Font &font,
-        double size,
-        int elemNum
+        sf::Font& font,
+        double size = 0,
+        int elemNum = 0
     );
     ~Board();
 
@@ -26,6 +26,6 @@ private:
     sf::Text displayValue;
     double size;
     int elemNum;
-    Tile ** board;
+    Tile** board;
 
 };

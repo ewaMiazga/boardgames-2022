@@ -1,25 +1,15 @@
 ﻿#include <SFML/Graphics.hpp>
 #include "game.h"
 
-SudokuWindow::SudokuWindow(double height, double width)
+SudokuWindow::SudokuWindow(double height, double width, sf::Font &font)
 {
-	this->height = height;
-	this->width = width;
-	font = new sf::Font;
-	if (!font->loadFromFile("../resources/fonts/Qarolina.ttf"))
-	{
-		std::cout << "error loading the file";
-		system("pause");
-	}
-	sf::Font bont = *font;
-
 	gameBoard = Board(
 		sf::Vector2f(0, 0),
 		sf::Color::Black,
 		sf::Color::White,
 		sf::Color::Black,
-		bont,
-		std::max(height, width),
+		font,
+		std::min(height, width),
 		9
 	);
 }
@@ -30,12 +20,8 @@ void SudokuWindow::draw(sf::RenderWindow& window)
 	gameBoard.draw(window);
 }
 
-SudokuWindow::~SudokuWindow()
-{
-	delete font;
-}
 
-void SudokuWindow::play()
+void SudokuWindow::play(sf::RenderWindow &window)
 {
 	while (window.isOpen())
 	{
@@ -57,13 +43,11 @@ void SudokuWindow::play()
 			case sf::Event::MouseButtonPressed:
 				if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
 				{
-					gameBoard.getTile(
-						sf::Mouse::getPosition(window), window).setOutlineColor(sf::Color::Red);
+					gameBoard.getTile(sf::Mouse::getPosition(window), window).setOutlineColor(sf::Color::Red);
 				}
 				if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Right))
 				{
-					gameBoard.getTile(
-						sf::Mouse::getPosition(window), window).setOutlineColor(sf::Color::Black);
+					gameBoard.getTile(sf::Mouse::getPosition(window), window).setOutlineColor(sf::Color::Black);
 				}
 
 				//board.update(); ?
@@ -74,13 +58,8 @@ void SudokuWindow::play()
 			}
 		}
 		window.clear(sf::Color::White);
-		gameBoard.draw(window);
+		draw(window);
 		window.display();
 	}
 
-}
-
-void SudokuWindow::setup()
-{
-	window.create(sf::VideoMode(height, width), "Sudoku");
 }
