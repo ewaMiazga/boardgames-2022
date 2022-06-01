@@ -2,9 +2,7 @@
 
 Crossword::Crossword()
 {
-    //std::string fileName = "C:/Users/a.miazga/Desktop/CrosswordData";
     std::string fileName = "C:/Users/a.miazga/Desktop/CrosswordDataUTF";
-    //std::string fileName = "C:/Users/a.miazga/Desktop/nowiutkitxt";
     readFromFile(fileName, *this); // call its own 
     chooseClueRandomly(); 
     chooseCrosswordClues();
