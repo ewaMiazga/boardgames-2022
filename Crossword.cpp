@@ -218,7 +218,7 @@ void Crossword::solveCrossword()
 {
     for (int i = 0; i < crosswordCluesUser.size(); i++)
     {
-        if (crosswordCluesUser[i].second.first == "_") // why cant I write empty instead of "_"
+        if (crosswordCluesUser[i].second.first[0] == emptySquare) 
             insert(i + 1, crosswordClues[i].second.first);
     }
 }
