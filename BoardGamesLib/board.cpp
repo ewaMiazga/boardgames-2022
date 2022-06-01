@@ -101,7 +101,9 @@ void Board::display()
                         std::pair<int, int> index(getIndex(sf::Mouse::getPosition(m_window)));
                         getTile(index).setOutlineColor(sf::Color::Red);
                     }
-                    if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Right)) {
+                    if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Right))
+                    {
+
                         std::pair<int, int> index(getIndex(sf::Mouse::getPosition(m_window)));
                         getTile(index).setOutlineColor(sf::Color::Black);
                     }

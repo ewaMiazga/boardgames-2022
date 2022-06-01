@@ -4,6 +4,7 @@
 #include "../BoardGamesLib/board.h"
 #include "../BoardGamesLib/tile.h"
 #include "../BoardGamesLib/TicTacToe.h"
+#include "../BoardGamesLib/Sudoku.h"
 
 int main()
 {
@@ -80,15 +81,27 @@ int main()
         sf::Color::Black,
         font,
         900,
-        3,
+        9,
         window);
-    TicTacToe tics(gboard);
+
+//    TicTacToe tics(gboard);
+////    sf::Thread thread(&Board::display, &gboard);
+//    sf::Thread thread2(&TicTacToe::play, &tics);
+////    thread.launch();
+//
+//    window.setActive(false);
+//    Tile &tile = gboard.getTile(std::pair(2, 2));
+////    gboard.display();
+//    thread2.launch();
+//    gboard.display();
+//   // tics.play();
+
+    Sudoku sudoku("easy", gboard);
 //    sf::Thread thread(&Board::display, &gboard);
-    sf::Thread thread2(&TicTacToe::play, &tics);
+    sf::Thread thread2(&Sudoku::play, &sudoku);
 //    thread.launch();
 
     window.setActive(false);
-    Tile &tile = gboard.getTile(std::pair(2, 2));
 //    gboard.display();
     thread2.launch();
     gboard.display();

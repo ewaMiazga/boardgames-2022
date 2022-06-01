@@ -33,6 +33,5 @@ private:
     double size;
     Tile ** board;
     int elemNum;
-
-
+    std::pair<int, int> selected = std::make_pair(-1, -1);
 };
