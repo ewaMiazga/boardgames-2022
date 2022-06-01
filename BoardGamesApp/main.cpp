@@ -83,16 +83,16 @@ int main()
         3,
         window);
     TicTacToe tics(gboard);
-    sf::Thread thread(&Board::display, &gboard);
-    //sf::Thread thread(&TicTacToe::play, &tics);
-    thread.launch();
-    //gboard.display();
+//    sf::Thread thread(&Board::display, &gboard);
+    sf::Thread thread2(&TicTacToe::play, &tics);
+//    thread.launch();
+
     window.setActive(false);
     Tile &tile = gboard.getTile(std::pair(2, 2));
-    std::cout<<tile.getValue();
 //    gboard.display();
-
-    tics.play();
+    thread2.launch();
+    gboard.display();
+   // tics.play();
 
    return 0;
 }

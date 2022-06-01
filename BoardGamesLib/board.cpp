@@ -91,7 +91,6 @@ void Board::display()
         sf::sleep(sf::milliseconds(100));
         sf::Event e;
 
-        bool run = true;
         while (m_window.pollEvent(e)) {
             switch (unsigned int key = -1;  e.type) {
                 case sf::Event::Closed:
