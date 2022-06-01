@@ -8,11 +8,8 @@ TicTacToe::TicTacToe(Board &myBoard) : dBoard(myBoard)
         {
             board[i][j] = '_';
             std::pair<int, int> temp(i, j);
-            std::cout<<"before: " << myBoard.getTile(temp).getValue()<<std::endl;
-            myBoard.getTile(temp).setValue('_');
-            std::cout<<"after: " << myBoard.getTile(temp).getValue()<<std::endl;
-            std::cout<<"x: "<<temp.first<<" y: "<<temp.second<<std::endl<<std::endl;
-            myBoard.update();
+            dBoard.getTile(temp).setValue('_');
+//          myBoard.update();
         }
 }
 
@@ -26,8 +23,11 @@ bool TicTacToe::isEmpty(int row, int column)
 void TicTacToe::insert(int row, int column, char value)
 {
 	while (isEmpty(row, column))
-		board[row][column] = value;
-
+    {
+        board[row][column] = value;
+        std::pair<int, int> temp(row, column);
+        dBoard.getTile(temp).setValue(value);
+    }
 	//else exception
 }
 
