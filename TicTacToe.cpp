@@ -263,11 +263,6 @@ void TicTacToe::moveAIHard(char value, char opponentValue)
 		std::pair<int, int> coordinates = chooseSecondMove(value);
 		insert(coordinates.first, coordinates.second, value);
 	}
-	//else if (chooseThirdMove() != notWillWin)
-	//{
-	//	std::pair<int, int> coordinates = chooseThirdMove();
-	//	insert(coordinates.first, coordinates.second, value);
-	//}
 	else if (emptyLineFullOpponentSq(opponentValue) != notWillWin)  // check if is it possible to be this case
 	{
 		std::pair<int, int> coordinates = emptyLineFullOpponentSq(opponentValue);
