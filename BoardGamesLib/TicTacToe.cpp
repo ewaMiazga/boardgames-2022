@@ -1,13 +1,20 @@
+#include <algorithm>
 #include "TicTacToe.h"
 
-TicTacToe::TicTacToe()
+TicTacToe::TicTacToe(Board &myBoard) : dBoard(myBoard)
 {
 	for (int i = 0; i < rows; i++)
 		for (int j = 0; j < columns; j++)
-			board[i][j] = '_';
+        {
+            board[i][j] = '_';
+            std::pair<int, int> temp(i, j);
+            std::cout<<"before: " << myBoard.getTile(temp).getValue()<<std::endl;
+            myBoard.getTile(temp).setValue('_');
+            std::cout<<"after: " << myBoard.getTile(temp).getValue()<<std::endl;
+            std::cout<<"x: "<<temp.first<<" y: "<<temp.second<<std::endl<<std::endl;
+            myBoard.update();
+        }
 }
-
-TicTacToe::~TicTacToe() {}
 
 bool TicTacToe::isEmpty(int row, int column)
 {
@@ -48,7 +55,7 @@ char TicTacToe::getWinner()
 	}
 	if (NumOfWinners != 1)
 		winner = ' ';
-	// else if (NumOfWinners > 2) throw exception	
+	// else if (NumOfWinners > 2) throw exception
 	return winner;
 }
 
@@ -330,6 +337,9 @@ int TicTacToe::chooseStartingPlayer()
 }
 void TicTacToe::display()
 {
+//    dBoard.m_window.clear(sf::Color::White);
+//    dBoard.draw();
+//    dBoard.m_window.display();
 	for (int i = 0; i < rows; i++)
 	{
 		for (int j = 0; j < columns; j++)

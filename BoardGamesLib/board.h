@@ -12,20 +12,25 @@ public:
         sf::Color frameColor,
         sf::Color backgroundColor,
         sf::Color displayColor,
-        sf::Font& font,
-        double size = 0,
-        int elemNum = 0
+        sf::Font &font,
+        double size,
+        int elemNum,
+        sf::RenderWindow &window
     );
     ~Board();
 
-    void draw(sf::RenderWindow& window);
-    Tile& getTile(sf::Vector2i, sf::RenderWindow& window);
+    sf::RenderWindow &m_window;
+
+    void draw();
+    Tile& getTile(std::pair<int, int> index);
+    void display();
+    void update();
 
 private:
     sf::Vector2f position;
     sf::Text displayValue;
     double size;
     int elemNum;
-    Tile** board;
+    Tile ** board;
 
 };

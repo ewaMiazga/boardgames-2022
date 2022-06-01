@@ -3,7 +3,9 @@
 #include <utility>
 #include <random>
 #include <vector>
+#include <SFML/Graphics.hpp>
 #include "Games.h"
+#include "board.h"
 
 #define N 3
 #define rows  3
@@ -26,10 +28,10 @@ class TicTacToe:public Games
 {
 private:
 	char board[rows][columns];
+    Board &dBoard;
 public:
-	TicTacToe();
-
-	~TicTacToe();
+	explicit TicTacToe(Board &myBoard);
+	~TicTacToe() = default;
 
 	bool isEmpty(int row, int column);
 
@@ -57,7 +59,7 @@ public:
 
 	void moveAIEasy(char value, char opponentValue);
 
-	int chooseStartingPlayer();
+	static int chooseStartingPlayer();
 
 	void display() override;
 

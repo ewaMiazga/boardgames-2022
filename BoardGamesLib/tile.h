@@ -13,14 +13,14 @@ public:
         sf::Color displayColor,
         sf::Font& font,
         double size, 
-        bool isVisible = false,
+        bool isVisible,
         char value = 0
     );
 
     void draw(sf::RenderWindow& window);
 
     char getValue();
-    void setValue(char value);
+    void setValue(char);
     void setVisibility(bool);
    
 private:

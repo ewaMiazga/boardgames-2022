@@ -52,9 +52,9 @@ char Tile::getValue()
     return this->value;
 }
 
-void Tile::setValue(char value)
+void Tile::setValue(char character)
 {
-    this->value = value;
+    value = character;
 }
 
 void Tile::setVisibility(bool visibility)

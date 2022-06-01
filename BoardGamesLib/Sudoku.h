@@ -1,70 +1,70 @@
-#pragma once
-#include <iostream>
-#include <random>
-#include <vector>
-#include "Games.h"
-
-
-#define emptySquare 0
-#define N 9
-#define rows  9
-#define columns 9
-
-#define solvable 18
-#define hard 40
-#define medium 65
-
-class Sudoku:public Games
-{
-private:
-
-	int** board;
-	std::pair<int, int> difficultyLevel;
-	int guessNum[9] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-	int gridPos[81];
-
-public:
-	Sudoku(std::string difficultyLevelValue);
-
-	~Sudoku();
-
-	void fillBoard(int** tab);
-
-	void assignDiffcultyLevel(std::string difficultyLevelValue);
-
-	int calcDifficultyLevel(int** tab);
-
-	void createEmptyBoard(int** tab);
-
-	bool usedInRow(int row, int value, int** tab);
-
-	bool usedInColumn(int row, int value, int** tab);
-
-	bool usedInBox(int row, int column, int value, int** tab);
-
-	bool checkRepetition(int row, int column, int value, int** tab);
-
-	std::vector<int> generateNumbers(int row, int column, int** tab);
-
-	void removeNumber(int row, int column, int** tab);
-
-	bool isEmpty(int& row, int& column, int** tab);
-
-	void insert(int row, int column, int num);
-
-	bool isSolved(int** tab, int& i, int& j);
-
-	void generateSolvedBoard();
-
-	void generateStartBoard();
-
-	void countSolutions(int& number, int row, int col);
-
-	bool solve(int row, int col, int** tab); //isSolvable
-
-	void solve1();
-
-	void play() override;
-
-	void display() override;
-};
+//#pragma once
+//#include <iostream>
+//#include <random>
+//#include <vector>
+//#include "Games.h"
+//
+//
+//#define emptySquare 0
+//#define N 9
+//#define rows  9
+//#define columns 9
+//
+//#define solvable 18
+//#define hard 40
+//#define medium 65
+//
+//class Sudoku:public Games
+//{
+//private:
+//
+//    int** board;
+//    std::pair<int, int> difficultyLevel;
+//    int guessNum[9] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+//    int gridPos[81];
+//
+//public:
+//    Sudoku(std::string difficultyLevelValue);
+//
+//    ~Sudoku();
+//
+//    void fillBoard(int** tab);
+//
+//    void assignDiffcultyLevel(std::string difficultyLevelValue);
+//
+//    int calcDifficultyLevel(int** tab);
+//
+//    void createEmptyBoard(int** tab);
+//
+//    bool usedInRow(int row, int value, int** tab);
+//
+//    bool usedInColumn(int row, int value, int** tab);
+//
+//    bool usedInBox(int row, int column, int value, int** tab);
+//
+//    bool checkRepetition(int row, int column, int value, int** tab);
+//
+//    std::vector<int> generateNumbers(int row, int column, int** tab);
+//
+//    void removeNumber(int row, int column, int** tab);
+//
+//    bool isEmpty(int& row, int& column, int** tab);
+//
+//    void insert(int row, int column, int num);
+//
+//    bool isSolved(int** tab, int& i, int& j);
+//
+//    void generateSolvedBoard();
+//
+//    void generateStartBoard();
+//
+//    void countSolutions(int& number, int row, int col);
+//
+//    bool solve(int row, int col, int** tab); //isSolvable
+//
+//    void solve1();
+//
+//    void play() override;
+//
+//    void display() override;
+//};
