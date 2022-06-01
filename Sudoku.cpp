@@ -5,6 +5,8 @@
 // 27 - 36 medium lvl
 // >= 37 easy
 
+// -------------------------------------------------- Ewa Miazga ----------------------------------------------------------
+
 int myrandom(int i) { return std::rand() % i; }
 
 Sudoku::Sudoku(std::string difficultyLevelValue)

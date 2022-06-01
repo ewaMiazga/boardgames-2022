@@ -14,6 +14,8 @@
 #define hard 40
 #define medium 65
 
+// -------------------------------------------------- Ewa Miazga ----------------------------------------------------------
+
 class Sudoku:public Games
 {
 private:

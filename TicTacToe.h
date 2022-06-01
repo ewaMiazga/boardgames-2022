@@ -18,6 +18,8 @@
 
 #define findEmptyLine(row1, col1, row2, col2, row3, col3)  ((board[row1][col1] == board[row2][col2]) && (board[row2][col2] == board[row3][col3]) && (board[row1][col1] == emptySquare))
 
+// -------------------------------------------------- Ewa Miazga ----------------------------------------------------------
+
 class TicTacToe:public Games
 {
 private:

@@ -142,7 +142,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Crossword.cpp" />
-    <ClCompile Include="Games.cpp" />
     <ClCompile Include="TicTacToe.cpp" />
     <ClCompile Include="Sudoku.cpp" />
     <ClCompile Include="Source.cpp" />

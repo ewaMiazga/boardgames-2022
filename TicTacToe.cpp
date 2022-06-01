@@ -1,5 +1,6 @@
 #include "TicTacToe.h"
-#include "../208.1-gry-planszowe/TicTacToe.h"
+
+// -------------------------------------------------- Ewa Miazga ----------------------------------------------------------
 
 TicTacToe::TicTacToe()
 {

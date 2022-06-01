@@ -1,5 +1,7 @@
 #include "Crossword.h"
 
+// -------------------------------------------------- Ewa Miazga ----------------------------------------------------------
+
 Crossword::Crossword()
 {
     std::string fileName = "C:/Users/a.miazga/Desktop/CrosswordDataUTF";

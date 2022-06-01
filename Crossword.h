@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-//#include <map>
 #include <ostream>
 #include <iostream>
 #include <fstream>
@@ -10,6 +9,10 @@
 #include "Games.h"
 
 #define emptySquare '_'
+
+// -------------------------------------------------- Ewa Miazga ----------------------------------------------------------
+
+
 class Crossword:public Games
 {
 private:
