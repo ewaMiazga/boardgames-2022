@@ -132,7 +132,10 @@ std::string Crossword::encryptClue(std::string clue)
 {
     std::string s;
     for (int i = 0; i < clue.size(); i++)
-        s += "_ ";
+    {
+        s += emptySquare;
+        s += " ";
+    }
     return s;
 }
 
