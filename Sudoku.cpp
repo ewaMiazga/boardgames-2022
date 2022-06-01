@@ -169,24 +169,6 @@ bool Sudoku::checkRepetition(int row, int column, int value, int** tab) // retur
 //	return number;
 //}
 
-//std::vector<int> Sudoku::generateNumbers(int row, int column, int** tab)
-//{
-//	std::vector<int> numbers;
-//	for (int temp = 1; temp <= N; temp++)
-//	{
-//		if (!checkRepetition(row, column, temp, tab))
-//		{
-//			numbers.push_back(temp);
-//		}
-//	}
-//	return numbers;
-//}
-
-//void Sudoku::removeNumber(int row, int column, int** tab)
-//{
-//	generateNumbers(row, column, tab).erase(generateNumbers(row, column, tab).begin());
-//}
-
 bool Sudoku::isEmpty(int& row, int& column, int** tab)
 {
 	if (tab[row][column] == emptySquare)

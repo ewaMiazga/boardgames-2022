@@ -50,10 +50,6 @@ public:
 
 	bool checkRepetition(int row, int column, int value, int** tab);
 
-	//std::vector<int> generateNumbers(int row, int column, int** tab);
-
-	//void removeNumber(int row, int column, int** tab);
-
 	bool isEmpty(int& row, int& column, int** tab);
 
 	void insert(int row, int column, int num);
