@@ -156,19 +156,6 @@ bool Sudoku::checkRepetition(int row, int column, int value, int** tab) // retur
 	return true;
 }
 
-//int Sudoku::generateNumber(int row, int column)
-//{
-//	bool repetitionFlag = true;
-//	int number;
-//	while (repetitionFlag)
-//	{
-//		number = rand() % N + 1;
-//		if (!checkRepetition(row, column, number))
-//			repetitionFlag = false;
-//	}
-//	return number;
-//}
-
 bool Sudoku::isEmpty(int& row, int& column, int** tab)
 {
 	if (tab[row][column] == emptySquare)
@@ -195,37 +182,6 @@ bool Sudoku::isSolved(int** tab, int& i, int& j)
 	return true;
 }
 
-//void Sudoku::generateSolvedBoard()
-//{
-//	int i, j;
-//	int** temp;
-//	temp = new int* [10];
-//	for (int i = 0; i < 10; i++)
-//		temp[i] = new int[10];
-//	createEmptyBoard(temp);
-//	while (!isSolved(temp, i, j))
-//	{
-//		for (int i = 0; i < rows; i++)
-//		{
-//			for (int j = 0; j < columns; j++)
-//			{
-//				//if (i == 0 && j == 0)
-//				//	board[0][0] = rand() % N + 1;
-//				if (generateNumbers(i, j, temp).size() != 0)
-//				{
-//					auto it = rand() % generateNumbers(i, j, temp).size();
-//					temp[i][j] = generateNumbers(i, j, temp)[it];
-//				}
-//				else
-//				{
-//					std::cout << i << j << std::endl;
-//					generateSolvedBoard();
-//				}
-//			}
-//		}
-//	}
-//	fillBoard(temp);
-//}
 
 void Sudoku::generateSolvedBoard()
 {
@@ -254,52 +210,9 @@ void Sudoku::generateSolvedBoard()
 	fillBoard(temp);
 }
 
-//void Sudoku::generateStartBoard()
-//{
-//	generateSolvedBoard();
-//	int howManySquareLast = difficultyLevel;
-//	int howManySquareRemove = N * N - howManySquareLast;
-//	std::vector<int> randomRow;
-//	std::vector<int> randomColumn;
-//	int it = 1;
-//	while (it <= howManySquareRemove)
-//	{
-//		randomRow.push_back(rand() % N);
-//		randomColumn.push_back(rand() % N);
-//		it++;
-//	}
-//	int i, j;
-//	int** temp;
-//	temp = new int* [10];
-//	for (int i = 0; i < 10; i++)
-//		temp[i] = new int[10];
-//	for (int i = 0; i < rows; i++)
-//	{
-//		for (int j = 0; j < columns; j++)
-//		{
-//			if (*randomRow.begin() == i && *randomColumn.begin() == j) // check how many solutions is there
-//			{
-//				if (randomRow.size() != 0 && randomColumn.size() != 0)
-//				{
-//					temp[i][j] = emptySquare;
-//					std::vector<int>::iterator itRow = randomRow.begin();
-//					randomRow.erase(itRow);
-//					std::vector<int>::iterator itCol = randomRow.begin();
-//					randomColumn.erase(itCol);
-//				}
-//			}
-//		}
-//	}
-//	fillBoard(temp);
-//}
-
 void Sudoku::generateStartBoard()
 {
 	generateSolvedBoard();
-	//int** temp;
-	//temp = new int* [10];
-	//for (int i = 0; i < 10; i++)
-	//	temp[i] = new int[10];
 	for (int i = 0; i < N * N; i++)
 	{
 		int x = (gridPos[i]) / 9;
@@ -315,26 +228,10 @@ void Sudoku::generateStartBoard()
 			board[x][y] = temp;
 		}
 	}
-	//if (!solve(0, 0, board))
-	//	generateStartBoard();
-	//displaySudoku();
-	//std::cout << "solved: " << std::endl;
-	//solve(0, 0, board);
-	//displaySudoku();
-	//fillBoard(temp);
 }
 
 void Sudoku::countSolutions(int& number, int row, int col)
 {
-	//for(int i = 0; i < N; i++)
-	//	std::cout << guessNum[i] << std::endl;
-	//if (solve(row, col, board))
-	//{
-	//	number++;
-	//	return;
-	//}
-	//col+= 1;
-	//if (solve(row, col, board))
 	if (row == rows - 1 && col == columns)
 		return;
 	if (col == columns)
@@ -343,50 +240,18 @@ void Sudoku::countSolutions(int& number, int row, int col)
 		row++;
 	}
 	if (!isEmpty(row, col, board))
-	{
 		number++;
-		//countSolutions(number, row, col + 1);
-		//return;
-	}
 	for (int i = 0; i < 9 && number < 2; i++)
 	{
 		if (!checkRepetition(row, col, this->guessNum[i], board))
-		//if (!checkRepetition(row, col, generateNumbers(row, col, board)[i], board))
 		{
 			this->board[row][col] = this->guessNum[i];
-			//this->board[row][col] = generateNumbers(row, col, board)[i];
 			countSolutions(number, row, col += 1);
 		}
 
 		this->board[row][col] = emptySquare;
 	}
 }
-
-//bool Sudoku::solve()
-//{
-//	if (isSolved(board))
-//		return true;
-//	for (int i = 0; i < rows; i++)
-//	{
-//		for (int j = 0; j < columns; j++) 
-//		{
-//			if (isEmpty(i, j, board))
-//			{
-//				while (generateNumbers(i, j, board).size() != 0)
-//				{
-//					int temp = generateNumbers(i, j, board)[0];
-//					board[i][j] = temp;
-//					solve();
-//					if (isSolved(board))
-//						return true;
-//					else
-//						removeNumber(i, j, board);
-//				}
-//				return false;
-//			}
-//		}
-//	}
-//}
 
 
 bool Sudoku::solve(int row, int col, int** tab)
@@ -412,23 +277,6 @@ bool Sudoku::solve(int row, int col, int** tab)
 		tab[row][col] = emptySquare;
 	}
 	return false;
-}
-
-void Sudoku::solve1()
-{
-	for(int row = 0; row < rows; row++)
-		for (int col = 0; col < columns; col++)
-			if (isEmpty(row, col, board))
-				for (int num = 1; num <= N; num++)
-					if (!checkRepetition(row, col, num, board))
-					{
-						board[row][col] = num;
-						if (!solve(row, col + 1, board))
-						{
-							board[row][col] = emptySquare;
-							solve1();
-						}
-					}
 }
 
 void Sudoku::play()

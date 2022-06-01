@@ -30,7 +30,7 @@ public:
 
 	int** getBoard();
 
-	std::string toString(int ** tab);
+	std::string toString(int** tab);
 
 	std::pair<int, int> getDifficultyLevel();
 
@@ -63,8 +63,6 @@ public:
 	void countSolutions(int& number, int row, int col);
 
 	bool solve(int row, int col, int** tab); //isSolvable
-
-	void solve1();
 
 	void play() override;
 
