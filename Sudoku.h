@@ -58,7 +58,7 @@ public:
 
 	void insert(int row, int column, int num);
 
-	bool isSolved(int** tab, int& i, int& j);
+	bool isSolved(int** tab, int& i, int& j); //isFullBoard
 
 	void generateSolvedBoard();
 
