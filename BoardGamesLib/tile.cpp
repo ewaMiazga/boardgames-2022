@@ -55,6 +55,7 @@ char Tile::getValue()
 void Tile::setValue(char character)
 {
     value = character;
+    displayValue.setString(std::string(1, value));
 }
 
 void Tile::setVisibility(bool visibility)

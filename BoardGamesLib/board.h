@@ -22,15 +22,17 @@ public:
     sf::RenderWindow &m_window;
 
     void draw();
+    std::pair<int, int> getIndex(sf::Vector2i);
     Tile& getTile(std::pair<int, int> index);
     void display();
     void update();
 
+
 private:
     sf::Vector2f position;
-    sf::Text displayValue;
     double size;
-    int elemNum;
     Tile ** board;
+    int elemNum;
+
 
 };

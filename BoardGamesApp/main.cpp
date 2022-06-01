@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include "../BoardGamesLib/board.h"
+#include "../BoardGamesLib/tile.h"
 #include "../BoardGamesLib/TicTacToe.h"
 
 int main()
@@ -82,10 +83,16 @@ int main()
         3,
         window);
     TicTacToe tics(gboard);
-    //sf::Thread thread(&Board::display, &gboard);
-    sf::Thread thread(&TicTacToe::play, &tics);
+    sf::Thread thread(&Board::display, &gboard);
+    //sf::Thread thread(&TicTacToe::play, &tics);
     thread.launch();
-    gboard.display();
-    //tics.play();
-    return 0;
+    //gboard.display();
+    window.setActive(false);
+    Tile &tile = gboard.getTile(std::pair(2, 2));
+    std::cout<<tile.getValue();
+//    gboard.display();
+
+    tics.play();
+
+   return 0;
 }

@@ -22,6 +22,7 @@ public:
     char getValue();
     void setValue(char);
     void setVisibility(bool);
+
    
 private:
     bool isVisible;
