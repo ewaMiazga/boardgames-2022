@@ -25,34 +25,35 @@ int main()
         sf::Color::Black,
         font,
         900,
-        9,
+        3,
         window);
 
-//    TicTacToe tics(gboard);
-////    sf::Thread thread(&Board::display, &gboard);
-//    sf::Thread thread2(&TicTacToe::play, &tics);
-////    thread.launch();
-//
-//    window.setActive(false);
-//    Tile &tile = gboard.getTile(std::pair(2, 2));
-////    gboard.display();
-//    thread2.launch();
-//    gboard.display();
-//   // tics.play();
-    std::vector<std::string> text = { "Quick Game", "Load User", "Exit" };
-    Menu menu(900, 900, text);
-    menu.RunMenu(window);
-
-    Sudoku sudoku("easy", gboard);
+    TicTacToe tics(gboard);
 //    sf::Thread thread(&Board::display, &gboard);
-    sf::Thread thread2(&Sudoku::play, &sudoku);
+    sf::Thread thread2(&TicTacToe::play, &tics);
 //    thread.launch();
 
     window.setActive(false);
+    Tile &tile = gboard.getTile(std::pair(2, 2));
 //    gboard.display();
     thread2.launch();
     gboard.display();
    // tics.play();
+
+//    std::vector<std::string> text = { "Quick Game", "Load User", "Exit" };
+//    Menu menu(900, 900, text);
+//    menu.RunMenu(window);
+//
+//    Sudoku sudoku("easy", gboard);
+////    sf::Thread thread(&Board::display, &gboard);
+//    sf::Thread thread2(&Sudoku::play, &sudoku);
+////    thread.launch();
+//
+//    window.setActive(false);
+////    gboard.display();
+//    thread2.launch();
+//    gboard.display();
+//   // tics.play();
 
    return 0;
 }

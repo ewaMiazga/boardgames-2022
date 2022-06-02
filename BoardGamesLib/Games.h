@@ -7,11 +7,11 @@
 class Games
 {
 public:
-    Games() = default;
+	Games() = default;
 
-    virtual void play() = 0;
+	~Games() {}
 
-    virtual void display() = 0;
+	virtual void play() = 0;
 
-    ~Games() {}
+	virtual void display() = 0;
 };

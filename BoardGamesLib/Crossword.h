@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-//#include <map>
 #include <ostream>
 #include <iostream>
 #include <fstream>
@@ -10,6 +9,10 @@
 #include "Games.h"
 
 #define emptySquare '_'
+
+// -------------------------------------------------- Ewa Miazga ----------------------------------------------------------
+
+
 class Crossword:public Games
 {
 private:
@@ -29,6 +32,8 @@ public:
 	void chooseClueRandomly();
 
 	std::vector<std::pair<std::string, std::string>> getClues();
+
+	std::vector<std::pair<int, std::pair<std::string, std::string>>> getCrosswordClues();
 
 	std::vector<std::pair<int, std::pair<std::string, std::string>>> getCrosswordCluesUser();
 
@@ -53,12 +58,6 @@ public:
 	friend std::istream& operator>>(std::istream& CIN, Crossword& crossword);
 
 	void display() override;
-
-	void display2();
-
-	void printVert(int allignment, std::string word);
-
-	void printHoriz(int allignment, std::string word);
 
 	void solveCrossword();
 
