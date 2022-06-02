@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Sudoku.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -27,18 +24,48 @@
     <ClCompile Include="Crossword.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\BoardGames\BoardGames\BoardGames.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\BoardGames\BoardGames\game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\BoardGames\BoardGames\Games.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\BoardGames\BoardGames\Menu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\BoardGames\BoardGames\Sudoku.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\BoardGames\BoardGames\User.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\BoardGames\BoardGames\Window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sudoku.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="TicTacToe.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Crossword.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Games.h">
+    <ClInclude Include="..\BoardGames\BoardGames\game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\BoardGames\BoardGames\Games.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\BoardGames\BoardGames\Menu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\BoardGames\BoardGames\Sudoku.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\BoardGames\BoardGames\User.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

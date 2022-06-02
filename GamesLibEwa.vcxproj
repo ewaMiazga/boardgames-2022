@@ -141,15 +141,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\BoardGames\BoardGames\BoardGames.cpp" />
+    <ClCompile Include="..\BoardGames\BoardGames\game.cpp" />
+    <ClCompile Include="..\BoardGames\BoardGames\Games.cpp" />
+    <ClCompile Include="..\BoardGames\BoardGames\Menu.cpp" />
+    <ClCompile Include="..\BoardGames\BoardGames\Sudoku.cpp" />
+    <ClCompile Include="..\BoardGames\BoardGames\User.cpp" />
+    <ClCompile Include="..\BoardGames\BoardGames\Window.cpp" />
     <ClCompile Include="Crossword.cpp" />
     <ClCompile Include="TicTacToe.cpp" />
-    <ClCompile Include="Sudoku.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\BoardGames\BoardGames\game.h" />
+    <ClInclude Include="..\BoardGames\BoardGames\Games.h" />
+    <ClInclude Include="..\BoardGames\BoardGames\Menu.h" />
+    <ClInclude Include="..\BoardGames\BoardGames\Sudoku.h" />
+    <ClInclude Include="..\BoardGames\BoardGames\User.h" />
     <ClInclude Include="Crossword.h" />
-    <ClInclude Include="Games.h" />
-    <ClInclude Include="Sudoku.h" />
     <ClInclude Include="TicTacToe.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
