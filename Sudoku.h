@@ -3,6 +3,8 @@
 #include <random>
 #include <vector>
 #include "Games.h"
+#include "User.h"
+#include "SFML/Graphics.hpp"
 
 
 #define emptySquare 0
@@ -13,8 +15,6 @@
 #define solvable 18
 #define hard 40
 #define medium 65
-
-// -------------------------------------------------- Ewa Miazga ----------------------------------------------------------
 
 class Sudoku:public Games
 {
@@ -32,7 +32,7 @@ public:
 
 	int** getBoard();
 
-	std::string toString(int** tab);
+	std::string toString(int ** tab);
 
 	std::pair<int, int> getDifficultyLevel();
 
@@ -52,11 +52,15 @@ public:
 
 	bool checkRepetition(int row, int column, int value, int** tab);
 
+	//std::vector<int> generateNumbers(int row, int column, int** tab);
+
+	//void removeNumber(int row, int column, int** tab);
+
 	bool isEmpty(int& row, int& column, int** tab);
 
 	void insert(int row, int column, int num);
 
-	bool isSolved(int** tab, int& i, int& j); //isFullBoard
+	bool isSolved(int** tab, int& i, int& j);
 
 	void generateSolvedBoard();
 
@@ -66,7 +70,9 @@ public:
 
 	bool solve(int row, int col, int** tab); //isSolvable
 
-	void play() override;
+	void solve1();
 
-	void display() override;
+	void play(user& player, sf::RenderWindow& window);
+
+	std::vector<std::string> display() override;
 };
