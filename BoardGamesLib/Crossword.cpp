@@ -4,7 +4,7 @@
 
 Crossword::Crossword()
 {
-    std::string fileName = "C:/Users/a.miazga/Desktop/CrosswordDataUTF";
+    std::string fileName = "../resources/CrosswordDataUTF.txt";
     readFromFile(fileName, *this); // call its own 
     chooseClueRandomly(); 
     chooseCrosswordClues();
@@ -119,7 +119,7 @@ void  Crossword::chooseCrosswordClues()
                 }
             }
         }
-        std::string fileName = "C:/Users/a.miazga/Desktop/CrosswordDataUTF";
+        std::string fileName = "../resources/CrosswordDataUTF.txt";
         readFromFile(fileName, *this);
     }
 }
