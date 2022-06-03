@@ -1,5 +1,6 @@
 #pragma once
-#include "SFML/Graphics.hpp"
+#include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
 
 #define MAX_NUMBER_OF_ITEMS 3
 
@@ -20,7 +21,6 @@ protected:
 	int selectedItemIndex;
 	sf::Font font;
 	std::vector<sf::Text> menu;
-
 };
 
 class LoginWindow
