@@ -12,29 +12,46 @@ public:
 	~Menu();
 
 	void draw(sf::RenderWindow& window);
-	void MoveUp();
-	void MoveDown();
-	int GetPressedItem() { return selectedItemIndex; }
 	int RunMenu(sf::RenderWindow& window);
 
 protected:
-	int selectedItemIndex;
 	sf::Font font;
-	std::vector<sf::Text> menu;
+	std::vector<sf::Text> text;
+	void fill_info(float width, float height, std::vector<std::string> info, size_t sum);
 };
 
-class LoginWindow
+class DecisionMenu
 	:public Menu
 {
 public:
-	LoginWindow(float width, float height);
+	DecisionMenu() {}
+	DecisionMenu(float width, float height, std::vector<std::string> info, std::vector<std::string> options);
+	~DecisionMenu();
+
+	void MoveUp();
+	void MoveDown();
+	int GetPressedItem() { return selectedItemIndex; }
+	void draw(sf::RenderWindow& window);
+	int RunMenu(sf::RenderWindow& window);
+
+protected:
+	void fill_options(float width, float height, std::vector<std::string> options, size_t sum);
+	int selectedItemIndex;
+	std::vector<sf::Text> options;
+};
+
+class LoginWindow
+	:public DecisionMenu
+{
+public:
+	LoginWindow(float width, float height, std::vector<std::string> info, std::vector<std::string> options);
 	~LoginWindow();
 	void draw(sf::RenderWindow& window);
 	void RunMenu(sf::RenderWindow& window);
 
 protected:
 	sf::String nameInPut;
+	sf::Text Name;
 	sf::RectangleShape nameRect;
-
 };
 

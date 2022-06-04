@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
-
+// MENU
 Menu::Menu()
 {
 
@@ -14,68 +14,150 @@ Menu::Menu(float width, float height, std::vector<std::string> info)
 	if (!font.loadFromFile("arial.ttf"))
 	{
 	}
+	fill_info(width, height, info, info.size());
+}
+
+void Menu::fill_info(float width, float height, std::vector<std::string> info, size_t sum)
+{
 	sf::Text information;
-	size_t number_of_items = info.size();
 	int index = 1;
+	float x;
 
 	std::vector<std::string>::iterator it = info.begin();
 	for (; it < info.end(); it++)
 	{
+		x = width / 2 - ((*it).length() * 10);
 		information.setFont(font);
 		information.setFillColor(sf::Color::White);
 		information.setString(*it);
-		information.setPosition(sf::Vector2f(width / 2, height / (number_of_items + 1) * index));
-		menu.push_back(information);
+		information.setPosition(sf::Vector2f(x, height / (sum + 1) * index));
+		text.push_back(information);
 		index++;
 	}
-	selectedItemIndex = 0;
 }
-
 
 Menu::~Menu()
 {
 }
 
-LoginWindow::~LoginWindow()
-{
-}
-
 void Menu::draw(sf::RenderWindow& window)
 {
-	std::vector<sf::Text>::iterator it = menu.begin();
-	for (; it < menu.end(); it++)
+	std::vector<sf::Text>::iterator it = text.begin();
+	for (; it < text.end(); it++)
 	{
 		window.draw(*it);
 	}
 }
 
-void Menu::MoveUp()
+int Menu::RunMenu(sf::RenderWindow& window)
+{
+	sf::Event event;
+	while (window.isOpen())
+	{
+		while (window.pollEvent(event))
+		{
+			switch (event.type)
+			{
+			case sf::Event::KeyReleased:
+				switch (event.key.code)
+				{
+				case sf::Keyboard::Escape:
+					return 0;
+					break;
+				}
+				break;
+			case sf::Event::Closed:
+				window.close();
+				break;
+			}
+		}
+		window.clear();
+
+		draw(window);
+
+		window.display();
+	}
+}
+
+// DecisionMenu
+DecisionMenu::DecisionMenu(float width, float height, std::vector<std::string> info, std::vector<std::string> options)
+{
+	size_t string_sum = info.size() + options.size();
+
+	if (!font.loadFromFile("arial.ttf"))
+	{
+	}
+	fill_info(width, height, info, string_sum);
+
+	fill_options(width, height, options, string_sum);
+
+	selectedItemIndex = 0;
+}
+
+void DecisionMenu::fill_options(float width, float height, std::vector<std::string> options, size_t sum)
+{
+	sf::Text information;
+	int index = sum - options.size() + 1;
+	float x;
+
+	std::vector<std::string>::iterator it = options.begin();
+	for (; it < options.end(); it++)
+	{
+		x = width / 2 - ((*it).length() * 10);
+		information.setFont(font);
+		information.setFillColor(sf::Color::White);
+		information.setString(*it);
+		information.setPosition(sf::Vector2f(x, height / (sum + 1) * index));
+		this->options.push_back(information);
+		index++;
+	}
+}
+
+void DecisionMenu::draw(sf::RenderWindow& window)
+{
+	std::vector<sf::Text>::iterator it = text.begin();
+	for (; it < text.end(); it++)
+	{
+		window.draw(*it);
+	}
+
+	it = options.begin();
+	for (; it < options.end(); it++)
+	{
+		window.draw(*it);
+	}
+}
+
+DecisionMenu::~DecisionMenu()
+{
+}
+
+void DecisionMenu::MoveUp()
 {
 	if (selectedItemIndex - 1 >= 0)
 	{
-		menu[selectedItemIndex].setFillColor(sf::Color::White);
+		options[selectedItemIndex].setFillColor(sf::Color::White);
 		selectedItemIndex--;
-		menu[selectedItemIndex].setFillColor(sf::Color::Red);
+		options[selectedItemIndex].setFillColor(sf::Color::Red);
 	}
 }
 
-void Menu::MoveDown()
+void DecisionMenu::MoveDown()
 {
-	size_t number_of_items = menu.size();
+	size_t number_of_items = options.size();
 	if (selectedItemIndex + 1 < number_of_items)
 	{
-		menu[selectedItemIndex].setFillColor(sf::Color::White);
+		options[selectedItemIndex].setFillColor(sf::Color::White);
 		selectedItemIndex++;
-		menu[selectedItemIndex].setFillColor(sf::Color::Red);
+		options[selectedItemIndex].setFillColor(sf::Color::Red);
 	}
 }
 
-int Menu::RunMenu(sf::RenderWindow& window)
+int DecisionMenu::RunMenu(sf::RenderWindow& window)
 {
+	sf::Event event;
 	while (window.isOpen())
 	{
-		sf::Event event;
-
 		while (window.pollEvent(event))
 		{
 			switch (event.type)
@@ -95,23 +177,21 @@ int Menu::RunMenu(sf::RenderWindow& window)
 					switch (GetPressedItem())
 					{
 					case 0:
-						return 0;
-					case 1:
 						return 1;
+					case 1:
+						return 2;
 					case 2:
 						window.close();
-						return 2;
+						return 3;
 					}
-
+				case sf::Keyboard::Escape:
+					return 0;
 					break;
 				}
-
 				break;
 			case sf::Event::Closed:
 				window.close();
-
 				break;
-
 			}
 		}
 
@@ -123,51 +203,41 @@ int Menu::RunMenu(sf::RenderWindow& window)
 	}
 }
 
-LoginWindow::LoginWindow(float width, float height)
+LoginWindow::LoginWindow(float width, float height, std::vector<std::string> info, std::vector<std::string> options)
 {
+	int len = width / 4;
 	if (!font.loadFromFile("arial.ttf"))
 	{
 		// handle error
 	}
+	size_t sum = info.size() + options.size();
 	sf::Text information;
-	nameInPut = "";
 
-	information.setFont(font);
-	information.setFillColor(sf::Color::White);
-	information.setString("Confirm");
-	information.setPosition(sf::Vector2f(width / 4, height / (1 + 4) * 3));
-	menu.push_back(information);
+	fill_info(width, height, info, sum);
+
+	Name.setFont(font);
+	Name.setFillColor(sf::Color::Black);
+	Name.setString(nameInPut);
+	Name.setPosition(sf::Vector2f(width / 2 - len / 2, height / (sum + 1) * (info.size() + 1)));
 	
-	information.setFont(font);
-	information.setFillColor(sf::Color::White);
-	information.setString("Exit");
-	information.setPosition(sf::Vector2f(width / 4, height / (1 + 4) * 4));
-	menu.push_back(information);
-
-	information.setFont(font);
-	information.setFillColor(sf::Color::White);
-	information.setString("Enter the User's name:");
-	information.setPosition(sf::Vector2f(width / 2, height / (1 + 4) * 1));
-	menu.push_back(information);
-
-	information.setFont(font);
-	information.setFillColor(sf::Color::Black);
-	information.setString(nameInPut);
-	information.setPosition(sf::Vector2f(width / 2, height / (1 + 4) * 2));
-	menu.push_back(information);
-
-	nameRect.setPosition(sf::Vector2f(width / 2, height / (1 + 4) * 2));
-	nameRect.setSize(sf::Vector2f(150, 50));
+	nameRect.setPosition(sf::Vector2f(width / 2 - width / 8, height / (sum + 1) * (info.size() + 1)));
+	nameRect.setSize(sf::Vector2f(width/4, height / 18));
 	nameRect.setFillColor(sf::Color::White);
 
+	fill_options(width, height, options, sum);
+
 	selectedItemIndex = 0;
+}
+
+LoginWindow::~LoginWindow()
+{
 }
 
 void LoginWindow::draw(sf::RenderWindow& window)
 {
 	window.draw(nameRect);
-	std::vector<sf::Text>::iterator it = menu.begin();
-	for (; it < menu.end(); it++)
+	std::vector<sf::Text>::iterator it = text.begin();
+	for (; it < text.end(); it++)
 	{
 		window.draw(*it);
 	}
@@ -186,7 +256,7 @@ void LoginWindow::RunMenu(sf::RenderWindow& window)
 			case sf::Event::TextEntered:
 			{
 				nameInPut += event.text.unicode;
-				menu[3].setString(nameInPut);
+				text[3].setString(nameInPut);
 			}
 			case sf::Event::KeyReleased:
 				switch (event.key.code)
