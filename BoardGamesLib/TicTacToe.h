@@ -41,7 +41,7 @@ public:
 
 	bool isFullBoard();
 
-	bool gameOver();
+	bool gameOver() override;
 
 	std::pair<int, int> checkWillWin(char value);
 
@@ -65,5 +65,5 @@ public:
 
 	void play() override;
 
-    char getValue(int column, int row);
+    char getValue(int column, int row) override;
 };

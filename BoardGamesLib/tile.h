@@ -21,11 +21,11 @@ public:
 
     char getValue();
     void setValue(char);
+    bool isVisible();
     void setVisibility(bool);
 
-   
 private:
-    bool isVisible;
+    bool visibility;
     sf::Vector2f position;
     char value;
     sf::Text displayValue;

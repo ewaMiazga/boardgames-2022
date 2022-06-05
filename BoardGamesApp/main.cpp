@@ -7,6 +7,7 @@
 #include "../BoardGamesLib/TicTacToe.h"
 #include "../BoardGamesLib/Sudoku.h"
 #include "../BoardGamesLib/Menu.h"
+#include "../BoardGamesLib/Crossword.h"
 
 int main()
 {
@@ -18,21 +19,21 @@ int main()
     }
 
 
-    sf::RenderWindow window(sf::VideoMode(900, 900), "Sudoku");
-    Board gboard( sf::Vector2f(0, 0),
-        sf::Color::Black,
-        sf::Color(155, 155, 155, 100),
-        sf::Color::Black,
-        font,
-        900,
-        3,
-        window);
-
-    TicTacToe tics;
-    sf::Thread thread2(&TicTacToe::play, &tics);
-    window.setActive(false);
-    thread2.launch();
-    gboard.display(tics);
+//    sf::RenderWindow window(sf::VideoMode(900, 900), "Sudoku");
+//    Board gboard( sf::Vector2f(0, 0),
+//        sf::Color::Black,
+//        sf::Color(155, 155, 155, 100),
+//        sf::Color::Black,
+//        font,
+//        900,
+//        3,
+//        window);
+//
+//    TicTacToe tics;
+//    sf::Thread thread2(&TicTacToe::play, &tics);
+//    window.setActive(false);
+//    thread2.launch();
+//    gboard.display(tics);
 
 //    std::vector<std::string> text = { "Quick Game", "Load User", "Exit" };
 //    Menu menu(900, 900, text);
@@ -48,6 +49,8 @@ int main()
 //    thread2.launch();
 //    gboard.display();
 //   // tics.play();
+    Crossword crossword;
+    crossword.play();
 
    return 0;
 }

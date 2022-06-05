@@ -67,6 +67,10 @@ public:
 
     bool solve(int row, int col, int** tab); //isSolvable
 
+    bool gameOver() override;
+
+    char getValue(int column, int row) override;
+
     void play() override;
 
     void display() override;

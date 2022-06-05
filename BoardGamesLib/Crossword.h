@@ -65,6 +65,8 @@ public:
 
 	bool checkCorrectness();
 
+    char getValue(int column, int row) override;
+
 	void play() override;
 };
 

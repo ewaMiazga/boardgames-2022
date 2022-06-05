@@ -4,7 +4,7 @@
 
 Crossword::Crossword()
 {
-    std::string fileName = "../resources/CrosswordDataUTF.txt";
+    std::string fileName = "D:/studia/sem2/proi/208.1-gry-planszowe/resources/CrosswordDataUTF.txt";
     readFromFile(fileName, *this); // call its own 
     chooseClueRandomly(); 
     chooseCrosswordClues();
@@ -119,7 +119,7 @@ void  Crossword::chooseCrosswordClues()
                 }
             }
         }
-        std::string fileName = "../resources/CrosswordDataUTF.txt";
+        std::string fileName = "D:/studia/sem2/proi/208.1-gry-planszowe/resources/CrosswordDataUTF.txt";
         readFromFile(fileName, *this);
     }
 }

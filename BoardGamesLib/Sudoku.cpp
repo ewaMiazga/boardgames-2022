@@ -345,3 +345,15 @@ void Sudoku::display()
             std::cout << "----------------------" << std::endl;
     }
 }
+
+bool Sudoku::gameOver()
+{
+    int i = 0, j = 0;
+    bool outcome = isSolved(board, i, j);
+    return outcome;
+}
+
+char Sudoku::getValue(int column, int row)
+{
+    return board[column][row] + '0';
+}
