@@ -126,10 +126,7 @@ void Board::display(TicTacToe &game)
             m_window.close();
         }
 
-        m_window.clear(sf::Color::White);
-        draw();
-        m_window.display();
-
+        update();
     }
 }
 void Board::update()

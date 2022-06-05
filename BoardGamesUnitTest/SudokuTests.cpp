@@ -1,6 +1,6 @@
 //#include "pch.h"
 #include "CppUnitTest.h"
-#include "..\208.1-gry-planszowe\Sudoku.h"
+#include "..\BoardGamesLib\Sudoku.h"
 
 // -------------------------------------------------- Ewa Miazga ----------------------------------------------------------
 

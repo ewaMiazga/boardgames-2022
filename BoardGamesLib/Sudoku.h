@@ -25,10 +25,9 @@ private:
     std::pair<int, int> difficultyLevel;
     int guessNum[9] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
     int gridPos[81];
-    Board &dBoard;
 
 public:
-    Sudoku(std::string difficultyLevelValue,  Board &myBoard);
+    Sudoku(std::string difficultyLevelValue);
 
     ~Sudoku();
 
