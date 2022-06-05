@@ -111,6 +111,7 @@ void DecisionMenu::fill_options(float width, float height, std::vector<std::stri
 		this->options.push_back(information);
 		index++;
 	}
+	this->options[0].setFillColor(sf::Color::Red);
 }
 
 void DecisionMenu::draw(sf::RenderWindow& window)
@@ -174,18 +175,10 @@ int DecisionMenu::RunMenu(sf::RenderWindow& window)
 					break;
 
 				case sf::Keyboard::Return:
-					switch (GetPressedItem())
-					{
-					case 0:
-						return 1;
-					case 1:
-						return 2;
-					case 2:
-						window.close();
-						return 3;
-					}
+					return GetPressedItem();
+				
 				case sf::Keyboard::Escape:
-					return 0;
+					return -1;
 					break;
 				}
 				break;
@@ -205,7 +198,6 @@ int DecisionMenu::RunMenu(sf::RenderWindow& window)
 
 LoginWindow::LoginWindow(float width, float height, std::vector<std::string> info, std::vector<std::string> options)
 {
-	int len = width / 4;
 	if (!font.loadFromFile("arial.ttf"))
 	{
 		// handle error
@@ -213,18 +205,18 @@ LoginWindow::LoginWindow(float width, float height, std::vector<std::string> inf
 	size_t sum = info.size() + options.size();
 	sf::Text information;
 
-	fill_info(width, height, info, sum);
+	fill_info(width, height, info, sum + 1);
 
 	Name.setFont(font);
 	Name.setFillColor(sf::Color::Black);
 	Name.setString(nameInPut);
-	Name.setPosition(sf::Vector2f(width / 2 - len / 2, height / (sum + 1) * (info.size() + 1)));
+	Name.setPosition(sf::Vector2f(width / 2 - width / 8, height / (sum + 1) * (info.size() + 1)));
 	
 	nameRect.setPosition(sf::Vector2f(width / 2 - width / 8, height / (sum + 1) * (info.size() + 1)));
 	nameRect.setSize(sf::Vector2f(width/4, height / 18));
 	nameRect.setFillColor(sf::Color::White);
 
-	fill_options(width, height, options, sum);
+	fill_options(width, height, options, sum+1);
 
 	selectedItemIndex = 0;
 }
@@ -241,10 +233,19 @@ void LoginWindow::draw(sf::RenderWindow& window)
 	{
 		window.draw(*it);
 	}
+
+	it = options.begin();
+	for (; it < options.end(); it++)
+	{
+		window.draw(*it);
+	}
+
+	window.draw(Name);
 }
 
-void LoginWindow::RunMenu(sf::RenderWindow& window)
+int LoginWindow::RunMenu(sf::RenderWindow& window)
 {
+	Name.setString("");
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -256,7 +257,7 @@ void LoginWindow::RunMenu(sf::RenderWindow& window)
 			case sf::Event::TextEntered:
 			{
 				nameInPut += event.text.unicode;
-				text[3].setString(nameInPut);
+				Name.setString(nameInPut);
 			}
 			case sf::Event::KeyReleased:
 				switch (event.key.code)
@@ -273,13 +274,16 @@ void LoginWindow::RunMenu(sf::RenderWindow& window)
 					switch (GetPressedItem())
 					{
 					case 0:
-						return;
+						return 0;
 					case 1:
-						return;
+						return 1;
 					case 2:
 						window.close();
-						return;
+						return 2;
 					}
+				case sf::Keyboard::Escape:
+					return -1;
+					break;
 
 					break;
 				}
@@ -298,4 +302,8 @@ void LoginWindow::RunMenu(sf::RenderWindow& window)
 
 		window.display();
 	}
+}
+
+void RunApp(std::vector<Menu> windows, sf::RenderWindow& window)
+{
 }
