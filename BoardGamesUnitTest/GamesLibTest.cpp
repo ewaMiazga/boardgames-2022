@@ -1,6 +1,5 @@
-#include "pch.h"
 #include "CppUnitTest.h"
-#include "..\208.1-gry-planszowe\Games.h"
+#include "..\BoardGamesLib\Games.h"
 
 // -------------------------------------------------- Ewa Miazga ----------------------------------------------------------
 

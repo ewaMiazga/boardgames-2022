@@ -418,4 +418,5 @@ void TicTacToe::play()
 			moveAIHard(AICounter, playerCounter);
 		move++;
 	}
+	dBoard.~Board();
 }

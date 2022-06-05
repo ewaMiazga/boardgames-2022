@@ -1,6 +1,5 @@
-#include "pch.h"
 #include "CppUnitTest.h"
-#include "..\208.1-gry-planszowe\TicTacToe.h"
+#include "..\BoardGamesLib\TicTacToe.h"
 
 // -------------------------------------------------- Ewa Miazga ----------------------------------------------------------
 

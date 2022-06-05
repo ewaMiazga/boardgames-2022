@@ -1,6 +1,6 @@
-#include "pch.h"
+//#include "pch.h"
 #include "CppUnitTest.h"
-#include "..\208.1-gry-planszowe\Crossword.h"
+#include"..\BoardGamesLib\Crossword.h"
 
 // -------------------------------------------------- Ewa Miazga ----------------------------------------------------------
 

@@ -188,9 +188,9 @@ void Sudoku::insert(int row, int column, int num)
 
 bool Sudoku::isSolved(int** tab, int& i, int& j)
 {
-    for (int i = 0; i < rows; i++)
+    for (; i < rows; i++)
     {
-        for (int j = 0; j < columns; j++)
+        for (; j < columns; j++)
         {
             if (isEmpty(i, j, tab))
                 return false;
