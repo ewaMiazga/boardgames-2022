@@ -28,17 +28,11 @@ int main()
         3,
         window);
 
-    TicTacToe tics(gboard);
-//    sf::Thread thread(&Board::display, &gboard);
+    TicTacToe tics;
     sf::Thread thread2(&TicTacToe::play, &tics);
-//    thread.launch();
-
     window.setActive(false);
-    Tile &tile = gboard.getTile(std::pair(2, 2));
-//    gboard.display();
     thread2.launch();
-    gboard.display();
-   // tics.play();
+    gboard.display(tics);
 
 //    std::vector<std::string> text = { "Quick Game", "Load User", "Exit" };
 //    Menu menu(900, 900, text);

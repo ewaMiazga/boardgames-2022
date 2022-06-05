@@ -2,20 +2,20 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "tile.h"
+#include "TicTacToe.h"
 
 class Board
 {
 public:
-    Board() = default;
     Board(
-        sf::Vector2f position,
-        sf::Color frameColor,
-        sf::Color backgroundColor,
-        sf::Color displayColor,
-        sf::Font &font,
-        double size,
-        int elemNum,
-        sf::RenderWindow &window
+            sf::Vector2f position,
+            sf::Color frameColor,
+            sf::Color backgroundColor,
+            sf::Color displayColor,
+            sf::Font &font,
+            double size,
+            int elemNum,
+            sf::RenderWindow &window
     );
     ~Board();
 
@@ -24,7 +24,7 @@ public:
     void draw();
     std::pair<int, int> getIndex(sf::Vector2i);
     Tile& getTile(std::pair<int, int> index);
-    void display();
+    void display(TicTacToe &game);
     void update();
 
 

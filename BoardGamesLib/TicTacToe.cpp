@@ -1,14 +1,15 @@
 #include <algorithm>
 #include "TicTacToe.h"
 
-TicTacToe::TicTacToe(Board &myBoard) : dBoard(myBoard)
+//TicTacToe::TicTacToe(Board &myBoard) : dBoard(myBoard)
+TicTacToe::TicTacToe()
 {
 	for (int i = 0; i < rows; i++)
 		for (int j = 0; j < columns; j++)
         {
             board[i][j] = '_';
-            std::pair<int, int> temp(i, j);
-            dBoard.getTile(temp).setValue('_');
+           // std::pair<int, int> temp(i, j);
+          //  dBoard.getTile(temp).setValue('_');
 //          myBoard.update();
         }
 }
@@ -26,7 +27,7 @@ void TicTacToe::insert(int row, int column, char value)
     {
         board[row][column] = value;
         std::pair<int, int> temp(row, column);
-        dBoard.getTile(temp).setValue(value);
+        //dBoard.getTile(temp).setValue(value);
     }
 	//else exception
 }
@@ -418,4 +419,9 @@ void TicTacToe::play()
 			moveAIHard(AICounter, playerCounter);
 		move++;
 	}
+}
+
+char TicTacToe::getValue(int column, int row)
+{
+    return board[column][row];
 }

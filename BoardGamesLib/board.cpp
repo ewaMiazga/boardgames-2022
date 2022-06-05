@@ -4,14 +4,14 @@
 
 
 Board::Board(
-    sf::Vector2f position,
-    sf::Color frameColor,
-    sf::Color backgroundColor,
-    sf::Color displayColor,
-    sf::Font &font,
-    double size,
-    int elemNum,
-    sf::RenderWindow &window
+        sf::Vector2f position,
+        sf::Color frameColor,
+        sf::Color backgroundColor,
+        sf::Color displayColor,
+        sf::Font &font,
+        double size,
+        int elemNum,
+        sf::RenderWindow &window
 ) : m_window(window)
 {
     this->position = position;
@@ -31,13 +31,13 @@ Board::Board(
         for (int j = 0; j < elemNum; ++j)
         {
             board[i][j] = Tile(
-                newPos,
-                frameColor,
-                backgroundColor,
-                displayColor,
-                font,
-                tileSize,
-                true
+                    newPos,
+                    frameColor,
+                    backgroundColor,
+                    displayColor,
+                    font,
+                    tileSize,
+                    true
             );
             newPos += sf::Vector2f(tileSize, 0);
         }
@@ -77,12 +77,12 @@ Tile& Board::getTile(std::pair<int, int> index)
 {
     //sf::Vector2i pos, sf::RenderWindow& window
 
-      int &column = index.first;
-      int &row = index.second;
-      return board[column][row];
+    int &column = index.first;
+    int &row = index.second;
+    return board[column][row];
 }
 
-void Board::display()
+void Board::display(TicTacToe &game)
 {
     m_window.setActive(true);
 
@@ -111,6 +111,21 @@ void Board::display()
                     break;
             }
         }
+
+        for (int i = 0; i < elemNum; ++i)
+        {
+            for (int j = 0; j < elemNum; ++j)
+            {
+                board[j][i].setValue(game.getValue(j, i));
+            }
+        }
+
+        if(game.gameOver())
+        {
+            //end screen should be called
+            m_window.close();
+        }
+
         m_window.clear(sf::Color::White);
         draw();
         m_window.display();
@@ -123,3 +138,4 @@ void Board::update()
     draw();
     m_window.display();
 }
+
