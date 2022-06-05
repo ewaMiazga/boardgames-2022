@@ -19,7 +19,8 @@ int main()
     }
 
 
-//    sf::RenderWindow window(sf::VideoMode(900, 900), "Sudoku");
+    sf::RenderWindow window(sf::VideoMode(900, 900), "Sudoku");
+
 //    Board gboard( sf::Vector2f(0, 0),
 //        sf::Color::Black,
 //        sf::Color(155, 155, 155, 100),
@@ -35,22 +36,21 @@ int main()
 //    thread2.launch();
 //    gboard.display(tics);
 
-//    std::vector<std::string> text = { "Quick Game", "Load User", "Exit" };
-//    Menu menu(900, 900, text);
-//    menu.RunMenu(window);
-//
-//    Sudoku sudoku("easy", gboard);
-////    sf::Thread thread(&Board::display, &gboard);
-//    sf::Thread thread2(&Sudoku::play, &sudoku);
-////    thread.launch();
-//
-//    window.setActive(false);
-////    gboard.display();
-//    thread2.launch();
-//    gboard.display();
-//   // tics.play();
-    Crossword crossword;
-    crossword.play();
+    Board gboard( sf::Vector2f(0, 0),
+        sf::Color::Black,
+        sf::Color(155, 155, 155, 100),
+        sf::Color::Black,
+        font,
+        900,
+        9,
+        window);
+
+    Sudoku sudoku("easy");
+    sf::Thread thread2(&Sudoku::play, &sudoku);
+    window.setActive(false);
+    thread2.launch();
+    gboard.display(sudoku);
+
 
    return 0;
 }

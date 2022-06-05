@@ -2,7 +2,6 @@
 #include "board.h"
 #include "tile.h"
 
-
 Board::Board(
         sf::Vector2f position,
         sf::Color frameColor,
@@ -83,7 +82,7 @@ Tile& Board::getTile(std::pair<int, int> index)
     return board[column][row];
 }
 
-void TicTacToeBoard::display(TicTacToe &game)
+void Board::display(TicTacToe &game)
 {
     m_window.setActive(true);
 
@@ -129,7 +128,7 @@ void TicTacToeBoard::display(TicTacToe &game)
     }
 }
 
-void SudokuBoard::display(Sudoku &game)
+void Board::display(Sudoku &game)
 {
     m_window.setActive(true);
 
@@ -175,51 +174,6 @@ void SudokuBoard::display(Sudoku &game)
     }
 }
 
-void CrosswordBoard::display(Crossword &game)
-{
-    m_window.setActive(true);
-
-    while (m_window.isOpen())
-    {
-        sf::sleep(sf::milliseconds(100));
-        sf::Event e;
-
-        while (m_window.pollEvent(e)) {
-            switch (unsigned int key = -1;  e.type) {
-                case sf::Event::Closed:
-                    m_window.close();
-                    break;
-                case sf::Event::MouseButtonPressed:
-                    if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
-                    {
-                        std::pair<int, int> index(getIndex(sf::Mouse::getPosition(m_window)));
-                        getTile(index).setOutlineColor(sf::Color::Red);
-                    }
-                    if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Right))
-                    {
-                        std::pair<int, int> index(getIndex(sf::Mouse::getPosition(m_window)));
-                        getTile(index).setOutlineColor(sf::Color::Black);
-                    }
-                default:
-                    break;
-            }
-        }
-        for (int i = 0; i < elemNum; ++i)
-        {
-            for (int j = 0; j < elemNum; ++j)
-            {
-                board[j][i].setValue(game.getValue(j, i));
-            }
-        }
-
-        if(game.gameOver())
-        {
-            //end screen should be called
-            m_window.close();
-        }
-        update();
-    }
-}
 void Board::update()
 {
     m_window.clear(sf::Color::White);
