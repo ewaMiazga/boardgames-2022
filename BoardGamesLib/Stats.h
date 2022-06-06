@@ -14,6 +14,7 @@ public:
 	stats();
 	stats(std::string title);
 	stats(std::string title, time_t total_time, int points);
+	~stats();
 	std::string get_title() { return this->title; }
 	time_t get_time() { return this->total_time; }
 	void set_title(std::string title) { this->title = title; }

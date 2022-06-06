@@ -32,6 +32,11 @@ user::user()
 	this->points = 0;
 }
 
+user::~user()
+{
+
+}
+
 void user::move(sf::Event button)
 {
 	int res = get_move(button);
@@ -123,31 +128,41 @@ std::string user::read_string()
 	return input;
 }
 
+std::vector<std::string> user::show_my_stats()
+{
+	std::vector<std::string> user_stats = { "You start a Quick Game, in this option show statistics is not possible" };
+	return user_stats;
+}
+
 // USER ACCOUNT
 
 user_account::user_account()
 {
-	this->x = 0;
-	this->y = 0;
-	this->points = 0;
-	this->current_sesion = 0;
-	stats Sudoku("Sudoku"), TicTacToe("TicTacToe"), Crosswords("Crosswords");
-	this->sudoku_stats = Sudoku;
-	this->ttc_stats = TicTacToe;
-	this->crosswords_stats = Crosswords;
+	x = 0;
+	y = 0;
+	points = 0;
+	current_sesion = 0;
+	name = "user_1";
+	sudoku_stats = stats("Sudoku");
+	ttc_stats = stats("TTC");
+	crosswords_stats = stats("Crosswords");
+}
+
+user_account::~user_account()
+{
+
 }
 
 user_account::user_account(std::string name)
 {
-	this->x = 0;
-	this->y = 0;
-	this->points = 0;
-	this->current_sesion = 0;
+	x = 0;
+	y = 0;
+	points = 0;
+	current_sesion = 0;
 	this->name = name;
-	stats Sudoku("Sudoku"), TicTacToe("TicTacToe"), Crosswords("Crosswords");
-	this->sudoku_stats = Sudoku;
-	this->ttc_stats = TicTacToe;
-	this->crosswords_stats = Crosswords;
+	sudoku_stats = stats("Sudoku");
+	ttc_stats = stats("TTC");
+	crosswords_stats = stats("Crosswords");
 }
 
 user_account::user_account(std::string name, stats sudoku, stats ttc, stats crosswords)
@@ -156,7 +171,7 @@ user_account::user_account(std::string name, stats sudoku, stats ttc, stats cros
 	y = 0;
 	points = 0;
 	current_sesion = 0;
-	current_game = nullptr;
+	current_game = "";
 	this->name = name;
 	sudoku_stats = sudoku;
 	ttc_stats = ttc;
@@ -191,17 +206,48 @@ void user_account::stop_game()
 		crosswords_stats.add_time(add_time);
 	}
 	current_sesion = 0;
-	current_game = nullptr;
+	current_game = "";
 	points = 0;
 }
 
-std::string user_account::show_my_stats()
+std::vector<std::string> user_account::show_my_stats()
 {
-	std::string str_rep;
-	str_rep += sudoku_stats.to_string();
-	str_rep += ttc_stats.to_string();
-	str_rep += crosswords_stats.to_string();
+	std::vector<std::string> user_stats;
+	std::string s = "You can see your statisctics";
+
+	user_stats.push_back(s);
+
+	user_stats.push_back(sudoku_stats.to_string());
+
+	user_stats.push_back(ttc_stats.to_string());
+
+	user_stats.push_back(crosswords_stats.to_string());
+
+	return user_stats;
+}
+
+bool user_account::update_to_premium()
+{
+	if (sudoku_stats.get_points() > 10 && ttc_stats.get_points() > 10 && crosswords_stats.get_points() > 10)
+		return true;
+	else
+		return false;
 }
 
 // Premium user
 
+premium_user::premium_user()
+{
+
+}
+
+premium_user::~premium_user()
+{
+
+}
+
+premium_user premium_user::update_to_premium(user_account& user)
+{
+	premium_user updated(user.get_name(), user.get_sudoku_stats(), user.get_ttc_stats(), user.get_crosswords_stats());
+	return updated;
+}
