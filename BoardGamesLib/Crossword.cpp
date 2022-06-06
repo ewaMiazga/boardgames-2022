@@ -222,7 +222,8 @@ void Crossword::display()
             if (userClue.second.first.size() < clue.second.first.size())
                 for (int k = 0; k < clue.second.first.size() - userClue.second.first.size(); k++)
                 {
-                    board[n][k] = '_';
+                    board[n][m] = '_';
+                    ++m;
                     std::cout << "_ ";
                 }
 
@@ -277,7 +278,7 @@ bool Crossword::checkCorrectness()
 
 void Crossword::play()
 {
-    while (!isSolved() && !checkCorrectness()) //ends if any is satisfied (!!!)
+    while (!(isSolved() && checkCorrectness()))
     {
         display();
         int num;
@@ -301,7 +302,7 @@ void Crossword::play()
 
 bool Crossword::gameOver()
 {
-    return isSolved();
+    return isSolved()&&checkCorrectness();
 }
 
 char Crossword::getValue(int column, int row)
