@@ -20,6 +20,7 @@ private:
 	std::vector<std::pair<int, std::pair<std::string, std::string>>> crosswordClues; //hasla w krzyzowkce
 	std::vector<std::pair<int, std::pair<std::string, std::string>>> crosswordCluesUser; // wyniki uzytkownika
 	std::vector<std::pair<std::string, std::string>> clues;
+    std::vector<std::vector<char>> board;
 public:
 	Crossword();
 

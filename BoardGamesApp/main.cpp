@@ -64,7 +64,19 @@ int main()
     if(choice == 3)
     {
         Crossword crossword;
-        crossword.play();
+        sf::RenderWindow window(sf::VideoMode(900, 900), "Crossword");
+        Board gboard( sf::Vector2f(0, 0),
+                      sf::Color::Black,
+                      sf::Color(155, 155, 155, 100),
+                      sf::Color::Black,
+                      font,
+                      900,
+                      20,
+                      window);
+        sf::Thread thread2(&Crossword::play, &crossword);
+        window.setActive(false);
+        thread2.launch();
+        gboard.display(crossword);
     }
    return 0;
 }

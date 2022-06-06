@@ -14,6 +14,15 @@ Crossword::Crossword()
         std::string clue = "_";
         crosswordCluesUser.push_back(std::make_pair(i + 1, std::make_pair(clue, clueInfo)));
     }
+    std::vector<char> foo;
+    for(int i = 0; i < 20; ++i)
+    {
+        foo.push_back(' ');
+    }
+    for(int i = 0; i < 20; ++i)
+    {
+        board.push_back(foo);
+    }
 }
 
 std::string Crossword::getClue()
@@ -164,17 +173,23 @@ void Crossword::display()
     int maxPos = findMaxLetterPos();
     int i = 0;
     int j = 0;
+    int n = 0;
+    int m = 0;
     while (i < maxPos)
     {
         std::cout << "  ";
         i++;
     }
+    board[n][i] = '#';
     std::cout << "#" << std::endl;
     for (auto clue : crosswordClues)
     {
+        m = 0;
+        n++;
         if (findLetterPos(crosswordClue.first[j], (clue.second).first) < maxPos)
         {
             int gap = maxPos - findLetterPos(crosswordClue.first[j], (clue.second).first);
+            m = gap;
             while (gap > 0)
             {
                 std::cout << "  ";
@@ -185,19 +200,38 @@ void Crossword::display()
         auto userClue = crosswordCluesUser[clue.first - 1];
         if (userClue.second.first == "_")
         {
-            std::cout << encryptClue((clue.second).first);
+            std::string temp = encryptClue((clue.second).first);
+            for(int x = 0; x < temp.size(); ++x)
+            {
+                if(temp[x]!=' ')
+                {
+                    board[n][m] = temp[x];
+                    ++m;
+                }
+            }
+            std::cout << temp;
         }
         else
         {
             for (int k = 0; k < userClue.second.first.size(); k++)
+            {
                 std::cout << userClue.second.first[k] << " ";
+                board[n][m] = userClue.second.first[k];
+                ++m;
+            }
             if (userClue.second.first.size() < clue.second.first.size())
                 for (int k = 0; k < clue.second.first.size() - userClue.second.first.size(); k++)
+                {
+                    board[n][k] = '_';
                     std::cout << "_ ";
+                }
+
         }
         std::cout << std::endl;
         j++;
     }
+    ++n;
+    board[n][i] = '#';
     while (i > 0)
     {
         std::cout << "  ";
@@ -243,7 +277,7 @@ bool Crossword::checkCorrectness()
 
 void Crossword::play()
 {
-    while (!isSolved() && !checkCorrectness())
+    while (!isSolved() && !checkCorrectness()) //ends if any is satisfied (!!!)
     {
         display();
         int num;
@@ -267,17 +301,17 @@ void Crossword::play()
 
 bool Crossword::gameOver()
 {
-    return false;
+    return isSolved();
 }
 
 char Crossword::getValue(int column, int row)
 {
-    return 0;
+    return board[column][row];
 }
 
 void readFromFile(std::string fileName, Crossword& crosswordTemp)
 {
-    //fileName += ".txt";
+    //fileName += ".txt"; why
     std::ifstream fileHandleOpen(fileName);
     if (!fileHandleOpen)
     {
