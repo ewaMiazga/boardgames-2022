@@ -217,6 +217,9 @@ std::vector<std::string> user_account::show_my_stats()
 
 	user_stats.push_back(s);
 
+	s = "Game Points Time";
+	user_stats.push_back(s);
+
 	user_stats.push_back(sudoku_stats.to_string());
 
 	user_stats.push_back(ttc_stats.to_string());
@@ -228,7 +231,7 @@ std::vector<std::string> user_account::show_my_stats()
 
 bool user_account::update_to_premium()
 {
-	if (sudoku_stats.get_points() > 10 && ttc_stats.get_points() > 10 && crosswords_stats.get_points() > 10)
+	if ((sudoku_stats.get_points() > 10 && ttc_stats.get_points() > 10) && crosswords_stats.get_points() > 10)
 		return true;
 	else
 		return false;
@@ -238,12 +241,23 @@ bool user_account::update_to_premium()
 
 premium_user::premium_user()
 {
+}
 
+premium_user::premium_user(std::string name, stats sudoku, stats ttc, stats crosswords)
+{
+	x = 0;
+	y = 0;
+	points = 0;
+	current_sesion = 0;
+	current_game = "";
+	this->name = name;
+	sudoku_stats = sudoku;
+	ttc_stats = ttc;
+	crosswords_stats = crosswords;
 }
 
 premium_user::~premium_user()
 {
-
 }
 
 premium_user premium_user::update_to_premium(user_account& user)

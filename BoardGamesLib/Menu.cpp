@@ -14,10 +14,12 @@ Menu::Menu(float width, float height, std::vector<std::string> info)
 	if (!font.loadFromFile("arial.ttf"))
 	{
 	}
-	fill_info(width, height, info, info.size());
+	this->width = width;
+	this->height = height;
+	fill_info(info, info.size());
 }
 
-void Menu::fill_info(float width, float height, std::vector<std::string> info, size_t sum)
+void Menu::fill_info(std::vector<std::string> info, size_t sum)
 {
 	sf::Text information;
 	int index = 1;
@@ -79,22 +81,33 @@ int Menu::RunMenu(sf::RenderWindow& window)
 	}
 }
 
+void Menu::reupload_info(std::vector<std::string> info)
+{
+	text = {};
+	fill_info(info, info.size());
+}
+
+
+
 // DecisionMenu
 DecisionMenu::DecisionMenu(float width, float height, std::vector<std::string> info, std::vector<std::string> options)
 {
+	this->width = width;
+	this->height = height;
+
 	size_t string_sum = info.size() + options.size();
 
 	if (!font.loadFromFile("arial.ttf"))
 	{
 	}
-	fill_info(width, height, info, string_sum);
+	fill_info(info, string_sum);
 
-	fill_options(width, height, options, string_sum);
+	fill_options(options, string_sum);
 
 	selectedItemIndex = 0;
 }
 
-void DecisionMenu::fill_options(float width, float height, std::vector<std::string> options, size_t sum)
+void DecisionMenu::fill_options(std::vector<std::string> options, size_t sum)
 {
 	sf::Text information;
 	int index = sum - options.size() + 1;
@@ -198,6 +211,9 @@ int DecisionMenu::RunMenu(sf::RenderWindow& window)
 
 LoginWindow::LoginWindow(float width, float height, std::vector<std::string> info, std::vector<std::string> options)
 {
+	this->width = width;
+	this->height = height;
+
 	if (!font.loadFromFile("arial.ttf"))
 	{
 		// handle error
@@ -205,7 +221,7 @@ LoginWindow::LoginWindow(float width, float height, std::vector<std::string> inf
 	size_t sum = info.size() + options.size();
 	sf::Text information;
 
-	fill_info(width, height, info, sum + 1);
+	fill_info(info, sum + 1);
 
 	Name.setFont(font);
 	Name.setFillColor(sf::Color::Black);
@@ -216,7 +232,7 @@ LoginWindow::LoginWindow(float width, float height, std::vector<std::string> inf
 	nameRect.setSize(sf::Vector2f(width / 4, height / 18));
 	nameRect.setFillColor(sf::Color::White);
 
-	fill_options(width, height, options, sum + 1);
+	fill_options(options, sum + 1);
 
 	selectedItemIndex = 0;
 }

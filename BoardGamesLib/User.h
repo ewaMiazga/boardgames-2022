@@ -30,7 +30,6 @@ public:
 	std::string read_string();
 	std::vector<std::string> show_my_stats();
 	bool is_premium() { return false; }
-	bool update_to_premium() { return false; }
 };
 
 class user_account

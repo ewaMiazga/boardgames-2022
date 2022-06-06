@@ -12,6 +12,7 @@ public:
 	~Menu();
 
 	void set_info(int index, std::string info) { this->text[index].setString(info); }
+	void reupload_info(std::vector<std::string> info);
 
 	void draw(sf::RenderWindow& window);
 	int RunMenu(sf::RenderWindow& window);
@@ -19,7 +20,9 @@ public:
 protected:
 	sf::Font font;
 	std::vector<sf::Text> text;
-	void fill_info(float width, float height, std::vector<std::string> info, size_t sum);
+	void fill_info(std::vector<std::string> info, size_t sum);
+	float width;
+	float height;
 };
 
 class DecisionMenu
@@ -37,7 +40,7 @@ public:
 	int RunMenu(sf::RenderWindow& window);
 
 protected:
-	void fill_options(float width, float height, std::vector<std::string> options, size_t sum);
+	void fill_options(std::vector<std::string> options, size_t sum);
 	int selectedItemIndex;
 	std::vector<sf::Text> options;
 };

@@ -1,6 +1,10 @@
 #include "Database.h"
 #include <vector>
 #include "User.h"
+#include "Stats.h"
+#include <fstream>
+#include <string>
+#include <iostream>
 
 // DATABASE
 database::database()
@@ -43,8 +47,8 @@ user_account database::find_user(std::string name)
 
 void database::update_user(user_account act_user)
 {
-	std::vector<user_account>::iterator i = this->get_users().begin();
-	std::vector<user_account>::iterator end = this->get_users().end();
+	std::vector<user_account>::iterator i = get_users().begin();
+	std::vector<user_account>::iterator end = get_users().end();
 	for (; i < end; i++)
 	{
 		if ((*i).get_name() == act_user.get_name())
@@ -57,7 +61,29 @@ void database::add_user(user_account new_user)
 	this->users.push_back(new_user);
 }
 
-/*std::ifstream& operator>>(std::ifstream& file, database& obj)
+void read_from_file(std::string path, database& obj)
+{
+	std::ifstream plik;
+	plik.open(path);
+	if (plik)
+	{
+		plik >> obj;
+	}
+	plik.close();
+}
+
+void write_to_file(std::string path, database& obj)
+{
+	std::ofstream plik;
+	plik.open(path);
+	if (plik)
+	{
+		plik << obj;
+	}
+	plik.close();
+}
+
+std::ifstream& operator>>(std::ifstream& file, database& obj)
 {
 	std::string line;
 	int n = 1;
@@ -122,20 +148,19 @@ void database::add_user(user_account new_user)
 
 std::ofstream& operator<<(std::ofstream& file, database& obj)
 {
-	std::vector<user_account>::iterator i = obj.get_users().begin();
-	std::vector<user_account>::iterator end = obj.get_users().end();
-	for (; i < end; i++)
+	std::string line;
+	for (int i=0; i < obj.get_users().size(); i++)
 	{
-		file << (*i).get_name() << "\n";
-		file << (*i).get_sudoku_stats().get_title() << "\n";
-		file << (*i).get_sudoku_stats().get_points() << "\n";
-		file << (*i).get_sudoku_stats().get_time() << "\n";
-		file << (*i).get_ttc_stats().get_title() << "\n";
-		file << (*i).get_ttc_stats().get_points() << "\n";
-		file << (*i).get_ttc_stats().get_time() << "\n";
-		file << (*i).get_crosswords_stats().get_title() << "\n";
-		file << (*i).get_crosswords_stats().get_points() << "\n";
-		file << (*i).get_crosswords_stats().get_time() << "\n";
+		file << obj.get_users()[i].get_name() << "\n";
+		file << "Sudoku" << "\n";
+		file << obj.get_users()[i].get_sudoku_stats().get_points() << "\n";
+		file << obj.get_users()[i].get_sudoku_stats().get_time() << "\n";
+		file << "Tic Tac Toe" << "\n";
+		file << obj.get_users()[i].get_ttc_stats().get_points() << "\n";
+		file << obj.get_users()[i].get_ttc_stats().get_time() << "\n";
+		file << "Crosswords" << "\n";
+		file << obj.get_users()[i].get_crosswords_stats().get_points() << "\n";
+		file << obj.get_users()[i].get_crosswords_stats().get_time() << "\n";
 	}
 	return file;
-}*/
+}

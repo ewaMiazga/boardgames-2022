@@ -24,6 +24,10 @@ public:
 	
 	void find_the_best_users();
 
+	friend void read_from_file(std::string path, database& obj);
+
+	friend void write_to_file(std::string path, database& obj);
+
 	friend std::ifstream& operator>>(std::ifstream& file, database& obj);
 	
 	friend std::ofstream& operator<<(std::ofstream& file, database& obj);
