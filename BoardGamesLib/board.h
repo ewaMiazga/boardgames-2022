@@ -4,7 +4,7 @@
 #include "tile.h"
 #include "TicTacToe.h"
 #include "Sudoku.h"
-//#include "Crossword.h"
+#include "Crossword.h"
 
 class Board
 {
@@ -23,18 +23,20 @@ public:
 
     sf::RenderWindow &m_window;
 
-    void draw();
-    std::pair<int, int> getIndex(sf::Vector2i);
-    Tile& getTile(std::pair<int, int> index);
+    virtual void draw();
+    virtual std::pair<int, int> getIndex(sf::Vector2i);
+    virtual Tile& getTile(std::pair<int, int> index);
     void display(TicTacToe &game);
     void display(Sudoku &game);
-    //void display(Crossword &game);
-    void update();
+    void display(Crossword &game);
+    virtual void update();
 
-private:
+protected:
     sf::Vector2f position;
     double size;
     Tile ** board;
-    int elemNum;
     std::pair<int, int> selected = std::make_pair(-1, -1);
+
+private:
+    int elemNum;
 };
