@@ -23,13 +23,12 @@ public:
 
     sf::RenderWindow &m_window;
 
-    virtual void draw();
     virtual std::pair<int, int> getIndex(sf::Vector2i);
     virtual Tile& getTile(std::pair<int, int> index);
-    void display(TicTacToe &game);
-    void display(Sudoku &game);
-    void display(Crossword &game);
+
+    virtual void draw();
     virtual void update();
+    virtual void display(Games &game);
 
 protected:
     sf::Vector2f position;

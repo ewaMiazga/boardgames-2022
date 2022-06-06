@@ -4,7 +4,7 @@
 
 Crossword::Crossword()
 {
-    std::string fileName = R"(D:\studia\sem2\proi\208.1-gry-planszowe\resources\CrosswordDataUTF.txt)";
+    std::string fileName = R"(..\resources\CrosswordDataUTF.txt)";
     readFromFile(fileName, *this); // call its own
     chooseClueRandomly();
     chooseCrosswordClues();
@@ -117,7 +117,7 @@ void  Crossword::chooseCrosswordClues()
                 }
             }
         }
-        std::string fileName = R"(D:\studia\sem2\proi\208.1-gry-planszowe\resources\CrosswordDataUTF.txt)";
+        std::string fileName = R"(..\resources\CrosswordDataUTF.txt)";
         readFromFile(fileName, *this);
     }
 }
