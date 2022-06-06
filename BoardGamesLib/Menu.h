@@ -11,6 +11,8 @@ public:
 	Menu(float width, float height, std::vector<std::string> info);
 	~Menu();
 
+	void set_info(int index, std::string info) { this->text[index].setString(info); }
+
 	void draw(sf::RenderWindow& window);
 	int RunMenu(sf::RenderWindow& window);
 
@@ -48,6 +50,7 @@ public:
 	~LoginWindow();
 	void draw(sf::RenderWindow& window);
 	int RunMenu(sf::RenderWindow& window);
+	sf::String getInPut() { return nameInPut; }
 
 protected:
 	sf::String nameInPut;

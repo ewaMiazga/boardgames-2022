@@ -75,7 +75,7 @@ int Menu::RunMenu(sf::RenderWindow& window)
 
 		draw(window);
 
-		window.display();
+		window.display();  
 	}
 }
 
@@ -176,7 +176,7 @@ int DecisionMenu::RunMenu(sf::RenderWindow& window)
 
 				case sf::Keyboard::Return:
 					return GetPressedItem();
-				
+
 				case sf::Keyboard::Escape:
 					return -1;
 					break;
@@ -211,12 +211,12 @@ LoginWindow::LoginWindow(float width, float height, std::vector<std::string> inf
 	Name.setFillColor(sf::Color::Black);
 	Name.setString(nameInPut);
 	Name.setPosition(sf::Vector2f(width / 2 - width / 8, height / (sum + 1) * (info.size() + 1)));
-	
+
 	nameRect.setPosition(sf::Vector2f(width / 2 - width / 8, height / (sum + 1) * (info.size() + 1)));
-	nameRect.setSize(sf::Vector2f(width/4, height / 18));
+	nameRect.setSize(sf::Vector2f(width / 4, height / 18));
 	nameRect.setFillColor(sf::Color::White);
 
-	fill_options(width, height, options, sum+1);
+	fill_options(width, height, options, sum + 1);
 
 	selectedItemIndex = 0;
 }
@@ -289,7 +289,7 @@ int LoginWindow::RunMenu(sf::RenderWindow& window)
 				}
 
 				break;
-			
+
 			case sf::Event::Closed:
 				window.close();
 				break;
