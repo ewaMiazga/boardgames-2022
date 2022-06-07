@@ -1,6 +1,6 @@
 .idea
 cmake-build-debug
-.vs/208.1-gry-planszowe/v17/.suo
+.vs
 *.ipch
 *.db
 *.lock
