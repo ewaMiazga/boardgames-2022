@@ -38,21 +38,21 @@ Menu::~Menu()
 {
 }
 
-void Menu::draw(sf::RenderWindow* window)
+void Menu::draw(sf::RenderWindow& window)
 {
 	std::vector<sf::Text>::iterator it = text.begin();
 	for (; it < text.end(); it++)
 	{
-		window->draw(*it);
+		window.draw(*it);
 	}
 }
 
-int Menu::RunMenu(sf::RenderWindow* window)
+int Menu::RunMenu(sf::RenderWindow& window)
 {
 	sf::Event event;
-	while (window->isOpen())
+	while (window.isOpen())
 	{
-		while (window->pollEvent(event))
+		while (window.pollEvent(event))
 		{
 			switch (event.type)
 			{

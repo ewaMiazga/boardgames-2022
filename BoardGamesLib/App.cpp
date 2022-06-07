@@ -5,9 +5,8 @@ const float width = 900;
 const float height = 900;
 const std::string path;
 
-App::App(sf::Font& font) : font(font)
+App::App(sf::Font& font, sf::RenderWindow &window) : font(font), window(window)
 {
-	window = &sf::RenderWindow(sf::VideoMode(900, 900), "Board_Games");
 
 	std::vector<std::string> start_info = { "BOARD GAMES!!!" };
 	std::vector<std::string> start_opt = { "Quick Game", "Load User", "Exit" };

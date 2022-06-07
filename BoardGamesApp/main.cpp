@@ -74,6 +74,7 @@ int main()
 //        thread2.launch();
 //        gboard.display(crossword);
 //    }
+    sf::RenderWindow window(sf::VideoMode(900, 900), "Crossword");
     sf::Font font;
     user_account user1;
     if (!font.loadFromFile("Qarolina.ttf"))
@@ -81,7 +82,7 @@ int main()
         std::cout << "error loading the file";
         system("pause");
     }
-    App game(font);
+    App game(font, window);
     game.PlayCrosswords(user1);
     return 0;
 }

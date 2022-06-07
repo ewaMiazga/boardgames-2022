@@ -12,7 +12,7 @@
 class App
 {
 public:
-	explicit App(sf::Font& font);
+	explicit App(sf::Font& font, sf::RenderWindow &window);
 
 	~App() = default;
 
@@ -61,5 +61,5 @@ private:
 
 	sf::Font& font;
 
-	sf::RenderWindow* window;
+	sf::RenderWindow& window;
 };
