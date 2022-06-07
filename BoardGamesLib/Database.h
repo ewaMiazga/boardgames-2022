@@ -1,6 +1,10 @@
 #pragma once
 #include <vector>
 #include "User.h"
+#include "Stats.h"
+#include <fstream>
+#include <string>
+#include <iostream>
 
 class database
 {
@@ -23,6 +27,10 @@ public:
 	void add_user(user_account new_user);
 	
 	void find_the_best_users();
+
+	friend void read_from_file(std::string path, database& obj);
+
+	friend void write_to_file(std::string path, database& obj);
 
 	friend std::ifstream& operator>>(std::ifstream& file, database& obj);
 	

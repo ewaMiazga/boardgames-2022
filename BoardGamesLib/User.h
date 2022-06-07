@@ -1,12 +1,9 @@
+#pragma once
 #include <iostream>
 #include <utility>
 #include <ctime>
 #include <vector>
-#include "SFML/System.hpp"
-#include "SFML/Graphics.hpp"
 #include "Stats.h"
-
-#pragma once
 
 class user
 {
@@ -14,7 +11,6 @@ protected:
 	int x;
 	int y;
 	int points;
-	int get_move(sf::Event button);
 
 public:
 	user();
@@ -23,14 +19,9 @@ public:
 	void add_point() { this->points++; }
 	int get_x() { return this->x; }
 	int get_y() { return this->y; }
-	bool enter(sf::Event button);
-	int get_insert(sf::Event button);
-	char get_action();
-	void move(sf::Event button);
-	std::string read_string();
+	void move(int x, int y);
 	std::vector<std::string> show_my_stats();
 	bool is_premium() { return false; }
-	bool update_to_premium() { return false; }
 };
 
 class user_account

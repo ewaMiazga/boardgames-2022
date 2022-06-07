@@ -31,7 +31,9 @@ std::string stats::to_string()
 	std::string str_rep = this->get_title();
 	str_rep += "  ";
 	str_rep += std::to_string(this->get_points());
+	str_rep += " points";
 	str_rep += "  ";
-	str_rep += std::to_string(this->get_time());
+	str_rep += std::to_string(this->get_time()/3600);
+	str_rep += " hours";
 	return str_rep;
 }
