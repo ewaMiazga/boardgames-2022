@@ -10,7 +10,7 @@
 
 int myrandom(int i) { return std::rand() % i; }
 
-Sudoku::Sudoku(std::string difficultyLevelValue, Board &myBoard) : dBoard(myBoard)
+Sudoku::Sudoku(std::string difficultyLevelValue)
 {
     assignDiffcultyLevel(difficultyLevelValue);
     int** array;
@@ -180,7 +180,7 @@ void Sudoku::insert(int row, int column, int num)
     if (num <= N && num >= 0)
     {
         std::pair<int, int> temp(row, column);
-        dBoard.getTile(temp).setValue(num+'0');
+       // dBoard.getTile(temp).setValue(num+'0');
         board[row][column] = num;
     }
 
@@ -312,7 +312,7 @@ void Sudoku::play()
         for(int b = 0; b < 9; ++b)
         {
             std::pair<int, int> temp(a, b);
-            dBoard.getTile(temp).setValue(board[a][b]+'0');
+            //dBoard.getTile(temp).setValue(board[a][b]+'0');
         }
     }
 
@@ -344,4 +344,16 @@ void Sudoku::display()
         if ((i + 1) % 3 == 0 && i != rows - 1)
             std::cout << "----------------------" << std::endl;
     }
+}
+
+bool Sudoku::gameOver()
+{
+    int i = 0, j = 0;
+    bool outcome = isSolved(board, i, j);
+    return outcome;
+}
+
+char Sudoku::getValue(int column, int row)
+{
+    return board[column][row] + '0';
 }

@@ -64,7 +64,7 @@
 //    //s1.play();
 //
 //    //PLAY CROSSWORD
-	Crossword c1();
+	//Crossword c1();
 //
 //    system("pause 0");
 //    return 0;

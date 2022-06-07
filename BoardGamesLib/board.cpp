@@ -2,22 +2,21 @@
 #include "board.h"
 #include "tile.h"
 
-
 Board::Board(
     sf::Vector2f position,
     sf::Color frameColor,
     sf::Color backgroundColor,
     sf::Color displayColor,
-    sf::Font &font,
+    sf::Font& font,
     double size,
     int elemNum,
-    sf::RenderWindow &window
+    sf::RenderWindow& window
 ) : m_window(window)
 {
     this->position = position;
     this->elemNum = elemNum;
     this->size = size;
-    this->board = new Tile* [elemNum];
+    this->board = new Tile * [elemNum];
     for (int i = 0; i < elemNum; i++)
     {
         board[i] = new Tile[elemNum];
@@ -60,7 +59,10 @@ void Board::draw()
     {
         for (int j = 0; j < elemNum; ++j)
         {
-            board[j][i].draw(m_window);
+            if (board[j][i].isVisible())
+            {
+                board[j][i].draw(m_window);
+            }
         }
     }
 }
@@ -75,14 +77,12 @@ std::pair<int, int> Board::getIndex(sf::Vector2i pos)
 }
 Tile& Board::getTile(std::pair<int, int> index)
 {
-    //sf::Vector2i pos, sf::RenderWindow& window
-
-      int &column = index.first;
-      int &row = index.second;
-      return board[column][row];
+    int& column = index.first;
+    int& row = index.second;
+    return board[column][row];
 }
 
-void Board::display()
+void Board::display(Games& game)
 {
     m_window.setActive(true);
 
@@ -93,30 +93,42 @@ void Board::display()
 
         while (m_window.pollEvent(e)) {
             switch (unsigned int key = -1;  e.type) {
-                case sf::Event::Closed:
-                    m_window.close();
-                    break;
-                case sf::Event::MouseButtonPressed:
-                    if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) {
-                        std::pair<int, int> index(getIndex(sf::Mouse::getPosition(m_window)));
-                        getTile(index).setOutlineColor(sf::Color::Red);
-                    }
-                    if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Right))
-                    {
-
-                        std::pair<int, int> index(getIndex(sf::Mouse::getPosition(m_window)));
-                        getTile(index).setOutlineColor(sf::Color::Black);
-                    }
-                default:
-                    break;
+            case sf::Event::Closed:
+                m_window.close();
+                break;
+            case sf::Event::MouseButtonPressed:
+                if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+                {
+                    std::pair<int, int> index(getIndex(sf::Mouse::getPosition(m_window)));
+                    getTile(index).setOutlineColor(sf::Color::Red);
+                }
+                if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Right))
+                {
+                    std::pair<int, int> index(getIndex(sf::Mouse::getPosition(m_window)));
+                    getTile(index).setOutlineColor(sf::Color::Black);
+                }
+            default:
+                break;
             }
         }
-        m_window.clear(sf::Color::White);
-        draw();
-        m_window.display();
+        for (int i = 0; i < elemNum; ++i)
+        {
+            for (int j = 0; j < elemNum; ++j)
+            {
+                board[j][i].setValue(game.getValue(j, i));
+            }
+        }
 
+        if (game.gameOver())
+        {
+            //end screen should be called
+            m_window.close();
+        }
+        update();
     }
 }
+
+
 void Board::update()
 {
     m_window.clear(sf::Color::White);

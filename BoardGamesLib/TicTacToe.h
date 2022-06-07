@@ -5,7 +5,7 @@
 #include <vector>
 #include <SFML/Graphics.hpp>
 #include "Games.h"
-#include "board.h"
+
 
 #define N 3
 #define rows  3
@@ -28,9 +28,9 @@ class TicTacToe:public Games
 {
 private:
 	char board[rows][columns];
-    Board &dBoard;
+
 public:
-	explicit TicTacToe(Board &myBoard);
+	TicTacToe();
 	~TicTacToe() = default;
 
 	bool isEmpty(int row, int column);
@@ -41,7 +41,7 @@ public:
 
 	bool isFullBoard();
 
-	bool gameOver();
+	bool gameOver() override;
 
 	std::pair<int, int> checkWillWin(char value);
 
@@ -64,4 +64,6 @@ public:
 	void display() override;
 
 	void play() override;
+
+    char getValue(int column, int row) override;
 };

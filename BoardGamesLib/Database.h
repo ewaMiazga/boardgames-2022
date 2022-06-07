@@ -1,6 +1,10 @@
 #pragma once
 #include <vector>
 #include "User.h"
+#include "Stats.h"
+#include <fstream>
+#include <string>
+#include <iostream>
 
 class database
 {

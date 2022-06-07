@@ -1,16 +1,9 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
+//#include "../BoardGamesLib/App.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
-#include "../BoardGamesLib/User.h"
-#include "../BoardGamesLib/Stats.h"
-#include "../BoardGamesLib/board.h"
-#include "../BoardGamesLib/tile.h"
-#include "../BoardGamesLib/TicTacToe.h"
-#include "../BoardGamesLib/Sudoku.h"
-#include "../BoardGamesLib/Menu.h"
-#include "../BoardGamesLib/Database.h"
 
 const float width = 900;
 const float height = 900;
@@ -18,11 +11,24 @@ const std::string path;
 
 int main()
 {
+	sf::RenderWindow window(sf::VideoMode(900, 900), "Sudoku");
+	sf::Font font;
+	if (!font.loadFromFile("../resources/fonts/Qarolina.ttf"))
+	{
+		std::cout << "error loading the file";
+		system("pause");
+	}
+
+	//App game(font);
+	//game.RunStartMenu(window);
+	return 0;
+
+
 	//database users;
 
 	//read_from_file(path, users);
 	
-	sf::RenderWindow window(sf::VideoMode(900, 900), "Sudoku");
+	/*sf::RenderWindow window(sf::VideoMode(900, 900), "Sudoku");
 	std::vector<std::string> start_info = { "BOARD GAMES!!!" };
 	std::vector<std::string> start_opt = { "Quick Game", "Load User", "Exit" };
 	DecisionMenu start(width, height, start_info, start_opt);
@@ -159,5 +165,5 @@ int main()
 		}
 	}
 	//write_to_file(path, users);
-	//return 0;
+	//return 0;*/
 }

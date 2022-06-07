@@ -1,10 +1,5 @@
 #include "Database.h"
-#include <vector>
-#include "User.h"
-#include "Stats.h"
-#include <fstream>
-#include <string>
-#include <iostream>
+
 
 // DATABASE
 database::database()
@@ -144,6 +139,7 @@ std::ifstream& operator>>(std::ifstream& file, database& obj)
 		}
 		}
 	}
+	return file;
 }
 
 std::ofstream& operator<<(std::ofstream& file, database& obj)

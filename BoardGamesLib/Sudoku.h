@@ -3,8 +3,6 @@
 #include <random>
 #include <vector>
 #include "Games.h"
-#include "board.h"
-
 
 #define emptySquare 0
 #define N 9
@@ -25,10 +23,9 @@ private:
     std::pair<int, int> difficultyLevel;
     int guessNum[9] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
     int gridPos[81];
-    Board &dBoard;
 
 public:
-    Sudoku(std::string difficultyLevelValue,  Board &myBoard);
+    explicit Sudoku(std::string difficultyLevelValue);
 
     ~Sudoku();
 
@@ -67,6 +64,10 @@ public:
     void countSolutions(int& number, int row, int col);
 
     bool solve(int row, int col, int** tab); //isSolvable
+
+    bool gameOver() override;
+
+    char getValue(int column, int row) override;
 
     void play() override;
 

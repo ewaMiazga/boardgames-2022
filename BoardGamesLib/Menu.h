@@ -49,6 +49,7 @@ class LoginWindow
 	:public DecisionMenu
 {
 public:
+	LoginWindow();
 	LoginWindow(float width, float height, std::vector<std::string> info, std::vector<std::string> options);
 	~LoginWindow();
 	void draw(sf::RenderWindow& window);
@@ -60,6 +61,3 @@ protected:
 	sf::Text Name;
 	sf::RectangleShape nameRect;
 };
-
-void RunApp(std::vector<Menu> windows, sf::RenderWindow& window);
-

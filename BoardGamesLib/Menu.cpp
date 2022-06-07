@@ -209,6 +209,11 @@ int DecisionMenu::RunMenu(sf::RenderWindow& window)
 	}
 }
 
+LoginWindow::LoginWindow()
+{
+
+}
+
 LoginWindow::LoginWindow(float width, float height, std::vector<std::string> info, std::vector<std::string> options)
 {
 	this->width = width;
