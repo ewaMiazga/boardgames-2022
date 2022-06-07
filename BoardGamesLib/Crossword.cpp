@@ -133,7 +133,6 @@ void  Crossword::chooseCrosswordClues()
 
 void Crossword::insert(int num, std::string clueValue)
 {
-    //if (crosswordCluesUser[num - 1].second.first == "_")
     crosswordCluesUser[num - 1].second.first = clueValue;
 }
 
@@ -177,11 +176,9 @@ void Crossword::display()
     int m = 0;
     while (i < maxPos)
     {
-        std::cout << "  ";
         i++;
     }
     board[n][i] = '#';
-    std::cout << "#" << std::endl;
     for (auto clue : crosswordClues)
     {
         m = 0;
@@ -192,7 +189,6 @@ void Crossword::display()
             m = gap;
             while (gap > 0)
             {
-                std::cout << "  ";
                 gap--;
             }
         }
@@ -209,13 +205,11 @@ void Crossword::display()
                     ++m;
                 }
             }
-            std::cout << temp;
         }
         else
         {
             for (int k = 0; k < userClue.second.first.size(); k++)
             {
-                std::cout << userClue.second.first[k] << " ";
                 board[n][m] = userClue.second.first[k];
                 ++m;
             }
@@ -224,23 +218,17 @@ void Crossword::display()
                 {
                     board[n][m] = '_';
                     ++m;
-                    std::cout << "_ ";
                 }
 
         }
-        std::cout << std::endl;
         j++;
     }
     ++n;
     board[n][i] = '#';
     while (i > 0)
     {
-        std::cout << "  ";
         i--;
     }
-    std::cout << "#" << std::endl;
-    std::cout << std::endl;
-    std::cout << std::endl;
     for (auto clue : crosswordClues)
     {
         std::cout << std::endl;

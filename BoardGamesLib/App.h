@@ -12,7 +12,7 @@
 class App
 {
 public:
-	explicit App(sf::Font& font, sf::RenderWindow& window);
+	explicit App(sf::Font& font);
 
 	~App() = default;
 
@@ -26,7 +26,7 @@ public:
 
 	void UserGame(user_account &current_user);
 
-	void PlaySudoku(user &current_user);
+	void PlaySudoku(user_account &current_user);
 
 	void PlayTTC(user &current_user);
 
@@ -37,6 +37,8 @@ public:
 	std::string get_crosswords_input();
 
 	int move(user& current_user);
+
+	void exit_from_app(user_account& current_user);
 
 private:
 	DecisionMenu start_window;
@@ -59,5 +61,5 @@ private:
 
 	sf::Font& font;
 
-	sf::RenderWindow& window;
+	sf::RenderWindow* window;
 };

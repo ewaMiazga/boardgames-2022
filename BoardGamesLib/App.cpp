@@ -5,8 +5,10 @@ const float width = 900;
 const float height = 900;
 const std::string path;
 
-App::App(sf::Font& font, sf::RenderWindow& window) : font(font), window(window)
+App::App(sf::Font& font) : font(font)
 {
+	window = &sf::RenderWindow(sf::VideoMode(900, 900), "Board_Games");
+
 	std::vector<std::string> start_info = { "BOARD GAMES!!!" };
 	std::vector<std::string> start_opt = { "Quick Game", "Load User", "Exit" };
 	start_window = DecisionMenu(width, height, start_info, start_opt);
@@ -54,7 +56,7 @@ void App::RunStartMenu()
 
 void App::QuickGame()
 {
-	user current_user ;
+	user_account current_user ;
 	game_window.set_info(1, "User: new_user");
 	result = game_window.RunMenu(window);
 	switch (result)
@@ -146,11 +148,12 @@ void App::UserGame(user_account &current_user)
 	}
 }
 
-void App::PlaySudoku(user &current_user)
+void App::PlaySudoku(user_account &current_user)
 {
+	current_user.start_game("Sudoku");
 	int input;
 	Sudoku level("hard");
-	// wypelnij sudoku
+	level.fill();
 	Board gboard(sf::Vector2f(0, 0),
 		sf::Color::Black,
 		sf::Color(155, 155, 155, 100),
@@ -161,31 +164,96 @@ void App::PlaySudoku(user &current_user)
 		window);
 	gboard.set_selected({ 0, 0 });
 	gboard.display(level);
+	result = 0;
+	while (window.isOpen())
+	{
+		switch (result)
+		{
+		case 0:
+			result = move(current_user);
+			gboard.set_selected({ current_user.get_y(), current_user.get_x() });
+			gboard.display(level);
+			break;
+		case 1:
+			input = get_sudoku_input();
+			level.insert(current_user.get_y(), current_user.get_x(), input);
+			gboard.set_selected({ current_user.get_y(), current_user.get_x() });
+			gboard.display(level);
+			result = 0;
+			break;
+		case -1:
+			current_user.stop_game();
+			return;
+		case -2:
+			current_user.stop_game();
+			exit_from_app(current_user);
+			window.close();
+			exit(0);	
+		}
+	}
+}
+
+void App::PlayTTC(user &current_user)
+{
+	int result;
+	TicTacToe level("easy");
+	Board gboard(sf::Vector2f(0, 0),
+		sf::Color::Black,
+		sf::Color(155, 155, 155, 100),
+		sf::Color::Black,
+		font,
+		900,
+		3,
+		window);
+	gboard.set_selected({ 0, 0 });
+	gboard.display(level);
 	while (window.isOpen())
 	{
 		result = 0;
 		while (result != 1)
 		{
 			result = move(current_user);
-			std::cout << current_user.get_x() << current_user.get_y() <<std::endl;
 			gboard.set_selected({ current_user.get_y(), current_user.get_x() });
 			gboard.display(level);
 		}
-		input = get_sudoku_input();
-		level.insert(current_user.get_y(), current_user.get_x(), input);
-		gboard.set_selected({ current_user.get_y(), current_user.get_x() });
+		level.insert(current_user.get_y(), current_user.get_x(), 'X');
+		gboard.display(level);
+		level.play();
 		gboard.display(level);
 	}
-}
-
-void App::PlayTTC(user &current_user)
-{
 
 }
 
 void App::PlayCrosswords(user &current_user)
 {
-
+	int result;
+	std::string input;
+	Crossword level;
+	Board gboard(sf::Vector2f(0, 0),
+		sf::Color::Black,
+		sf::Color(155, 155, 155, 100),
+		sf::Color::Black,
+		font,
+		900,
+		20,
+		window);
+	gboard.set_selected({ 0, 0 });
+	level.display();
+	gboard.display(level);
+	while (window.isOpen())
+	{
+		result = 0;
+		while (result != 1)
+		{
+			result = move(current_user);
+			gboard.set_selected({ current_user.get_y()+1, current_user.get_x() });
+			level.display();
+			gboard.display(level);
+		}
+		input = get_crosswords_input();
+		level.insert(current_user.get_y(), input);
+		gboard.display(level);
+	}
 }
 
 int App::get_sudoku_input()
@@ -223,7 +291,7 @@ int App::get_sudoku_input()
 				}
 				break;
 			case sf::Event::Closed:
-				window.close();
+				return -2;
 			}
 		}
 	}
@@ -303,4 +371,11 @@ int App::move(user& current_user)
 			}
 		}
 	}
+}
+
+void App::exit_from_app(user_account& current_user)
+{
+	current_user.stop_game();
+	users.update_user(current_user);
+	write_to_file("Database.txt", users);
 }

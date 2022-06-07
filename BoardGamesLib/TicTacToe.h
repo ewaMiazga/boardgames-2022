@@ -28,9 +28,13 @@ class TicTacToe:public Games
 {
 private:
 	char board[rows][columns];
+	std::string lvl;
     //Board &dBoard;
 public:
-	TicTacToe();
+	TicTacToe() = default;
+
+	TicTacToe(std::string lvl);
+
 	~TicTacToe() = default;
 
 	bool isEmpty(int row, int column);

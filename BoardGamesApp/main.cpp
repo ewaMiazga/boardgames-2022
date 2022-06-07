@@ -74,16 +74,14 @@ int main()
 //        thread2.launch();
 //        gboard.display(crossword);
 //    }
-    sf::RenderWindow window(sf::VideoMode(900, 900), "BoardGames");
     sf::Font font;
-    user user1;
+    user_account user1;
     if (!font.loadFromFile("Qarolina.ttf"))
     {
         std::cout << "error loading the file";
         system("pause");
     }
-    App game(font, window);
-    std::cout << "Run";
-    game.PlaySudoku(user1);
+    App game(font);
+    game.PlayCrosswords(user1);
     return 0;
 }

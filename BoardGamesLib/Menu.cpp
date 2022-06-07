@@ -6,12 +6,13 @@
 // MENU
 
 Menu::Menu(float width, float height, std::vector<std::string> info)
-: width(width), height(height)
 {
 	if (!font.loadFromFile("../resources/fonts/Qarolina.ttf"))
 	{
 	}
 	fill_info(width, height, info, info.size());
+	this->width = width;
+	this->height = height;
 }
 
 void Menu::fill_info(float width, float height, std::vector<std::string> info, size_t sum)
@@ -37,21 +38,21 @@ Menu::~Menu()
 {
 }
 
-void Menu::draw(sf::RenderWindow& window)
+void Menu::draw(sf::RenderWindow* window)
 {
 	std::vector<sf::Text>::iterator it = text.begin();
 	for (; it < text.end(); it++)
 	{
-		window.draw(*it);
+		window->draw(*it);
 	}
 }
 
-int Menu::RunMenu(sf::RenderWindow& window)
+int Menu::RunMenu(sf::RenderWindow* window)
 {
 	sf::Event event;
-	while (window.isOpen())
+	while (window->isOpen())
 	{
-		while (window.pollEvent(event))
+		while (window->pollEvent(event))
 		{
 			switch (event.type)
 			{
@@ -89,6 +90,9 @@ DecisionMenu::DecisionMenu(float width, float height, std::vector<std::string> i
 	fill_options(width, height, options, string_sum);
 
 	selectedItemIndex = 0;
+
+	this->width = width;
+	this->height = height;
 }
 
 void DecisionMenu::fill_options(float width, float height, std::vector<std::string> options, size_t sum)
@@ -212,6 +216,9 @@ LoginWindow::LoginWindow(float width, float height, std::vector<std::string> inf
 	fill_options(width, height, options, sum + 1);
 
 	selectedItemIndex = 0;
+
+	this->width = width;
+	this->height = height;
 }
 
 LoginWindow::~LoginWindow()

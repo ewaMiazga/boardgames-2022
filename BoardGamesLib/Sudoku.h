@@ -72,4 +72,6 @@ public:
     void play() override;
 
     void display() override;
+
+    void fill();
 };

@@ -2,15 +2,12 @@
 #include "TicTacToe.h"
 
 //TicTacToe::TicTacToe(Board &myBoard) : dBoard(myBoard)
-TicTacToe::TicTacToe()
+TicTacToe::TicTacToe(std::string lvl): lvl(lvl)
 {
 	for (int i = 0; i < rows; i++)
 		for (int j = 0; j < columns; j++)
         {
             board[i][j] = '_';
-           // std::pair<int, int> temp(i, j);
-          //  dBoard.getTile(temp).setValue('_');
-//          myBoard.update();
         }
 }
 
@@ -77,7 +74,6 @@ bool TicTacToe::gameOver()
 	if (getWinner() != ' ')
 	{
 		winner = getWinner(); // one player win
-		std::cout << "The winner is: " << winner << std::endl;
 		return true;
 	}
 	else if (!isFullBoard()) // continue to play
@@ -85,7 +81,6 @@ bool TicTacToe::gameOver()
 	else
 	{
 		winner = ' '; // tie
-		std::cout << "Tie" << std::endl;
 		return true;
 	}
 }
@@ -338,9 +333,6 @@ int TicTacToe::chooseStartingPlayer()
 }
 void TicTacToe::display()
 {
-//    dBoard.m_window.clear(sf::Color::White);
-//    dBoard.draw();
-//    dBoard.m_window.display();
 	for (int i = 0; i < rows; i++)
 	{
 		for (int j = 0; j < columns; j++)
@@ -354,70 +346,14 @@ void TicTacToe::display()
 
 void TicTacToe::play()
 {
-	char playerCounter;
-	char AICounter;
-	std::string request;
-	std::string lvl;
-	std::cout << "Player1: Choose counter ( 'O' or 'X' )" << std::endl;
-	std::cin >> playerCounter;
-	std::cout << "Do you want to play with AI? yes/no" << std::endl;
-	std::cin >> request;
-	if (request == "yes")
+	if (!gameOver())
 	{
-		std::cout << "Choose difficulty lvl hard/medium/easy" << std::endl;
-		std::cin >> lvl;
-	}
-	if (playerCounter == 'X')
-		AICounter = 'O';
-	else
-		AICounter = 'X';
-	if (request == "no")
-		std::cout << "Player2's counter = " << AICounter << std::endl;
-	int move = chooseStartingPlayer();
-	while (!gameOver())
-	{
-		bool inserted = false;
-		while (move % 2 == 1 && !inserted)
-		{
-			display();
-			int row, col;
-			std::cout << "Player" << " " << playerCounter << std::endl;
-			std::cout << "Choose row" << std::endl;
-			std::cin >> row;
-			std::cout << "Choose column" << std::endl;
-			std::cin >> col;
-			if (!isEmpty(row - 1, col - 1))
-				std::cout << "This square is not empty!" << std::endl;
-			else
-			{
-				insert(row - 1, col - 1, playerCounter);
-				inserted = true;
-			}
-		}
-		while (request == "no" && move % 2 == 0 && !inserted)
-		{
-			display();
-			int row, col;
-			std::cout << "Player" << " " << AICounter << std::endl;
-			std::cout << "Choose row" << std::endl;
-			std::cin >> row;
-			std::cout << "Choose column" << std::endl;
-			std::cin >> col;
-			if (!isEmpty(row - 1, col - 1))
-				std::cout << "This square is not empty!" << std::endl;
-			else
-			{
-				insert(row - 1, col - 1, AICounter);
-				inserted = true;
-			}
-		}
-		if (request == "yes" && move % 2 == 0 && lvl == "easy")
-			moveAIEasy(AICounter, playerCounter);
-		else if (request == "yes" && move % 2 == 0 && lvl == "medium")
-			moveAIMedium(AICounter, playerCounter);
-		else if (request == "yes" && move % 2 == 0 && lvl == "hard")
-			moveAIHard(AICounter, playerCounter);
-		move++;
+		if (lvl == "easy")
+			moveAIEasy('O', 'X');
+		else if (lvl == "medium")
+			moveAIMedium('O', 'X');
+		else if (lvl == "hard")
+			moveAIHard('O', 'X');
 	}
 }
 

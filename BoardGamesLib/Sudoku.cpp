@@ -179,8 +179,6 @@ void Sudoku::insert(int row, int column, int num)
 {
     if (num <= N && num >= 0)
     {
-        std::pair<int, int> temp(row, column);
-       // dBoard.getTile(temp).setValue(num+'0');
         board[row][column] = num;
     }
 
@@ -296,6 +294,16 @@ bool Sudoku::solve(int row, int col, int** tab)
     return false;
 }
 
+void Sudoku::fill()
+{
+    int k = 0;
+    while (!(k >= difficultyLevel.first && k <= difficultyLevel.second))
+    {
+        generateStartBoard();
+        k = calcDifficultyLevel(board);
+    }
+}
+
 void Sudoku::play()
 {
     // change to 
@@ -308,9 +316,9 @@ void Sudoku::play()
     int i = 0;
     int j = 0;
 
-    for(int a = 0; a < 9; ++a)
+    for (int a = 0; a < 9; ++a)
     {
-        for(int b = 0; b < 9; ++b)
+        for (int b = 0; b < 9; ++b)
         {
             std::pair<int, int> temp(a, b);
             //dBoard.getTile(temp).setValue(board[a][b]+'0');
@@ -330,6 +338,7 @@ void Sudoku::play()
         insert(row - 1, col - 1, num);
     }
 }
+
 
 void Sudoku::display()
 {
