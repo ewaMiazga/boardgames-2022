@@ -5,7 +5,7 @@ const float width = 900;
 const float height = 900;
 const std::string path;
 
-App::App(sf::Font& font) : font(font)
+App::App(sf::Font& font, sf::RenderWindow& window) : font(font), window(window)
 {
 	std::vector<std::string> start_info = { "BOARD GAMES!!!" };
 	std::vector<std::string> start_opt = { "Quick Game", "Load User", "Exit" };
@@ -29,28 +29,30 @@ App::App(sf::Font& font) : font(font)
 	crosswords_window = Menu(width, height, crosswords_info);
 
 	std::vector<std::string> stats_info = { "Stats" };
-	Menu statistics(width, height, stats_info);
+	stats_window = Menu(width, height, stats_info);
 
 	result = 0;
 }
 
-void App::RunStartMenu(sf::RenderWindow& window)
+void App::RunStartMenu()
 {
-	result = load_window.RunMenu(window);
+	std::cout << "Run";
+	result = start_window.RunMenu(window);
+	std::cout << "Run";
 
 	switch (result)
 	{
 	case 0:
-		QuickGame(window);
+		QuickGame();
 	case 1:
-		LoadUser(window);
+		LoadUser();
 	case 2:
 		window.close();
 		return;
 	}
 }
 
-void App::QuickGame(sf::RenderWindow& window)
+void App::QuickGame()
 {
 	user current_user ;
 	game_window.set_info(1, "User: new_user");
@@ -58,13 +60,13 @@ void App::QuickGame(sf::RenderWindow& window)
 	switch (result)
 	{
 	case 0:
-		PlaySudoku(window, current_user);
+		PlaySudoku(current_user);
 		break;
 	case 1:
-		PlayTTC(window, current_user);
+		PlayTTC(current_user);
 		break;
 	case 2:
-		PlayTTC(window, current_user);
+		PlayTTC(current_user);
 		break;
 	case 3:
 		stats_window.reupload_info((current_user).show_my_stats());
@@ -78,11 +80,11 @@ void App::QuickGame(sf::RenderWindow& window)
 		window.close();
 		break;
 	case -1:
-		RunStartMenu(window);
+		RunStartMenu();
 	}
 }
 
-void App::LoadUser(sf::RenderWindow& window)
+void App::LoadUser()
 {
 	std::string name = "";
 	user_account current_user;
@@ -104,28 +106,29 @@ void App::LoadUser(sf::RenderWindow& window)
 			current_user = current_premium_user;
 			delete current_premium_user;
 		}*/
-		UserGame(window, current_user);
+		UserGame(current_user);
 	}
 	case 1:
 		window.close();
 		return;
 	case -1:
-		RunStartMenu(window);
+		RunStartMenu();
 	}
 }
 
-void App::UserGame(sf::RenderWindow& window, user_account &current_user)
+void App::UserGame(user_account &current_user)
 {
+	result = game_window.RunMenu(window);
 	switch (result)
 	{
 	case 0:
-		PlaySudoku(window, current_user);
+		PlaySudoku(current_user);
 		break;
 	case 1:
-		PlayTTC(window, current_user);
+		PlayTTC(current_user);
 		break;
 	case 2:
-		PlayTTC(window, current_user);
+		PlayTTC(current_user);
 		break;
 	case 3:
 		stats_window.reupload_info((current_user).show_my_stats());
@@ -139,14 +142,15 @@ void App::UserGame(sf::RenderWindow& window, user_account &current_user)
 		window.close();
 		break;
 	case -1:
-		RunStartMenu(window);
+		RunStartMenu();
 	}
 }
 
-void App::PlaySudoku(sf::RenderWindow & window, user &current_user)
+void App::PlaySudoku(user &current_user)
 {
 	int input;
 	Sudoku level("hard");
+	// wypelnij sudoku
 	Board gboard(sf::Vector2f(0, 0),
 		sf::Color::Black,
 		sf::Color(155, 155, 155, 100),
@@ -155,34 +159,36 @@ void App::PlaySudoku(sf::RenderWindow & window, user &current_user)
 		900,
 		9,
 		window);
-    sf::Thread thread2(&Sudoku::play, &level);
-    window.setActive(false);
-    thread2.launch();
-    gboard.display(level);
-//	while (true)
-//	{
-//		result = move(window, current_user);
-//		while (result != 1)
-//		{
-//			result = move(window, current_user);
-//		}
-//		input = get_sudoku_input(window);
-//		level.insert(current_user.get_x(), current_user.get_y(), input);
-//		gboard.display(level);
-//	}
+	gboard.set_selected({ 0, 0 });
+	gboard.display(level);
+	while (window.isOpen())
+	{
+		result = 0;
+		while (result != 1)
+		{
+			result = move(current_user);
+			std::cout << current_user.get_x() << current_user.get_y() <<std::endl;
+			gboard.set_selected({ current_user.get_y(), current_user.get_x() });
+			gboard.display(level);
+		}
+		input = get_sudoku_input();
+		level.insert(current_user.get_y(), current_user.get_x(), input);
+		gboard.set_selected({ current_user.get_y(), current_user.get_x() });
+		gboard.display(level);
+	}
 }
 
-void App::PlayTTC(sf::RenderWindow& window, user &current_user)
+void App::PlayTTC(user &current_user)
 {
 
 }
 
-void App::PlayCrosswords(sf::RenderWindow& window, user &current_user)
+void App::PlayCrosswords(user &current_user)
 {
 
 }
 
-int App::get_sudoku_input(sf::RenderWindow& window)
+int App::get_sudoku_input()
 {
 	sf::Event event;
 	while (window.isOpen())
@@ -223,7 +229,7 @@ int App::get_sudoku_input(sf::RenderWindow& window)
 	}
 }
 
-std::string App::get_crosswords_input(sf::RenderWindow& window)
+std::string App::get_crosswords_input()
 {
 	sf::String input;
 	while (window.isOpen())
@@ -257,7 +263,7 @@ std::string App::get_crosswords_input(sf::RenderWindow& window)
 	}
 }
 
-int App::move(sf::RenderWindow& window, user& current_user)
+int App::move(user& current_user)
 {
 	sf::Event event;
 	while (window.isOpen())
@@ -267,25 +273,29 @@ int App::move(sf::RenderWindow& window, user& current_user)
 			switch (event.type)
 			{
 			case sf::Event::KeyReleased:
-//				switch (event.key.code)
-//				{
-//				case sf::Keyboard::Up:
-//					current_user.move(0, -1);
-//					return 0;
-//				case sf::Keyboard::Down:
-//					current_user.move(0, 1);
-//					return 0;
-//				case sf::Keyboard::Left:
-//					current_user.move(-1, 0);
-//					return 0;
-//				case sf::Keyboard::Right:
-//					current_user.move(1, 0);
-//					return 0;
-//				case sf::Keyboard::Return:
-//					return 1;
-//				case sf::Keyboard::Escape:
-//					return -1;
-//				}
+				switch (event.key.code)
+				{
+				case sf::Keyboard::Up:
+					if(current_user.get_y() > 0)
+						current_user.move(0, -1);
+					return 0;
+				case sf::Keyboard::Down:
+					if (current_user.get_y() < 8)
+						current_user.move(0, 1);
+					return 0;
+				case sf::Keyboard::Left:
+					if (current_user.get_x() > 0)
+						current_user.move(-1, 0);
+					return 0;
+				case sf::Keyboard::Right:
+					if (current_user.get_y() < 8)
+						current_user.move(1, 0);
+					return 0;
+				case sf::Keyboard::Return:
+					return 1;
+				case sf::Keyboard::Escape:
+					return -1;
+				}
 				break;
 			case sf::Event::Closed:
 				window.close();

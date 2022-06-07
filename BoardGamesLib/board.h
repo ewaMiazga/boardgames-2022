@@ -29,6 +29,7 @@ public:
     virtual void draw();
     virtual void update();
     virtual void display(Games &game);
+    virtual void set_selected(std::pair<int, int> index);
 
 protected:
     sf::Vector2f position;

@@ -12,31 +12,31 @@
 class App
 {
 public:
-	explicit App(sf::Font& font);
+	explicit App(sf::Font& font, sf::RenderWindow& window);
 
 	~App() = default;
 
 	//void RunApp(sf::RenderWindow& window);
 
-	void RunStartMenu(sf::RenderWindow& window);
+	void RunStartMenu();
 
-	void QuickGame(sf::RenderWindow& window);
+	void QuickGame();
 
-	void LoadUser(sf::RenderWindow& window);
+	void LoadUser();
 
-	void UserGame(sf::RenderWindow& window, user_account &current_user);
+	void UserGame(user_account &current_user);
 
-	void PlaySudoku(sf::RenderWindow& window, user &current_user);
+	void PlaySudoku(user &current_user);
 
-	void PlayTTC(sf::RenderWindow& window, user &current_user);
+	void PlayTTC(user &current_user);
 
-	void PlayCrosswords(sf::RenderWindow& window, user &current_user);
+	void PlayCrosswords(user &current_user);
 
-	int get_sudoku_input(sf::RenderWindow& window);
+	int get_sudoku_input();
 
-	std::string get_crosswords_input(sf::RenderWindow& window);
+	std::string get_crosswords_input();
 
-	int move(sf::RenderWindow& window, user& current_user);
+	int move(user& current_user);
 
 private:
 	DecisionMenu start_window;
@@ -57,7 +57,7 @@ private:
 
 	int result;
 
-	sf::Window window;
-
 	sf::Font& font;
+
+	sf::RenderWindow& window;
 };

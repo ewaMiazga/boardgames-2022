@@ -298,6 +298,7 @@ bool Sudoku::solve(int row, int col, int** tab)
 
 void Sudoku::play()
 {
+    // change to 
     int k = 0;
     while (!(k >= difficultyLevel.first && k <= difficultyLevel.second))
     {
