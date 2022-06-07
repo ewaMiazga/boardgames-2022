@@ -16,7 +16,7 @@ public:
 	
 	~App();
 	
-	void RunApp(sf::RenderWindow& window);
+	//void RunApp(sf::RenderWindow& window);
 
 	void RunStartMenu(sf::RenderWindow& window);
 
@@ -33,8 +33,6 @@ public:
 	void PlayCrosswords(sf::RenderWindow& window, user current_user);
 
 	int get_sudoku_input(sf::RenderWindow& window);
-
-	char get_ttc_input(sf::RenderWindow& window);
 
 	std::string get_crosswords_input(sf::RenderWindow& window);
 

@@ -175,17 +175,17 @@ void App::PlaySudoku(sf::RenderWindow & window, user current_user)
 	}
 }
 
-//void PlayTTC(sf::RenderWindow& window, user current_user)
-//{
-//
-//}
+void App::PlayTTC(sf::RenderWindow& window, user current_user)
+{
 
-//void PlayCrosswords(sf::RenderWindow& window, user current_user)
-//{
-//
-//}
+}
 
-int get_sudoku_input(sf::RenderWindow& window)
+void App::PlayCrosswords(sf::RenderWindow& window, user current_user)
+{
+
+}
+
+int App::get_sudoku_input(sf::RenderWindow& window)
 {
 	sf::Event event;
 	while (window.isOpen())
@@ -226,7 +226,7 @@ int get_sudoku_input(sf::RenderWindow& window)
 	}
 }
 
-std::string get_crosswords_input(sf::RenderWindow& window)
+std::string App::get_crosswords_input(sf::RenderWindow& window)
 {
 	sf::String input;
 	while (window.isOpen())
@@ -260,7 +260,7 @@ std::string get_crosswords_input(sf::RenderWindow& window)
 	}
 }
 
-int move(sf::RenderWindow& window, user& current_user)
+int App::move(sf::RenderWindow& window, user& current_user)
 {
 	sf::Event event;
 	while (window.isOpen())
