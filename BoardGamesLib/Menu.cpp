@@ -4,14 +4,11 @@
 #include <SFML/System.hpp>
 
 // MENU
-Menu::Menu()
-{
-
-}
 
 Menu::Menu(float width, float height, std::vector<std::string> info)
+: width(width), height(height)
 {
-	if (!font.loadFromFile("arial.ttf"))
+	if (!font.loadFromFile("../resources/fonts/Qarolina.ttf"))
 	{
 	}
 	fill_info(width, height, info, info.size());
@@ -84,7 +81,7 @@ DecisionMenu::DecisionMenu(float width, float height, std::vector<std::string> i
 {
 	size_t string_sum = info.size() + options.size();
 
-	if (!font.loadFromFile("arial.ttf"))
+	if (!font.loadFromFile("../resources/fonts/Qarolina.ttf"))
 	{
 	}
 	fill_info(width, height, info, string_sum);
@@ -127,10 +124,6 @@ void DecisionMenu::draw(sf::RenderWindow& window)
 	{
 		window.draw(*it);
 	}
-}
-
-DecisionMenu::~DecisionMenu()
-{
 }
 
 void DecisionMenu::MoveUp()
@@ -198,7 +191,7 @@ int DecisionMenu::RunMenu(sf::RenderWindow& window)
 
 LoginWindow::LoginWindow(float width, float height, std::vector<std::string> info, std::vector<std::string> options)
 {
-	if (!font.loadFromFile("arial.ttf"))
+	if (!font.loadFromFile("../resources/fonts/Qarolina.ttf"))
 	{
 		// handle error
 	}
@@ -304,6 +297,9 @@ int LoginWindow::RunMenu(sf::RenderWindow& window)
 	}
 }
 
-void RunApp(std::vector<Menu> windows, sf::RenderWindow& window)
+
+void Menu::reupload_info(std::vector<std::string> info)
 {
+    text = {};
+    fill_info(width, height, info, info.size());
 }

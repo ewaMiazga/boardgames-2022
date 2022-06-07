@@ -2,39 +2,43 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
-#define MAX_NUMBER_OF_ITEMS 3
 
 class Menu
 {
 public:
-	Menu();
+	Menu() = default;
 	Menu(float width, float height, std::vector<std::string> info);
 	~Menu();
 
 	void set_info(int index, std::string info) { this->text[index].setString(info); }
 
-	void draw(sf::RenderWindow& window);
-	int RunMenu(sf::RenderWindow& window);
+	virtual void draw(sf::RenderWindow& window);
+
+    virtual int RunMenu(sf::RenderWindow& window);
+
+    void reupload_info(std::vector<std::string> info);
 
 protected:
 	sf::Font font;
 	std::vector<sf::Text> text;
 	void fill_info(float width, float height, std::vector<std::string> info, size_t sum);
+    float width;
+    float height;
 };
 
 class DecisionMenu
 	:public Menu
 {
 public:
-	DecisionMenu() {}
+	DecisionMenu() = default;
 	DecisionMenu(float width, float height, std::vector<std::string> info, std::vector<std::string> options);
-	~DecisionMenu();
+	~DecisionMenu() = default;
 
 	void MoveUp();
 	void MoveDown();
 	int GetPressedItem() { return selectedItemIndex; }
-	void draw(sf::RenderWindow& window);
-	int RunMenu(sf::RenderWindow& window);
+	void draw(sf::RenderWindow& window) override;
+	int RunMenu(sf::RenderWindow& window) override;
 
 protected:
 	void fill_options(float width, float height, std::vector<std::string> options, size_t sum);
@@ -46,10 +50,11 @@ class LoginWindow
 	:public DecisionMenu
 {
 public:
+    LoginWindow() = default;
 	LoginWindow(float width, float height, std::vector<std::string> info, std::vector<std::string> options);
 	~LoginWindow();
-	void draw(sf::RenderWindow& window);
-	int RunMenu(sf::RenderWindow& window);
+	void draw(sf::RenderWindow& window) override;
+	int RunMenu(sf::RenderWindow& window) override;
 	sf::String getInPut() { return nameInPut; }
 
 protected:
