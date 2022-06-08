@@ -37,8 +37,9 @@ std::vector<std::string> database::the_best_stats()
 
 user_account database::find_user(std::string name)
 {
-	std::vector<user_account>::iterator i = this->get_users().begin();
-	std::vector<user_account>::iterator end = this->get_users().end();
+    std::vector<user_account> temp = get_users();
+	std::vector<user_account>::iterator i = temp.begin();
+	std::vector<user_account>::iterator end = temp.end();
 	for (; i < end; i++)
 	{
 		if ((*i).get_name() == name)
@@ -51,8 +52,9 @@ user_account database::find_user(std::string name)
 
 void database::update_user(user_account act_user)
 {
-	std::vector<user_account>::iterator i = get_users().begin();
-	std::vector<user_account>::iterator end = get_users().end();
+    std::vector<user_account> temp = get_users();
+	std::vector<user_account>::iterator i = temp.begin();
+	std::vector<user_account>::iterator end = temp.end();
 	for (; i < end; i++)
 	{
 		if ((*i).get_name() == act_user.get_name())

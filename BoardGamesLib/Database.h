@@ -14,11 +14,11 @@ protected:
 public:
 	database();
 	
-	database(std::vector<user_account> users);
+	explicit database(std::vector<user_account> users);
 	
-	std::vector<user_account> get_users() { return this->users; }
+	std::vector<user_account> get_users() { return users; }
 	
-	std::vector<user_account> get_the_best_users() { return this->the_best_users; }
+	std::vector<user_account> get_the_best_users() { return the_best_users; }
 	
 	user_account find_user(std::string name);
 	
@@ -28,7 +28,7 @@ public:
 	
 	void find_the_best_users();
 
-	std::vector<std::string> database::the_best_stats();
+	std::vector<std::string> the_best_stats();
 
 	friend void read_from_file(std::string path, database& obj);
 
