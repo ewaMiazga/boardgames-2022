@@ -346,15 +346,12 @@ void TicTacToe::display()
 
 void TicTacToe::play()
 {
-	if (!gameOver())
-	{
 		if (lvl == "easy")
 			moveAIEasy('O', 'X');
 		else if (lvl == "medium")
 			moveAIMedium('O', 'X');
 		else if (lvl == "hard")
 			moveAIHard('O', 'X');
-	}
 }
 
 char TicTacToe::getValue(int column, int row)

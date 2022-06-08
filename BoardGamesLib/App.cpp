@@ -194,7 +194,7 @@ void App::PlaySudoku(user_account &current_user, std::string lvl)
 	}
 }
 
-void App::PlayTTC(user &current_user, std::string lvl)
+int App::PlayTTC(user &current_user, std::string lvl)
 {
 	int result;
 	char winner;
@@ -207,23 +207,55 @@ void App::PlayTTC(user &current_user, std::string lvl)
 		900,
 		3,
 		window);
+	
+	result = level.chooseStartingPlayer();
+	
+	if(result == 1)
+		level.play();
+	
 	gboard.set_selected({ 0, 0 });
 	gboard.display(level);
+	
+	result = 0;
+	
 	while (window.isOpen())
 	{
-		result = 0;
-		while (result != 1)
+		switch (result)
 		{
+		case 0:
 			result = move(current_user);
 			gboard.set_selected({ current_user.get_y(), current_user.get_x() });
 			gboard.display(level);
+			break;
+		case 1:
+			level.insert(current_user.get_y(), current_user.get_x(), 'X');
+			gboard.display(level);
+			if (!level.gameOver())
+			level.play();
+			gboard.display(level);
+			result = 0;
+			break;
+		case -1:
+			return -1;
+		break;
 		}
-		level.insert(current_user.get_y(), current_user.get_x(), 'X');
-		gboard.display(level);
-		level.play();
-		gboard.display(level);
+		if (level.gameOver())
+		{
+			window.clear();
+			window.display();
+
+			winner = level.getWinner();
+			switch (winner)
+			{
+			case 'O':
+				return 0;
+			case 'X':
+				current_user.add_point();
+				return 1;
+			}
+			return 2;
+		}
 	}
-	current_user.add_point();
 }
 
 void App::PlayCrosswords(user &current_user)

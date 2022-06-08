@@ -33,23 +33,15 @@ int main()
 		std::vector<std::string> game_opt = { "Sudoku", "Tic Tac Toe", "Crosswords", "Stats", "Exit" };
 		DecisionMenu game(900, 900, game_info, game_opt);
 
-		std::vector<std::string> sudoku_info = { "Sudoku" };
-		Menu sudoku(900, 900, sudoku_info);
-
-		std::vector<std::string> ttc_info = { "Tic Tac Toe" };
-		Menu ttc(900, 900, ttc_info);
-
-		std::vector<std::string> crosswords_info = { "Sudoku" };
-		Menu cr(900, 900, crosswords_info);
-
 		std::vector<std::string> stats_info = { "Stats" };
-		Menu stats(900, 900, sudoku_info);
+		Menu stats(900, 900, stats_info);
 
 		std::vector<std::string> lvls_info = { "Chose level of game" };
 		std::vector<std::string> lvls = { "Easy", "Medium", "Hard"};
 		DecisionMenu chose_lvl(900, 900, lvls_info, lvls);
-
-		std::vector<Menu> windows = { start, load, game, sudoku, ttc, cr, stats };
+		
+		std::vector<std::string> info = { "You Win!", "Press Esc to come back to menu" };
+		Menu result_info(900, 900, info);
 		
 
 		int result = 0;
@@ -62,7 +54,7 @@ int main()
 			switch (result)
 			{
 			case 0:
-			{
+			
 				new_info = "What do you want to do " + current_user.get_name() + "?";
 				game.set_info(0, new_info);
 				result = game.RunMenu(window);
@@ -109,6 +101,7 @@ int main()
 						result = 0;
 						break;
 					}
+					result = 0;
 					break;
 				case 2:
 					aplication.PlayCrosswords(current_user);
@@ -116,6 +109,7 @@ int main()
 				case 3:
 					stats.reupload_info(current_user.show_my_stats());
 					result = stats.RunMenu(window);
+					result = 0;
 					break;
 				case 4:
 					window.close();
@@ -130,7 +124,6 @@ int main()
 					break;
 				}
 				break;
-			}
 			case 1:
 				result = load.RunMenu(window);
 				switch (result)
@@ -151,80 +144,11 @@ int main()
 				break;
 			case 2:
 				window.close();
-
+				break;
 			case -1:
 				result = -2;
+				break;
 			}
 		}
 		return 0;
-
-    /*sf::Font font;
-    if (!font.loadFromFile("../resources/fonts/Qarolina.ttf"))
-    {
-        std::cout << "error loading the file";
-        system("pause");
-    }
-
-    std::cout<<"Choose game: \n0 - exit\n1 - sudoku\n2 - tictactoe\n3 - crossword\n";
-    int choice;
-    std::cin>>choice;
-
-    if(!choice)
-    {
-        return 0;
-    }
-    if(choice == 1)
-    {
-        sf::RenderWindow window(sf::VideoMode(900, 900), "Sudoku");
-        SudokuWindow();
-        Board gboard(sf::Vector2f(0, 0),
-                     sf::Color::Black,
-                     sf::Color(155, 155, 155, 100),
-                     sf::Color::Black,
-                     font,
-                     900,
-                     9,
-                     window);
-        Sudoku sudoku("easy");
-        sf::Thread thread2(&Sudoku::play, &sudoku);
-        window.setActive(false);
-        thread2.launch();
-        gboard.display(sudoku);
-    }
-    if(choice == 2)
-    {
-        sf::RenderWindow window(sf::VideoMode(900, 900), "TicTacToe");
-        Board gboard( sf::Vector2f(0, 0),
-                      sf::Color::Black,
-                      sf::Color(155, 155, 155, 100),
-                      sf::Color::Black,
-                      font,
-                      900,
-                      3,
-                      window);
-
-        TicTacToe tics;
-        sf::Thread thread2(&TicTacToe::play, &tics);
-        window.setActive(false);
-        thread2.launch();
-        gboard.display(tics);
-    }
-    if(choice == 3)
-    {
-        Crossword crossword;
-        sf::RenderWindow window(sf::VideoMode(900, 900), "Crossword");
-        Board gboard( sf::Vector2f(0, 0),
-                      sf::Color::Black,
-                      sf::Color(155, 155, 155, 100),
-                      sf::Color::Black,
-                      font,
-                      900,
-                      20,
-                      window);
-        sf::Thread thread2(&Crossword::play, &crossword);
-        window.setActive(false);
-        thread2.launch();
-        gboard.display(crossword);
-    }
-    return 0;*/
 }

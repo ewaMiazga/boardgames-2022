@@ -28,7 +28,7 @@ public:
 
 	void PlaySudoku(user_account &current_user, std::string lvl);
 
-	void PlayTTC(user &current_user, std::string lvl);
+	int PlayTTC(user &current_user, std::string lvl);
 
 	void PlayCrosswords(user &current_user);
 

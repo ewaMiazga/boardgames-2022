@@ -45,7 +45,7 @@ public:
 
 	bool isFullBoard();
 
-	bool gameOver() override;
+	bool gameOver();
 
 	std::pair<int, int> checkWillWin(char value);
 
