@@ -35,19 +35,21 @@ std::vector<std::string> database::the_best_stats()
 	return result;
 }
 
-user_account database::find_user(std::string name)
+void database::find_user(std::string name, user_account& current_user)
 {
-    std::vector<user_account> temp = get_users();
-	std::vector<user_account>::iterator i = temp.begin();
-	std::vector<user_account>::iterator end = temp.end();
-	for (; i < end; i++)
+	current_user.set_name(name);
+	for (auto i:users)
 	{
-		if ((*i).get_name() == name)
-			return (*i);
+		if (i.get_name() == name)
+		{
+			current_user.set_sudoku_stats(i.get_sudoku_stats());
+			current_user.set_ttc_stats(i.get_ttc_stats());
+			current_user.set_crosswords_stats(i.get_crosswords_stats());
+			return;
+		}
 	}
-	user_account new_user(name);
-	add_user(new_user);
-	return new_user;
+	add_user(current_user);
+	return;
 }
 
 void database::update_user(user_account act_user)
@@ -71,108 +73,81 @@ void update(user_account& current_user, database& obj)
 {
 	current_user.stop_game();
 	obj.update_user(current_user);
-	write_to_file("Database.txt", obj);
+	writeToFile("../resources/Database.txt", obj);
 }
 
-void read_from_file(std::string path, database& obj)
+void readFromFile(std::string fileName, database& obj)
 {
-	std::ifstream plik;
-	plik.open(path);
-	if (plik)
+	std::ifstream fileHandleOpen(fileName);
+	if (!fileHandleOpen)
 	{
-		plik >> obj;
+		std::cerr << "File cannot be open - this path not exist " << std::endl;
 	}
-	plik.close();
-}
-
-void write_to_file(std::string path, database& obj)
-{
-	std::ofstream plik;
-	plik.open(path);
-	if (plik)
+	else
 	{
-		plik << obj;
+		while (!fileHandleOpen.eof())
+		{
+			fileHandleOpen >> obj;
+		}
+		fileHandleOpen.close();
 	}
-	plik.close();
 }
 
-std::ifstream& operator>>(std::ifstream& file, database& obj)
+void writeToFile(std::string fileName, database& obj)
 {
-	std::string line;
-	int n = 1;
-	user_account next;
-	stats new_stats;
+	std::ofstream fileHandleOpen(fileName);
+	if (!fileHandleOpen)
+	{
+		std::cerr << "File cannot be open - this path not exist " << std::endl;
+	}
+	else
+	{
+		fileHandleOpen << obj;
+		fileHandleOpen.close();
+	}
+}
+
+std::istream& operator>>(std::istream& CIN, database& obj)
+{
+	
+	std::string name;
 	std::string title;
-	int points, time;
+	std::string points;
+	std::string time;
+	std::string clueInfo;
+	std::getline(CIN, name);
+	std::getline(CIN, title);
+	std::getline(CIN, points);
+	std::getline(CIN, time);
+	stats Sudoku(title, std::stoi(time), std::stoi(points));
+	std::getline(CIN, title);
+	std::getline(CIN, points);
+	std::getline(CIN, time);
+	stats TTC(title, std::stoi(time), std::stoi(points));
+	std::getline(CIN, title);
+	std::getline(CIN, points);
+	std::getline(CIN, time);
+	stats CR(title, std::stoi(time), std::stoi(points));
 
-	while (std::getline(file, line))
-	{
-		if (n == 11)
-		{
-			n = 1;
-			obj.users.push_back(next);
-		}
-		switch (n)
-		{
-		case 1:
-			next.set_name(line);
-			n++;
-			break;
-		case 2:
-			new_stats.set_title(title);
-			std::getline(file, line);
-			points = std::stoi(line);
-			new_stats.set_points(points);
-			std::getline(file, line);
-			time = std::stoi(line);
-			new_stats.set_time(time);
-			next.set_sudoku_stats(new_stats);
-			n += 3;
-			break;
-		case 5:
-			title = line;
-			new_stats.set_title(title);
-			std::getline(file, line);
-			 points = std::stoi(line);
-			new_stats.set_points(points);
-			std::getline(file, line);
-			time = std::stoi(line);
-			new_stats.set_time(time);
-			next.set_ttc_stats(new_stats);
-			n += 3;
-			break;
-		case 8:
-			title = line;
-			new_stats.set_title(title);
-			std::getline(file, line);
-			points = std::stoi(line);
-			new_stats.set_points(points);
-			std::getline(file, line);
-			time = std::stoi(line);
-			new_stats.set_time(time);
-			next.set_crosswords_stats(new_stats);
-			n += 3;
-			break;
-		}
-	}
-	return file;
+	user_account new_user(name, Sudoku, TTC, CR);
+	obj.users.push_back(new_user);
+	return CIN;
 }
 
-std::ofstream& operator<<(std::ofstream& file, database& obj)
+std::ostream& operator<<(std::ostream& file, database& obj)
 {
-	std::string line;
 	for (int i=0; i < obj.get_users().size(); i++)
 	{
-		file << obj.get_users()[i].get_name();
-		file << "Sudoku" << "\n";
-		file << obj.get_users()[i].get_sudoku_stats().get_points() << "\n";
-		file << obj.get_users()[i].get_sudoku_stats().get_time() << "\n";
-		file << "Tic Tac Toe" << "\n";
-		file << obj.get_users()[i].get_ttc_stats().get_points() << "\n";
-		file << obj.get_users()[i].get_ttc_stats().get_time() << "\n";
-		file << "Crosswords" << "\n";
-		file << obj.get_users()[i].get_crosswords_stats().get_points() << "\n";
-		file << obj.get_users()[i].get_crosswords_stats().get_time() << "\n";
+		file << obj.get_users()[i].get_name() << std::endl;
+		file << "Sudoku" << std::endl;
+		file << obj.get_users()[i].get_sudoku_stats().get_points() << std::endl;
+		file << obj.get_users()[i].get_sudoku_stats().get_time() << std::endl;
+		file << "Tic Tac Toe" << std::endl;
+		file << obj.get_users()[i].get_ttc_stats().get_points() << std::endl;
+		file << obj.get_users()[i].get_ttc_stats().get_time() << std::endl;
+		file << "Crosswords" << std::endl;
+		file << obj.get_users()[i].get_crosswords_stats().get_points() << std::endl;
+		file << obj.get_users()[i].get_crosswords_stats().get_time() << std::endl;
 	}
 	return file;
 }

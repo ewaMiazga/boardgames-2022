@@ -20,7 +20,7 @@ public:
 	
 	std::vector<user_account> get_the_best_users() { return the_best_users; }
 	
-	user_account find_user(std::string name);
+	void find_user(std::string name, user_account& current_user);
 	
 	void update_user(user_account act_user);
 	
@@ -32,11 +32,11 @@ public:
 	
 	friend void update(user_account& current_user, database& obj);
 
-	friend void read_from_file(std::string path, database& obj);
-
-	friend void write_to_file(std::string path, database& obj);
-
-	friend std::ifstream& operator>>(std::ifstream& file, database& obj);
+	friend void readFromFile(std::string fileName, database& obj);
 	
-	friend std::ofstream& operator<<(std::ofstream& file, database& obj);
+	friend void writeToFile(std::string fileName, database& obj);
+
+	friend std::istream& operator>>(std::istream& CIN, database& obj);
+	
+	friend std::ostream& operator<<(std::ostream& file, database& obj);
 };

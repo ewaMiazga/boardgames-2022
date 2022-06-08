@@ -10,7 +10,11 @@ int main()
 		sf::RenderWindow window(sf::VideoMode(900, 900), "Sudoku");
 		user_account current_user("new_user");
 		database users;
-		std::ifstream plik;
+		
+		readFromFile("../resources/Database.txt", users);
+
+		std::cout << users.get_users().size();
+
 		std::string new_info = "What do you want to do";
 
 		sf::Font font;
@@ -159,7 +163,7 @@ int main()
 				switch (result)
 				{
 				case 0:
-					current_user = users.find_user(load.getInPut());
+					users.find_user(load.getInPut(), current_user);
 					new_info = "What do you want to do " + current_user.get_name() + "?";
 					game.set_info(0, new_info);
 					result = 0;
@@ -180,5 +184,6 @@ int main()
 				break;
 			}
 		}
+		writeToFile("../resources/Database.txt", users);
 		return 0;
 }

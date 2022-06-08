@@ -40,7 +40,7 @@ public:
 	user_account(std::string name);
 	~user_account();
 	user_account(std::string name, stats sudoku, stats ttc, stats crosswords);
-	std::string get_name() { return this->name; }
+	std::string get_name() { return name; }
 	void set_name(std::string new_name) { this->name = new_name; }
 	stats get_sudoku_stats() { return sudoku_stats; }
 	void set_sudoku_stats(stats& new_stats) { this->sudoku_stats = new_stats; }
