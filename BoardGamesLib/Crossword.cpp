@@ -1,10 +1,21 @@
+#include <fstream>
 #include "Crossword.h"
 
 // -------------------------------------------------- Ewa Miazga ----------------------------------------------------------
 
 Crossword::Crossword()
 {
+    std::ifstream bar;
     std::string fileName = R"(..\resources\CrosswordDataUTF.txt)";
+    
+    bar.open(fileName); //added to fix issue with tests
+    if (!bar)
+    {
+        fileName = R"(..\..\resources\CrosswordDataUTF.txt)";
+    }
+    bar.close();
+
+
     readFromFile(fileName, *this); // call its own
     chooseClueRandomly();
     chooseCrosswordClues();
@@ -126,7 +137,14 @@ void  Crossword::chooseCrosswordClues()
                 }
             }
         }
+        std::ifstream bar;
         std::string fileName = R"(..\resources\CrosswordDataUTF.txt)";
+        bar.open(fileName);
+        if (!bar)
+        {
+            fileName = R"(..\..\resources\CrosswordDataUTF.txt)";
+        }
+        bar.close();
         readFromFile(fileName, *this);
     }
 }
