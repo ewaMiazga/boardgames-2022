@@ -1,5 +1,3 @@
-//#include "pch.h"
-
 #include "CppUnitTest.h"
 #include "..\BoardGamesLib\Crossword.h"
 
@@ -15,7 +13,7 @@ namespace CrosswordTests
 	TEST_CLASS(CrosswordTests)
 	{
 	public:
-		TEST_METHOD(createCrosswordBoard) // monkeypatch
+		TEST_METHOD(createCrosswordBoard)
 		{
 			//Crossword crossword;
 			//int size = crossword.getClues().size();

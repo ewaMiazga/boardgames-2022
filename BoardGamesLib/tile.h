@@ -13,7 +13,7 @@ public:
         sf::Color displayColor,
         sf::Font& font,
         double size, 
-        bool isVisible,
+        bool isVisible = true,
         char value = 0
     );
 
