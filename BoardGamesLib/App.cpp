@@ -151,6 +151,7 @@ void App::UserGame(user_account& current_user)
 int App::PlaySudoku(user_account &current_user, std::string lvl)
 {
 	current_user.start_game("Sudoku");
+	current_user.reset_position();
 	int input;
 	Sudoku level(lvl);
 	level.fill();
@@ -193,13 +194,14 @@ int App::PlaySudoku(user_account &current_user, std::string lvl)
 		{
 			current_user.add_point();
 			current_user.stop_game();
-			return 0;
+			return 1;
 		}
 	}
 }
 
 int App::PlayTTC(user_account &current_user, std::string lvl)
 {
+	current_user.start_game("TicTacToe");
 	current_user.reset_position();
 	int result;
 	char winner;
@@ -246,7 +248,6 @@ int App::PlayTTC(user_account &current_user, std::string lvl)
 		}
 		if (level.gameOver())
 		{
-			current_user.stop_game();
 
 			winner = level.getWinner();
 			switch (winner)
@@ -255,6 +256,7 @@ int App::PlayTTC(user_account &current_user, std::string lvl)
 				return 0;
 			case 'X':
 				current_user.add_point();
+				current_user.stop_game();
 				return 1;
 			}
 			return 2;
@@ -264,22 +266,37 @@ int App::PlayTTC(user_account &current_user, std::string lvl)
 
 int App::PlayCrosswords(user_account &current_user)
 {
-        Crossword crossword;
-        Board gboard( sf::Vector2f(0, 0),
-                      sf::Color::Black,
-                      sf::Color(155, 155, 155, 100),
-                      sf::Color::Black,
-					  font,
-                      900,
-                      20,
-                      window);
-        sf::Thread thread2(&Crossword::play, &crossword);
-		if (crossword.gameOver())
-			return 0;
-        window.setActive(false);
-        thread2.launch();
-        gboard.display2(crossword);
-		window.setActive(true);
+	current_user.start_game("Crosswords");
+	int result;
+	Crossword crossword;
+	Board gboard( sf::Vector2f(0, 0),
+					sf::Color::Black,
+                    sf::Color(155, 155, 155, 100),
+                    sf::Color::Black,
+					font,
+                    900,
+                    20,
+                    window);
+	sf::Thread thread2(&Crossword::play, &crossword);
+	
+	if (crossword.gameOver())
+	{
+		current_user.add_point();
+		current_user.stop_game();
+		return 1;
+	}	
+	
+	window.setActive(false);
+	thread2.launch();
+	gboard.display2(crossword);
+	window.setActive(true);
+	
+	result = move(current_user);
+	if (result == -1)
+	{
+		current_user.stop_game();
+		return -1;
+	}
 }
 
 int App::get_sudoku_input()
