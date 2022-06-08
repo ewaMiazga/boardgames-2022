@@ -26,9 +26,9 @@ public:
 
 	void UserGame(user_account &current_user);
 
-	void PlaySudoku(user_account &current_user);
+	void PlaySudoku(user_account &current_user, std::string lvl);
 
-	void PlayTTC(user &current_user);
+	void PlayTTC(user &current_user, std::string lvl);
 
 	void PlayCrosswords(user &current_user);
 
@@ -39,6 +39,8 @@ public:
 	int move(user& current_user);
 
 	void exit_from_app(user_account& current_user);
+
+	sf::RenderWindow& window;
 
 private:
 	DecisionMenu start_window;
@@ -60,6 +62,4 @@ private:
 	int result;
 
 	sf::Font& font;
-
-	sf::RenderWindow& window;
 };

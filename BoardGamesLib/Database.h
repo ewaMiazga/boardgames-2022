@@ -28,6 +28,8 @@ public:
 	
 	void find_the_best_users();
 
+	std::vector<std::string> database::the_best_stats();
+
 	friend void read_from_file(std::string path, database& obj);
 
 	friend void write_to_file(std::string path, database& obj);

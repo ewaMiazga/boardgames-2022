@@ -10,7 +10,7 @@ public:
 	Menu(float width, float height, std::vector<std::string> info);
 	~Menu();
 
-	void set_info(int index, std::string info) { this->text[index].setString(info); }
+	void set_info(int index, std::string info);
 
 	virtual void draw(sf::RenderWindow& window);
 

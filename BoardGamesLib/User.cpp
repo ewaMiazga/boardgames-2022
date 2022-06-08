@@ -112,6 +112,12 @@ void user_account::stop_game()
 std::vector<std::string> user_account::show_my_stats()
 {
 	std::vector<std::string> user_stats;
+	if (name == "new_user")
+	{
+		user_stats.push_back("You do not have access to this option");
+		return user_stats;
+	}
+	
 	std::string s = "You can see your statisctics";
 
 	user_stats.push_back(s);

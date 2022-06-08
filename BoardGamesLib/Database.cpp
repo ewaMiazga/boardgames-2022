@@ -18,12 +18,20 @@ void database::find_the_best_users()
 {
 	if (users.size() >= 3)
 		the_best_users = { users[0], users[1], users[2] };
-	std::vector<user_account>::iterator i = users.begin();
-	std::vector<user_account>::iterator end = users.end();
-	for (; i < end; i++)
-	{
+	//std::vector<user_account>::iterator i = users.begin();
+	//std::vector<user_account>::iterator end = users.end();
+	//for (; i < end; i++)
+	//{
 
-	}
+	//}
+}
+
+std::vector<std::string> database::the_best_stats()
+{
+	std::vector<std::string> result;
+	result.insert(std::end(result), std::begin(the_best_users[0].show_my_stats()), std::end(the_best_users[0].show_my_stats()));
+	result.insert(std::end(result), std::begin(the_best_users[1].show_my_stats()), std::end(the_best_users[1].show_my_stats()));
+	result.insert(std::end(result), std::begin(the_best_users[2].show_my_stats()), std::end(the_best_users[2].show_my_stats()));
 }
 
 user_account database::find_user(std::string name)

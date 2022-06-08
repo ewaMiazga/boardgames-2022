@@ -1,5 +1,6 @@
 #include "App.h"
 #include <SFML/System.hpp>
+#include <SFML/Graphics.hpp>
 
 const float width = 900;
 const float height = 900;
@@ -61,13 +62,13 @@ void App::QuickGame()
 	switch (result)
 	{
 	case 0:
-		PlaySudoku(current_user);
+		PlaySudoku(current_user, "easy");
 		break;
 	case 1:
-		PlayTTC(current_user);
+		PlayTTC(current_user, "easy");
 		break;
 	case 2:
-		PlayTTC(current_user);
+		PlayTTC(current_user, "easy");
 		break;
 	case 3:
 		stats_window.reupload_info((current_user).show_my_stats());
@@ -117,19 +118,19 @@ void App::LoadUser()
 	}
 }
 
-void App::UserGame(user_account &current_user)
+void App::UserGame(user_account& current_user)
 {
 	result = game_window.RunMenu(window);
 	switch (result)
 	{
 	case 0:
-		PlaySudoku(current_user);
+		PlaySudoku(current_user, "easy");
 		break;
 	case 1:
-		PlayTTC(current_user);
+		PlayTTC(current_user, "easy");
 		break;
 	case 2:
-		PlayTTC(current_user);
+		PlayTTC(current_user, "easy");
 		break;
 	case 3:
 		stats_window.reupload_info((current_user).show_my_stats());
@@ -147,11 +148,11 @@ void App::UserGame(user_account &current_user)
 	}
 }
 
-void App::PlaySudoku(user_account &current_user)
+void App::PlaySudoku(user_account &current_user, std::string lvl)
 {
 	current_user.start_game("Sudoku");
 	int input;
-	Sudoku level("hard");
+	Sudoku level(lvl);
 	level.fill();
 	Board gboard(sf::Vector2f(0, 0),
 		sf::Color::Black,
@@ -181,6 +182,7 @@ void App::PlaySudoku(user_account &current_user)
 			result = 0;
 			break;
 		case -1:
+			current_user.add_point();
 			current_user.stop_game();
 			return;
 		case -2:
@@ -192,10 +194,11 @@ void App::PlaySudoku(user_account &current_user)
 	}
 }
 
-void App::PlayTTC(user &current_user)
+void App::PlayTTC(user &current_user, std::string lvl)
 {
 	int result;
-	TicTacToe level("easy");
+	char winner;
+	TicTacToe level(lvl);
 	Board gboard(sf::Vector2f(0, 0),
 		sf::Color::Black,
 		sf::Color(155, 155, 155, 100),
@@ -220,12 +223,12 @@ void App::PlayTTC(user &current_user)
 		level.play();
 		gboard.display(level);
 	}
-
+	current_user.add_point();
 }
 
 void App::PlayCrosswords(user &current_user)
 {
-	int result;
+	/*int result;
 	std::string input;
 	Crossword level;
 	Board gboard(sf::Vector2f(0, 0),
@@ -251,8 +254,24 @@ void App::PlayCrosswords(user &current_user)
 		}
 		input = get_crosswords_input();
 		level.insert(current_user.get_y(), input);
-		gboard.display(level);
-	}
+		gboard.display(level);*/
+
+        Crossword crossword;
+        sf::RenderWindow window(sf::VideoMode(900, 900), "Crossword");
+        Board gboard( sf::Vector2f(0, 0),
+                      sf::Color::Black,
+                      sf::Color(155, 155, 155, 100),
+                      sf::Color::Black,
+					  font,
+                      900,
+                      20,
+                      window);
+		crossword.display();
+		gboard.display(crossword);
+        sf::Thread thread2(&Crossword::play, &crossword);
+        window.setActive(false);
+        thread2.launch();
+        gboard.display(crossword);
 }
 
 int App::get_sudoku_input()

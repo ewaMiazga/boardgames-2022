@@ -34,6 +34,13 @@ void Menu::fill_info(float width, float height, std::vector<std::string> info, s
 	}
 }
 
+void Menu::set_info(int index, std::string info)
+{
+	float x = width / 2 - (info.length() * 10);
+	this->text[index].setString(info);
+	this->text[index].setPosition(sf::Vector2f(x, height / (5 + 1)));
+}
+
 Menu::~Menu()
 {
 }
