@@ -2,6 +2,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
+//utility class representing the smallest element of a Board Game
 class Tile : public sf::RectangleShape
 {
 public:
@@ -17,7 +18,7 @@ public:
         char value = 0
     );
 
-    void draw(sf::RenderWindow& window);
+    void draw(sf::RenderWindow& window); //draws tile and its value
 
     char getValue();
     void setValue(char);
@@ -25,8 +26,8 @@ public:
     void setVisibility(bool);
 
 private:
-    bool visibility;
-    sf::Vector2f position;
+    bool visibility; //determines whether object will be rendered
+    sf::Vector2f position; //offset of top left corner in relation to top left corner of current window
     char value;
-    sf::Text displayValue;
+    sf::Text displayValue; //Text object allowing to display stored value
 };
