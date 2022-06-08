@@ -2,7 +2,6 @@
 #include "board.h"
 #include "tile.h"
 
-
 Board::Board(
         sf::Vector2f position,
         sf::Color frameColor,
@@ -54,6 +53,14 @@ Board::~Board()
     delete[] board;
 }
 
+void Board::set_selected(std::pair<int, int> index)
+{
+    if(selected.first != -1)
+        getTile(selected).setOutlineColor(sf::Color::Black);
+    selected = index;
+    getTile(selected).setOutlineColor(sf::Color::Red);
+}
+
 void Board::draw()
 {
     for (int i = 0; i < elemNum; ++i)
@@ -76,6 +83,7 @@ std::pair<int, int> Board::getIndex(sf::Vector2i pos)
     int row = mousePos.x / (size / elemNum);
     return std::pair<int, int>(column, row);
 }
+
 Tile& Board::getTile(std::pair<int, int> index)
 {
     int &column = index.first;
@@ -83,7 +91,26 @@ Tile& Board::getTile(std::pair<int, int> index)
     return board[column][row];
 }
 
-void TicTacToeBoard::display(TicTacToe &game)
+void Board::display(Games& game)
+{
+    for (int i = 0; i < elemNum; ++i)
+    {
+        for (int j = 0; j < elemNum; ++j)
+        {
+            board[j][i].setValue(game.getValue(j, i));
+        }
+    }
+    
+    if (game.gameOver())
+    {
+        //end screen should be called
+        m_window.close();
+    }
+    
+    update();
+}
+
+void Board::display2(Games& game)
 {
     m_window.setActive(true);
 
@@ -94,22 +121,22 @@ void TicTacToeBoard::display(TicTacToe &game)
 
         while (m_window.pollEvent(e)) {
             switch (unsigned int key = -1;  e.type) {
-                case sf::Event::Closed:
-                    m_window.close();
-                    break;
-                case sf::Event::MouseButtonPressed:
-                    if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
-                    {
-                        std::pair<int, int> index(getIndex(sf::Mouse::getPosition(m_window)));
-                        getTile(index).setOutlineColor(sf::Color::Red);
-                    }
-                    if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Right))
-                    {
-                        std::pair<int, int> index(getIndex(sf::Mouse::getPosition(m_window)));
-                        getTile(index).setOutlineColor(sf::Color::Black);
-                    }
-                default:
-                    break;
+            case sf::Event::Closed:
+                m_window.close();
+                break;
+            case sf::Event::MouseButtonPressed:
+                if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+                {
+                    std::pair<int, int> index(getIndex(sf::Mouse::getPosition(m_window)));
+                    getTile(index).setOutlineColor(sf::Color::Red);
+                }
+                if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Right))
+                {
+                    std::pair<int, int> index(getIndex(sf::Mouse::getPosition(m_window)));
+                    getTile(index).setOutlineColor(sf::Color::Black);
+                }
+            default:
+                break;
             }
         }
         for (int i = 0; i < elemNum; ++i)
@@ -120,7 +147,7 @@ void TicTacToeBoard::display(TicTacToe &game)
             }
         }
 
-        if(game.gameOver())
+        if (game.gameOver())
         {
             //end screen should be called
             m_window.close();
@@ -129,97 +156,8 @@ void TicTacToeBoard::display(TicTacToe &game)
     }
 }
 
-void SudokuBoard::display(Sudoku &game)
-{
-    m_window.setActive(true);
 
-    while (m_window.isOpen())
-    {
-        sf::sleep(sf::milliseconds(100));
-        sf::Event e;
 
-        while (m_window.pollEvent(e)) {
-            switch (unsigned int key = -1;  e.type) {
-                case sf::Event::Closed:
-                    m_window.close();
-                    break;
-                case sf::Event::MouseButtonPressed:
-                    if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
-                    {
-                        std::pair<int, int> index(getIndex(sf::Mouse::getPosition(m_window)));
-                        getTile(index).setOutlineColor(sf::Color::Red);
-                    }
-                    if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Right))
-                    {
-                        std::pair<int, int> index(getIndex(sf::Mouse::getPosition(m_window)));
-                        getTile(index).setOutlineColor(sf::Color::Black);
-                    }
-                default:
-                    break;
-            }
-        }
-        for (int i = 0; i < elemNum; ++i)
-        {
-            for (int j = 0; j < elemNum; ++j)
-            {
-                board[j][i].setValue(game.getValue(j, i));
-            }
-        }
-
-        if(game.gameOver())
-        {
-            //end screen should be called
-            m_window.close();
-        }
-        update();
-    }
-}
-
-void CrosswordBoard::display(Crossword &game)
-{
-    m_window.setActive(true);
-
-    while (m_window.isOpen())
-    {
-        sf::sleep(sf::milliseconds(100));
-        sf::Event e;
-
-        while (m_window.pollEvent(e)) {
-            switch (unsigned int key = -1;  e.type) {
-                case sf::Event::Closed:
-                    m_window.close();
-                    break;
-                case sf::Event::MouseButtonPressed:
-                    if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
-                    {
-                        std::pair<int, int> index(getIndex(sf::Mouse::getPosition(m_window)));
-                        getTile(index).setOutlineColor(sf::Color::Red);
-                    }
-                    if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Right))
-                    {
-                        std::pair<int, int> index(getIndex(sf::Mouse::getPosition(m_window)));
-                        getTile(index).setOutlineColor(sf::Color::Black);
-                    }
-                default:
-                    break;
-            }
-        }
-        for (int i = 0; i < elemNum; ++i)
-        {
-            for (int j = 0; j < elemNum; ++j)
-            {
-                board[j][i].setValue(game.getValue(j, i));
-            }
-        }
-
-        if(game.gameOver())
-        {
-            //end screen should be called
-            m_window.close();
-        }
-        update();
-    }
-}
 void Board::update()
 {
     m_window.clear(sf::Color::White);

@@ -1,40 +1,67 @@
 #pragma once
-#include "SFML/Graphics.hpp"
+#include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
 
-#define MAX_NUMBER_OF_ITEMS 3
 
 class Menu
 {
 public:
-	Menu();
+	Menu() = default;
 	Menu(float width, float height, std::vector<std::string> info);
 	~Menu();
 
-	void draw(sf::RenderWindow& window);
-	void MoveUp();
-	void MoveDown();
-	int GetPressedItem() { return selectedItemIndex; }
-	int RunMenu(sf::RenderWindow& window);
+	void set_info(int index, std::string info);
+
+	virtual void draw(sf::RenderWindow& window);
+
+    virtual int RunMenu(sf::RenderWindow& window);
+
+    void reupload_info(std::vector<std::string> info);
 
 protected:
-	int selectedItemIndex;
 	sf::Font font;
-	std::vector<sf::Text> menu;
-
+	std::vector<sf::Text> text;
+	void fill_info(float width, float height, std::vector<std::string> info, size_t sum);
+    float width;
+    float height;
 };
 
-class LoginWindow
+class DecisionMenu
 	:public Menu
 {
 public:
-	LoginWindow(float width, float height);
+	DecisionMenu() = default;
+	DecisionMenu(float width, float height, std::vector<std::string> info, std::vector<std::string> options);
+	~DecisionMenu() = default;
+
+	void MoveUp();
+	void MoveDown();
+	int GetPressedItem() { return selectedItemIndex; }
+	void draw(sf::RenderWindow& window) override;
+	int RunMenu(sf::RenderWindow& window) override;
+
+protected:
+	void fill_options(float width, float height, std::vector<std::string> options, size_t sum);
+	int selectedItemIndex;
+	std::vector<sf::Text> options;
+};
+
+class LoginWindow
+	:public DecisionMenu
+{
+public:
+    LoginWindow() = default;
+	LoginWindow(float width, float height, std::vector<std::string> info, std::vector<std::string> options);
 	~LoginWindow();
-	void draw(sf::RenderWindow& window);
-	void RunMenu(sf::RenderWindow& window);
+	void draw(sf::RenderWindow& window) override;
+	int RunMenu(sf::RenderWindow& window) override;
+	sf::String getInPut() { return nameInPut; }
 
 protected:
 	sf::String nameInPut;
+	sf::Text Name;
 	sf::RectangleShape nameRect;
-
 };
+
+void RunApp(std::vector<Menu> windows, sf::RenderWindow& window);
 

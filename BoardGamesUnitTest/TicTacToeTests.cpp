@@ -77,7 +77,7 @@ namespace TicTacToeTests
 			char symbol = 'O';
 			Assert::IsFalse(board.isEmpty(0, 0));
 			Assert::IsFalse(board.isEmpty(0, 1));
-			Assert::AreEqual(board.getWinner(), symbol);
+			Assert::AreEqual(symbol, board.getWinner());
 		}
 
 		TEST_METHOD(getWinnerTie)

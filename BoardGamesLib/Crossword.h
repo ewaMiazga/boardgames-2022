@@ -20,10 +20,11 @@ private:
 	std::vector<std::pair<int, std::pair<std::string, std::string>>> crosswordClues; //hasla w krzyzowkce
 	std::vector<std::pair<int, std::pair<std::string, std::string>>> crosswordCluesUser; // wyniki uzytkownika
 	std::vector<std::pair<std::string, std::string>> clues;
+    std::vector<std::vector<char>> board;
 public:
 	Crossword();
 
-	~Crossword();
+	~Crossword() = default;
 
 	std::string getClue();
 
@@ -38,7 +39,7 @@ public:
 	std::vector<std::pair<int, std::pair<std::string, std::string>>> getCrosswordCluesUser();
 
 	bool isEmpty(int& num);
-	
+
 	void addClue(std::string Clue, std::string ClueInfo);
 
 	bool findLetter(char letter, std::pair<std::string, std::string> word);
@@ -64,6 +65,8 @@ public:
 	bool isSolved();
 
 	bool checkCorrectness();
+
+    bool gameOver() override;
 
     char getValue(int column, int row) override;
 

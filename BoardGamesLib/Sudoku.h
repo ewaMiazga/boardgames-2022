@@ -3,8 +3,6 @@
 #include <random>
 #include <vector>
 #include "Games.h"
-#include "board.h"
-
 
 #define emptySquare 0
 #define N 9
@@ -27,7 +25,7 @@ private:
     int gridPos[81];
 
 public:
-    Sudoku(std::string difficultyLevelValue);
+    explicit Sudoku(std::string difficultyLevelValue);
 
     ~Sudoku();
 
@@ -74,4 +72,6 @@ public:
     void play() override;
 
     void display() override;
+
+    void fill();
 };

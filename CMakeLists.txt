@@ -60,7 +60,9 @@ target_link_libraries(BoardGamesUnitTest BoardGamesLib)
 set_property(TARGET BoardGamesUnitTest PROPERTY CXX_STANDARD 17)
 
 target_link_libraries(BoardGamesApp sfml-graphics sfml-system sfml-window) 
-target_link_libraries(BoardGamesLib sfml-graphics sfml-system sfml-window) 
+target_link_libraries(BoardGamesLib sfml-graphics sfml-system sfml-window)
+
+
 
 
 
