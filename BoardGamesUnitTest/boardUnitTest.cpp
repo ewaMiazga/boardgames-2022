@@ -31,7 +31,9 @@ namespace BoardUnitTest
 		}
 		TEST_METHOD(getTile)
 		{
-			sf::RenderWindow window(sf::VideoMode(1000, 1000), "title");
+			sf::RenderWindow window;
+			window.setActive(false);
+			window.create(sf::VideoMode(1000, 1000), "title");
 			Board board(sf::Vector2f(0, 0),
 						sf::Color::Black,
 						sf::Color(155, 155, 155, 100),
@@ -50,7 +52,9 @@ namespace BoardUnitTest
 		}
 		TEST_METHOD(getIndex)
 		{
-			sf::RenderWindow window(sf::VideoMode(1000, 1000), "title");
+			sf::RenderWindow window;
+			window.setActive(false);
+			window.create(sf::VideoMode(1000, 1000), "title");
 			Board board(sf::Vector2f(0, 0),
 				sf::Color::Black,
 				sf::Color(155, 155, 155, 100),
