@@ -68,21 +68,26 @@ int main()
 					switch (result)
 					{
 					case 0:
-						aplication.PlaySudoku(current_user, "easy");
+						result = aplication.PlaySudoku(current_user, "easy");
 						break;
 					case 1:
-						aplication.PlaySudoku(current_user, "medium");
+						result = aplication.PlaySudoku(current_user, "medium");
 						break;
 					case 2:
-						aplication.PlaySudoku(current_user, "hard");
+						result = aplication.PlaySudoku(current_user, "hard");
 						break;
 					case -1:
 						result = 0;
 						break;
 					}
+					if (result == 1)
+					{
+						result_info.set_info(0, "You filled all gaps");
+						result_info.RunMenu(window);
+					}
+					result = 0;
 					break;
 				case 1:
-					current_user.start_game("TicTacToe");
 					result = chose_lvl.RunMenu(window);
 					switch (result)
 					{
@@ -117,7 +122,18 @@ int main()
 					result = 0;
 					break;
 				case 2:
-					aplication.PlayCrosswords(current_user);
+					result = aplication.PlayCrosswords(current_user);
+					switch (result)
+					{
+					case 1:
+						result_info.set_info(0, "You gave answer for every question");
+						result_info.RunMenu(window);
+						result = 0;
+						break;
+					case -1:
+						result = 0;
+						break;
+					}
 					break;
 				case 3:
 					stats.reupload_info(current_user.show_my_stats());

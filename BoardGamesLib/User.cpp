@@ -37,6 +37,7 @@ void user::reset_position()
 {
 	x = 0;
 	y = 0;
+	points = 0;
 }
 
 // USER ACCOUNT
