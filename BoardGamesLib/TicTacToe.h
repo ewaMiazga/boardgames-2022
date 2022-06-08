@@ -5,7 +5,6 @@
 #include <vector>
 #include <SFML/Graphics.hpp>
 #include "Games.h"
-//#include "board.h"
 
 #define N 3
 #define rows  3
@@ -22,14 +21,12 @@
 
 #define findEmptyLine(row1, col1, row2, col2, row3, col3)  ((board[row1][col1] == board[row2][col2]) && (board[row2][col2] == board[row3][col3]) && (board[row1][col1] == emptySquare))
 
-//#define findSameCorners(row1, col1, row2, col2, row3, col3) (((board[row1][col1] == board[row3][col3]) || (board[row1][col1] == board[row1 + 2][col1 + 2]) || (board[row3][col3] == board[row3 + 2][col3 + 2])) && (board[2][2] == emptySquare))
 
 class TicTacToe:public Games
 {
 private:
 	char board[rows][columns];
 	std::string lvl;
-    //Board &dBoard;
 public:
 	TicTacToe() = default;
 
@@ -45,13 +42,11 @@ public:
 
 	bool isFullBoard();
 
-	bool gameOver();
+	bool gameOver() override;
 
 	std::pair<int, int> checkWillWin(char value);
 
 	std::pair<int, int> chooseSecondMove(char value);
-
-	std::pair<int, int> chooseThirdMove();
 
 	std::pair<int, int> emptyLineFullOpponentSq(char value);
 

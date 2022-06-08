@@ -170,18 +170,6 @@ std::pair<int, int> TicTacToe::chooseSecondMove(char value)
 	return std::make_pair(-1, -1);
 }
 
-
-//std::pair<int, int> TicTacToe::chooseThirdMove() // find case when opponet try to get to positions to win
-//{
-//	std::pair<int, int> notWillWin = std::make_pair(-1, -1);
-//	for (int i = 0; i < N; i++)
-//	{
-//		if (findSameCorners(i, 0, i, 1, i, 2) && i==0)
-//			return std::make_pair(2, 2);
-//	}
-//	return notWillWin;
-//}
-
 std::pair<int, int> TicTacToe::emptyLineFullOpponentSq(char value)
 {
 	std::pair<int, int> notWillWin = std::make_pair(-1, -1);
@@ -276,11 +264,6 @@ void TicTacToe::moveAIHard(char value, char opponentValue)
 		std::pair<int, int> coordinates = chooseSecondMove(value);
 		insert(coordinates.first, coordinates.second, value);
 	}
-	//else if (chooseThirdMove() != notWillWin)
-	//{
-	//	std::pair<int, int> coordinates = chooseThirdMove();
-	//	insert(coordinates.first, coordinates.second, value);
-	//}
 	else if (emptyLineFullOpponentSq(opponentValue) != notWillWin)  // check if is it possible to be this case
 	{
 		std::pair<int, int> coordinates = emptyLineFullOpponentSq(opponentValue);
