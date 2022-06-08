@@ -266,7 +266,7 @@ bool Crossword::checkCorrectness()
 
 void Crossword::play()
 {
-    while (!(isSolved() && checkCorrectness()))
+    while (!isSolved() && !checkCorrectness())
     {
         display();
         int num;
@@ -290,7 +290,7 @@ void Crossword::play()
 
 bool Crossword::gameOver()
 {
-    return isSolved()&&checkCorrectness();
+    return isSolved();
 }
 
 char Crossword::getValue(int column, int row)

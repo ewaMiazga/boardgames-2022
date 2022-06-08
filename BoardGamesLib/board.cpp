@@ -110,6 +110,53 @@ void Board::display(Games& game)
     update();
 }
 
+void Board::display2(Games& game)
+{
+    m_window.setActive(true);
+
+    while (m_window.isOpen())
+    {
+        sf::sleep(sf::milliseconds(100));
+        sf::Event e;
+
+        while (m_window.pollEvent(e)) {
+            switch (unsigned int key = -1;  e.type) {
+            case sf::Event::Closed:
+                m_window.close();
+                break;
+            case sf::Event::MouseButtonPressed:
+                if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+                {
+                    std::pair<int, int> index(getIndex(sf::Mouse::getPosition(m_window)));
+                    getTile(index).setOutlineColor(sf::Color::Red);
+                }
+                if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Right))
+                {
+                    std::pair<int, int> index(getIndex(sf::Mouse::getPosition(m_window)));
+                    getTile(index).setOutlineColor(sf::Color::Black);
+                }
+            default:
+                break;
+            }
+        }
+        for (int i = 0; i < elemNum; ++i)
+        {
+            for (int j = 0; j < elemNum; ++j)
+            {
+                board[j][i].setValue(game.getValue(j, i));
+            }
+        }
+
+        if (game.gameOver())
+        {
+            //end screen should be called
+            m_window.close();
+        }
+        update();
+    }
+}
+
+
 
 void Board::update()
 {

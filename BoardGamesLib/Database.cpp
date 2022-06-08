@@ -32,6 +32,7 @@ std::vector<std::string> database::the_best_stats()
 	result.insert(std::end(result), std::begin(the_best_users[0].show_my_stats()), std::end(the_best_users[0].show_my_stats()));
 	result.insert(std::end(result), std::begin(the_best_users[1].show_my_stats()), std::end(the_best_users[1].show_my_stats()));
 	result.insert(std::end(result), std::begin(the_best_users[2].show_my_stats()), std::end(the_best_users[2].show_my_stats()));
+	return result;
 }
 
 user_account database::find_user(std::string name)

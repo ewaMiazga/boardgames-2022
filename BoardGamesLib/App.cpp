@@ -257,7 +257,7 @@ void App::PlayCrosswords(user &current_user)
 		gboard.display(level);*/
 
         Crossword crossword;
-        sf::RenderWindow window(sf::VideoMode(900, 900), "Crossword");
+        //sf::RenderWindow window(sf::VideoMode(900, 900), "Crossword");
         Board gboard( sf::Vector2f(0, 0),
                       sf::Color::Black,
                       sf::Color(155, 155, 155, 100),
@@ -266,12 +266,11 @@ void App::PlayCrosswords(user &current_user)
                       900,
                       20,
                       window);
-		crossword.display();
-		gboard.display(crossword);
         sf::Thread thread2(&Crossword::play, &crossword);
         window.setActive(false);
         thread2.launch();
-        gboard.display(crossword);
+        gboard.display2(crossword);
+		window.setActive(true);
 }
 
 int App::get_sudoku_input()
@@ -397,3 +396,4 @@ void App::exit_from_app(user_account& current_user)
 	users.update_user(current_user);
 	write_to_file("Database.txt", users);
 }
+
