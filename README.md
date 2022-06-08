@@ -24,6 +24,5 @@ cd _build
 call cmake ..
 ```
 ~~Run  `BoardGamesApp.exe`~~ 
-
-The application will then launch.
+sln file is located in _build
 
