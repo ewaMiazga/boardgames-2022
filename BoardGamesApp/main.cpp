@@ -49,8 +49,8 @@ int main()
 //    thread2.launch();
 //    gboard.display();
 //   // tics.play();
-    Crossword crossword;
-    crossword.play();
+    //Crossword crossword;
+    //crossword.play();
 
    return 0;
 }

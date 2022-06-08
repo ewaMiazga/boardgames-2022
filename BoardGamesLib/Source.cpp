@@ -1,9 +1,9 @@
-//#include "Sudoku.h"
-//#include "TicTacToe.h"
-//#include "Crossword.h"
-//
-//int main()
-//{
+#include "Sudoku.h"
+#include "TicTacToe.h"
+#include "Crossword.h"
+
+int main()
+{
 //    /*int arr[9][9] = {
 //    {5, 3, 0, 0, 7, 0, 0, 0, 0},
 //    {6, 0, 0, 1, 9, 5, 0, 0, 0},
@@ -54,14 +54,14 @@
 //     board.play();
 //
 //    //PLAY SUDOKU
-//    //std::string diffLvl;
-//    //std::cout << "Choose difficulty level: " << std::endl;
-//    //std::cout << "easy" << std::endl;
-//    //std::cout << "medium" << std::endl;
-//    //std::cout << "hard" << std::endl;
-//    //std::cin >> diffLvl;
-//    //Sudoku s1(diffLvl);
-//    //s1.play();
+    std::string diffLvl;
+    std::cout << "Choose difficulty level: " << std::endl;
+    std::cout << "easy" << std::endl;
+    std::cout << "medium" << std::endl;
+    std::cout << "hard" << std::endl;
+    std::cin >> diffLvl;
+    Sudoku s1(diffLvl);
+    s1.play();
 //
 //    //PLAY CROSSWORD
 //    //Crossword c1;
@@ -69,4 +69,4 @@
 //
 //    system("pause 0");
 //    return 0;
-//}
+}
