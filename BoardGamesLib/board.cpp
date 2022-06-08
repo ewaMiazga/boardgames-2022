@@ -144,8 +144,6 @@ void Board::display2(Games& game)
     }
 }
 
-
-
 void Board::update()
 {
     m_window.clear(sf::Color::White);
