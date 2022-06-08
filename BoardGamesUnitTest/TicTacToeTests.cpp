@@ -15,13 +15,13 @@ namespace TicTacToeTests
 
 		TEST_METHOD(createTicTacToeBoard)
 		{
-			TicTacToe board;
+			TicTacToe board("hard");
 			Assert::IsTrue(board.isEmpty(0, 0));
 		}
 
 		TEST_METHOD(Insert)
 		{
-			TicTacToe board;
+			TicTacToe board("hard");
 			board.insert(0, 1, 'X');
 			Assert::IsTrue(board.isEmpty(0, 0));
 			Assert::IsFalse(board.isEmpty(0, 1));
@@ -29,7 +29,7 @@ namespace TicTacToeTests
 
 		TEST_METHOD(getWinnerX)
 		{
-			TicTacToe board;
+			TicTacToe board("hard");
 			board.insert(0, 1, 'X');
 			board.insert(0, 2, 'X');
 			board.insert(0, 0, 'X');
@@ -47,7 +47,7 @@ namespace TicTacToeTests
 
 		TEST_METHOD(getWinnerXNotFullBoard)
 		{
-			TicTacToe board;
+			TicTacToe board("hard");
 			board.insert(0, 1, 'X');
 			board.insert(0, 2, 'X');
 			board.insert(0, 0, 'X');
@@ -64,7 +64,7 @@ namespace TicTacToeTests
 
 		TEST_METHOD(getWinnerO)
 		{
-			TicTacToe board;
+			TicTacToe board("hard");
 			board.insert(0, 1, 'O');
 			board.insert(0, 2, 'X');
 			board.insert(0, 0, 'X');
@@ -82,7 +82,7 @@ namespace TicTacToeTests
 
 		TEST_METHOD(getWinnerTie)
 		{
-			TicTacToe board;
+			TicTacToe board("hard");
 			board.insert(0, 1, 'O');
 			board.insert(0, 2, 'X');
 			board.insert(0, 0, 'X');
@@ -100,7 +100,7 @@ namespace TicTacToeTests
 
 		TEST_METHOD(getWinnerTie2Winners)
 		{
-			TicTacToe board;
+			TicTacToe board("hard");
 			board.insert(0, 1, 'O');
 			board.insert(0, 2, 'O');
 			board.insert(0, 0, 'O');
@@ -118,7 +118,7 @@ namespace TicTacToeTests
 
 		TEST_METHOD(isfullBoardTrue)
 		{
-			TicTacToe board;
+			TicTacToe board("hard");
 			board.insert(0, 1, 'O');
 			board.insert(0, 2, 'X');
 			board.insert(0, 0, 'X');
@@ -133,7 +133,7 @@ namespace TicTacToeTests
 
 		TEST_METHOD(isfullBoardFalse)
 		{
-			TicTacToe board;
+			TicTacToe board("hard");
 			board.insert(0, 1, 'O');
 			board.insert(0, 2, 'X');
 			board.insert(0, 0, 'X');
@@ -147,7 +147,7 @@ namespace TicTacToeTests
 
 		TEST_METHOD(gameOverNotFullBoard)
 		{
-			TicTacToe board;
+			TicTacToe board("hard");
 			board.insert(0, 1, 'O');
 			board.insert(0, 2, 'X');
 			board.insert(2, 1, 'X');
@@ -157,7 +157,7 @@ namespace TicTacToeTests
 
 		TEST_METHOD(gameOverWinnerO)
 		{
-			TicTacToe board;
+			TicTacToe board("hard");
 			board.insert(0, 1, 'O');
 			board.insert(0, 2, 'X');
 			board.insert(0, 0, 'X');
@@ -173,7 +173,7 @@ namespace TicTacToeTests
 
 		TEST_METHOD(gameOverTie)
 		{
-			TicTacToe board;
+			TicTacToe board("hard");
 			board.insert(0, 1, 'O');
 			board.insert(0, 2, 'O');
 			board.insert(0, 0, 'O');
@@ -189,7 +189,7 @@ namespace TicTacToeTests
 
 		TEST_METHOD(checkWillWinRow)
 		{
-			TicTacToe board;
+			TicTacToe board("hard");
 			board.insert(0, 1, 'X');
 			board.insert(0, 2, 'X');
 			board.insert(1, 0, 'X');
@@ -200,7 +200,7 @@ namespace TicTacToeTests
 
 		TEST_METHOD(checkWillWinRow2)
 		{
-			TicTacToe board;
+			TicTacToe board("hard");
 			board.insert(2, 0, 'X');
 			board.insert(2, 2, 'X');
 			board.insert(1, 0, 'O');
@@ -211,7 +211,7 @@ namespace TicTacToeTests
 
 		TEST_METHOD(checkWillWinSq)
 		{
-			TicTacToe board;
+			TicTacToe board("hard");
 			board.insert(0, 0, 'O');
 			board.insert(0, 1, 'O');
 			board.insert(0, 2, 'X');
@@ -227,7 +227,7 @@ namespace TicTacToeTests
 
 		TEST_METHOD(checkWillWinCol2)
 		{
-			TicTacToe board;
+			TicTacToe board("hard");
 			board.insert(1, 1, 'O');
 			board.insert(0, 1, 'O');
 			board.insert(0, 2, 'X');
@@ -239,7 +239,7 @@ namespace TicTacToeTests
 
 		TEST_METHOD(checkWillWinCol)
 		{
-			TicTacToe board;
+			TicTacToe board("hard");
 			board.insert(0, 0, 'O');
 			board.insert(0, 1, 'O');
 			board.insert(0, 2, 'X');
@@ -251,7 +251,7 @@ namespace TicTacToeTests
 
 		TEST_METHOD(checkWillWinSq2)
 		{
-			TicTacToe board;
+			TicTacToe board("hard");
 			board.insert(2, 0, 'O');
 			board.insert(1, 1, 'O');
 			board.insert(0, 1, 'X');
@@ -262,7 +262,7 @@ namespace TicTacToeTests
 
 		TEST_METHOD(chooseSecondMoveifInColIsOpponent)
 		{
-			TicTacToe board;
+			TicTacToe board("hard");
 			board.insert(0, 0, 'X');
 			board.insert(2, 0, 'O');
 			pair<int, int> dim = std::make_pair(1, 1);
@@ -272,7 +272,7 @@ namespace TicTacToeTests
 
 		TEST_METHOD(chooseSecondMoveifInRowIsOpponent)
 		{
-			TicTacToe board;
+			TicTacToe board("hard");
 			board.insert(0, 1, 'X');
 			board.insert(1, 2, 'O');
 			pair<int, int> dim = std::make_pair(0, 0);
@@ -282,7 +282,7 @@ namespace TicTacToeTests
 
 		TEST_METHOD(chooseSecondMoveifInRowAndColIsOpponent)
 		{
-			TicTacToe board;
+			TicTacToe board("hard");
 			board.insert(0, 2, 'X');
 			board.insert(0, 1, 'O');
 			board.insert(2, 2, 'O');
@@ -293,7 +293,7 @@ namespace TicTacToeTests
 
 		TEST_METHOD(chooseSecondMoveifInRowAndSqIsOpponent)
 		{
-			TicTacToe board;
+			TicTacToe board("hard");
 			board.insert(0, 0, 'X');
 			board.insert(1, 1, 'O');
 			board.insert(0, 2, 'O');
@@ -305,7 +305,7 @@ namespace TicTacToeTests
 
 		TEST_METHOD(chooseFirstMoveIsEmptyThirdRow)
 		{
-			TicTacToe board;
+			TicTacToe board("hard");
 			board.insert(0, 0, 'X');
 			board.insert(1, 2, 'X');
 			board.insert(1, 1, 'O');
@@ -318,7 +318,7 @@ namespace TicTacToeTests
 
 		TEST_METHOD(chooseFirstMoveIsEmptyThirdCol)
 		{
-			TicTacToe board;
+			TicTacToe board("hard");
 			board.insert(0, 0, 'X');
 			board.insert(1, 1, 'O');
 			board.insert(1, 0, 'O');
@@ -330,7 +330,7 @@ namespace TicTacToeTests
 
 		TEST_METHOD(chooseFirstMoveIsEmptySecondCol)
 		{
-			TicTacToe board;
+			TicTacToe board("hard");
 			board.insert(0, 0, 'X');
 			board.insert(1, 2, 'O');
 			board.insert(1, 0, 'O');
@@ -342,7 +342,7 @@ namespace TicTacToeTests
 
 		TEST_METHOD(chooseFirstMoveIsEmptySq)
 		{
-			TicTacToe board;
+			TicTacToe board("hard");
 			board.insert(0, 0, 'X');
 			board.insert(1, 2, 'O');
 			board.insert(1, 0, 'O');
