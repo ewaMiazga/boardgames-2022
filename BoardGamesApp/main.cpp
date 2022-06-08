@@ -3,12 +3,14 @@
 #include <SFML/System.hpp>
 #include "../BoardGamesLib/board.h"
 #include "../BoardGamesLib/App.h"
+#include "../BoardGamesLib/Database.h"
 
 int main()
 {
 		sf::RenderWindow window(sf::VideoMode(900, 900), "Sudoku");
 		user_account current_user("new_user");
 		database users;
+		std::ifstream plik;
 		std::string new_info = "What do you want to do";
 
 		sf::Font font;
@@ -61,20 +63,18 @@ int main()
 				switch (result)
 				{
 				case 0:
+					current_user.start_game("Sudoku");
 					result = chose_lvl.RunMenu(window);
 					switch (result)
 					{
 					case 0:
 						aplication.PlaySudoku(current_user, "easy");
-						result = 0;
 						break;
 					case 1:
 						aplication.PlaySudoku(current_user, "medium");
-						result = 0;
 						break;
 					case 2:
 						aplication.PlaySudoku(current_user, "hard");
-						result = 0;
 						break;
 					case -1:
 						result = 0;
@@ -82,24 +82,37 @@ int main()
 					}
 					break;
 				case 1:
+					current_user.start_game("TicTacToe");
 					result = chose_lvl.RunMenu(window);
 					switch (result)
 					{
 					case 0:
-						aplication.PlayTTC(current_user, "easy");
-						result = 0;
+						result = aplication.PlayTTC(current_user, "easy");
 						break;
 					case 1:
-						aplication.PlayTTC(current_user, "medium");
-						result = 0;
+						result = aplication.PlayTTC(current_user, "medium");
 						break;
 					case 2:
-						aplication.PlayTTC(current_user, "hard");
-						result = 0;
+						result = aplication.PlayTTC(current_user, "hard");
 						break;
 					case -1:
 						result = 0;
 						break;
+					}
+					if (result == 0)
+					{
+						result_info.set_info(0, "You lost :(");
+						result_info.RunMenu(window);
+					}
+					if (result == 1)
+					{
+						result_info.set_info(0, "You WIN!");
+						result_info.RunMenu(window);
+					}
+					if (result == 2)
+					{
+						result_info.set_info(0, "Draw");
+						result_info.RunMenu(window);
 					}
 					result = 0;
 					break;
@@ -115,6 +128,7 @@ int main()
 					window.close();
 					break;
 				case -1:
+					update(current_user, users);
 					result = -2;
 					break;
 				}

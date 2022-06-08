@@ -33,6 +33,7 @@ App::App(sf::Font& font, sf::RenderWindow &window) : font(font), window(window)
 	std::vector<std::string> stats_info = { "Stats" };
 	stats_window = Menu(width, height, stats_info);
 
+
 	result = 0;
 }
 
@@ -97,7 +98,6 @@ void App::LoadUser()
 	{
 		name = "User: ";
 		name += load_window.getInPut();
-		current_user = users.find_user(load_window.getInPut());
 		/*if ((*current_user).update_to_premium())
 		{
 			std::cout << "we've got it" << std::endl;
@@ -148,7 +148,7 @@ void App::UserGame(user_account& current_user)
 	}
 }
 
-void App::PlaySudoku(user_account &current_user, std::string lvl)
+int App::PlaySudoku(user_account &current_user, std::string lvl)
 {
 	current_user.start_game("Sudoku");
 	int input;
@@ -182,20 +182,25 @@ void App::PlaySudoku(user_account &current_user, std::string lvl)
 			result = 0;
 			break;
 		case -1:
-			current_user.add_point();
 			current_user.stop_game();
-			return;
+			return -1;
 		case -2:
 			current_user.stop_game();
-			exit_from_app(current_user);
 			window.close();
-			exit(0);	
+			return 2;
+		}
+		if (level.gameOver())
+		{
+			current_user.add_point();
+			current_user.stop_game();
+			return 0;
 		}
 	}
 }
 
-int App::PlayTTC(user &current_user, std::string lvl)
+int App::PlayTTC(user_account &current_user, std::string lvl)
 {
+	current_user.reset_position();
 	int result;
 	char winner;
 	TicTacToe level(lvl);
@@ -218,7 +223,7 @@ int App::PlayTTC(user &current_user, std::string lvl)
 	
 	result = 0;
 	
-	while (window.isOpen())
+	while (!level.gameOver())
 	{
 		switch (result)
 		{
@@ -241,8 +246,7 @@ int App::PlayTTC(user &current_user, std::string lvl)
 		}
 		if (level.gameOver())
 		{
-			window.clear();
-			window.display();
+			current_user.stop_game();
 
 			winner = level.getWinner();
 			switch (winner)
@@ -258,38 +262,9 @@ int App::PlayTTC(user &current_user, std::string lvl)
 	}
 }
 
-void App::PlayCrosswords(user &current_user)
+int App::PlayCrosswords(user_account &current_user)
 {
-	/*int result;
-	std::string input;
-	Crossword level;
-	Board gboard(sf::Vector2f(0, 0),
-		sf::Color::Black,
-		sf::Color(155, 155, 155, 100),
-		sf::Color::Black,
-		font,
-		900,
-		20,
-		window);
-	gboard.set_selected({ 0, 0 });
-	level.display();
-	gboard.display(level);
-	while (window.isOpen())
-	{
-		result = 0;
-		while (result != 1)
-		{
-			result = move(current_user);
-			gboard.set_selected({ current_user.get_y()+1, current_user.get_x() });
-			level.display();
-			gboard.display(level);
-		}
-		input = get_crosswords_input();
-		level.insert(current_user.get_y(), input);
-		gboard.display(level);*/
-
         Crossword crossword;
-        //sf::RenderWindow window(sf::VideoMode(900, 900), "Crossword");
         Board gboard( sf::Vector2f(0, 0),
                       sf::Color::Black,
                       sf::Color(155, 155, 155, 100),
@@ -299,6 +274,8 @@ void App::PlayCrosswords(user &current_user)
                       20,
                       window);
         sf::Thread thread2(&Crossword::play, &crossword);
+		if (crossword.gameOver())
+			return 0;
         window.setActive(false);
         thread2.launch();
         gboard.display2(crossword);
@@ -421,11 +398,3 @@ int App::move(user& current_user)
 		}
 	}
 }
-
-void App::exit_from_app(user_account& current_user)
-{
-	current_user.stop_game();
-	users.update_user(current_user);
-	write_to_file("Database.txt", users);
-}
-

@@ -252,6 +252,7 @@ void LoginWindow::draw(sf::RenderWindow& window)
 
 int LoginWindow::RunMenu(sf::RenderWindow& window)
 {
+	nameInPut = "";
 	Name.setString("");
 	while (window.isOpen())
 	{

@@ -26,19 +26,17 @@ public:
 
 	void UserGame(user_account &current_user);
 
-	void PlaySudoku(user_account &current_user, std::string lvl);
+	int PlaySudoku(user_account &current_user, std::string lvl);
 
-	int PlayTTC(user &current_user, std::string lvl);
+	int PlayTTC(user_account &current_user, std::string lvl);
 
-	void PlayCrosswords(user &current_user);
+	int PlayCrosswords(user_account &current_user);
 
 	int get_sudoku_input();
 
 	std::string get_crosswords_input();
 
 	int move(user& current_user);
-
-	void exit_from_app(user_account& current_user);
 
 	sf::RenderWindow& window;
 
@@ -56,8 +54,6 @@ private:
 	Menu crosswords_window;
 
 	Menu stats_window;
-
-	database users;
 
 	int result;
 

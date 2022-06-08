@@ -19,6 +19,7 @@ public:
 	void add_point() { this->points++; }
 	int get_x() { return this->x; }
 	int get_y() { return this->y; }
+	void reset_position();
 	void move(int x, int y);
 	std::vector<std::string> show_my_stats();
 	bool is_premium() { return false; }

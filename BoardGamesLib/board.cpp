@@ -99,14 +99,7 @@ void Board::display(Games& game)
         {
             board[j][i].setValue(game.getValue(j, i));
         }
-    }
-    
-    if (game.gameOver())
-    {
-        //end screen should be called
-        m_window.close();
-    }
-    
+    }   
     update();
 }
 
@@ -147,11 +140,6 @@ void Board::display2(Games& game)
             }
         }
 
-        if (game.gameOver())
-        {
-            //end screen should be called
-            m_window.close();
-        }
         update();
     }
 }

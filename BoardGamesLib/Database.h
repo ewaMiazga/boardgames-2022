@@ -29,6 +29,8 @@ public:
 	void find_the_best_users();
 
 	std::vector<std::string> the_best_stats();
+	
+	friend void update(user_account& current_user, database& obj);
 
 	friend void read_from_file(std::string path, database& obj);
 

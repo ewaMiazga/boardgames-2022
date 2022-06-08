@@ -33,6 +33,12 @@ std::vector<std::string> user::show_my_stats()
 	return user_stats;
 }
 
+void user::reset_position()
+{
+	x = 0;
+	y = 0;
+}
+
 // USER ACCOUNT
 
 user_account::user_account()
