@@ -1,4 +1,5 @@
 # 208.1 gry planszowe
+>Authors: Jakub Kieruczenko, Ewa Miazga, Bartłomiej Niewiarowski
 
 # Board Games
 
@@ -23,6 +24,7 @@ mkdir _build
 cd _build
 call cmake ..
 ```
-~~Run  `BoardGamesApp.exe`~~ 
-sln file is located in _build
+sln file is located in _build.
+
+Documentation: [here](./BoardGamesDocumentation.pdf)
 
