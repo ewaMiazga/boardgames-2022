@@ -28,12 +28,6 @@ void user::move(int x, int y)
 		this->y += y;
 }
 
-std::vector<std::string> user::show_my_stats()
-{
-	std::vector<std::string> user_stats = { "You start a Quick Game, in this option show statistics is not possible" };
-	return user_stats;
-}
-
 void user::reset_position()
 {
 	x = 0;

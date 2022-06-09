@@ -9,7 +9,7 @@
 // -------------------------------------------------- Bartlomiej Niewiarowski ----------------------------------------------------------
 class database
 {
-protected:
+private:
 	std::vector<user_account> users;
 	std::vector<user_account> the_best_users;
 public:

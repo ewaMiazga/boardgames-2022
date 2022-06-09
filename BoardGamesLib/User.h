@@ -22,7 +22,6 @@ public:
 	int get_y() { return this->y; }
 	void reset_position();
 	void move(int x, int y);
-	std::vector<std::string> show_my_stats();
 	bool is_premium() { return false; }
 };
 
@@ -39,8 +38,8 @@ protected:
 public:
 	user_account();
 	user_account(std::string name);
-	~user_account();
 	user_account(std::string name, stats sudoku, stats ttc, stats crosswords);
+	~user_account();
 	std::string get_name() { return name; }
 	void set_name(std::string new_name) { this->name = new_name; }
 	stats get_sudoku_stats() { return sudoku_stats; }

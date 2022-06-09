@@ -18,10 +18,11 @@ public:
 
     void reupload_info(std::vector<std::string> info);
 
+	void fill_info(float width, float height, std::vector<std::string> info, size_t sum);
+
 protected:
 	sf::Font font;
 	std::vector<sf::Text> text;
-	void fill_info(float width, float height, std::vector<std::string> info, size_t sum);
     float width;
     float height;
 };
@@ -39,9 +40,9 @@ public:
 	int GetPressedItem() { return selectedItemIndex; }
 	void draw(sf::RenderWindow& window) override;
 	int RunMenu(sf::RenderWindow& window) override;
+	void fill_options(float width, float height, std::vector<std::string> options, size_t sum);
 
 protected:
-	void fill_options(float width, float height, std::vector<std::string> options, size_t sum);
 	int selectedItemIndex;
 	std::vector<sf::Text> options;
 };
