@@ -1,6 +1,7 @@
 #include "Stats.h"
 #include <string>
 
+// -------------------------------------------------- Bartlomiej Niewiarowski ----------------------------------------------------------
 stats::stats()
 {
 	points = 0;

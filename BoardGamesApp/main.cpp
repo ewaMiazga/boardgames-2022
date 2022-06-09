@@ -5,6 +5,7 @@
 #include "../BoardGamesLib/App.h"
 #include "../BoardGamesLib/Database.h"
 
+// -------------------------------------------------- Bartlomiej Niewiarowski ----------------------------------------------------------
 int main()
 {
 		sf::RenderWindow window(sf::VideoMode(900, 900), "Sudoku");
@@ -148,7 +149,7 @@ int main()
 					window.close();
 					break;
 				case -1:
-					update(current_user, users);
+					users.update_user(current_user);
 					result = -2;
 					break;
 				}
@@ -163,7 +164,9 @@ int main()
 				switch (result)
 				{
 				case 0:
-					users.find_user(load.getInPut(), current_user);
+					std::cout << users.get_users().size() << std::endl;
+					std::cout << load.get_name() << std::endl;
+					users.find_user(load.get_name(), current_user);
 					new_info = "What do you want to do " + current_user.get_name() + "?";
 					game.set_info(0, new_info);
 					result = 0;
@@ -184,6 +187,7 @@ int main()
 				break;
 			}
 		}
+		std::cout << users.get_users().size();
 		writeToFile("../resources/Database.txt", users);
 		return 0;
 }

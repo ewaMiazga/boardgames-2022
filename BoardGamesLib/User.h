@@ -5,6 +5,7 @@
 #include <vector>
 #include "Stats.h"
 
+// -------------------------------------------------- Bartlomiej Niewiarowski ----------------------------------------------------------
 class user
 {
 protected:
@@ -49,6 +50,7 @@ public:
 	stats get_crosswords_stats() { return crosswords_stats; }
 	void set_crosswords_stats(stats& new_stats) { this->crosswords_stats = new_stats; }
 	time_t get_current_sesion() { return this->current_sesion; }
+	std::string get_current_game() { return current_game; }
 	void start_game(std::string title);
 	void stop_game();
 	std::vector<std::string> show_my_stats();
@@ -59,10 +61,10 @@ class premium_user
 	:public user_account
 {
 public:
-	premium_user();
+	premium_user() = default;
 	premium_user(std::string name, stats sudoku, stats ttc, stats crosswords);
-	~premium_user();
+	~premium_user() = default;
 
 	bool is_premium() { return true; }
-	premium_user update_to_premium(user_account& user);
+	friend premium_user update_to_premium(user_account& user);
 };

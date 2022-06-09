@@ -6,6 +6,7 @@
 #include <string>
 #include <iostream>
 
+// -------------------------------------------------- Bartlomiej Niewiarowski ----------------------------------------------------------
 class database
 {
 protected:
@@ -18,15 +19,11 @@ public:
 	
 	std::vector<user_account> get_users() { return users; }
 	
-	std::vector<user_account> get_the_best_users() { return the_best_users; }
-	
 	void find_user(std::string name, user_account& current_user);
 	
-	void update_user(user_account act_user);
+	void update_user(user_account& act_user);
 	
 	void add_user(user_account new_user);
-	
-	void find_the_best_users();
 
 	std::vector<std::string> the_best_stats();
 	

@@ -1,6 +1,6 @@
 #include "Database.h"
 
-
+// -------------------------------------------------- Bartlomiej Niewiarowski ----------------------------------------------------------
 // DATABASE
 database::database()
 {
@@ -11,19 +11,6 @@ database::database()
 database::database(std::vector<user_account> users)
 {
 	this->users = users;
-	the_best_users = {};
-}
-
-void database::find_the_best_users()
-{
-	if (users.size() >= 3)
-		the_best_users = { users[0], users[1], users[2] };
-	//std::vector<user_account>::iterator i = users.begin();
-	//std::vector<user_account>::iterator end = users.end();
-	//for (; i < end; i++)
-	//{
-
-	//}
 }
 
 std::vector<std::string> database::the_best_stats()
@@ -52,15 +39,15 @@ void database::find_user(std::string name, user_account& current_user)
 	return;
 }
 
-void database::update_user(user_account act_user)
+void database::update_user(user_account& act_user)
 {
+	int it = 0;
     std::vector<user_account> temp = get_users();
-	std::vector<user_account>::iterator i = temp.begin();
-	std::vector<user_account>::iterator end = temp.end();
-	for (; i < end; i++)
+	for (auto i:users)
 	{
-		if ((*i).get_name() == act_user.get_name())
-			(*i) = act_user;
+		if (i.get_name() == act_user.get_name())
+			users[it] = act_user;
+		it++;
 	}
 }
 
@@ -109,7 +96,8 @@ void writeToFile(std::string fileName, database& obj)
 
 std::istream& operator>>(std::istream& CIN, database& obj)
 {
-	
+	int p;
+	int t;
 	std::string name;
 	std::string title;
 	std::string points;
@@ -118,16 +106,22 @@ std::istream& operator>>(std::istream& CIN, database& obj)
 	std::getline(CIN, name);
 	std::getline(CIN, title);
 	std::getline(CIN, points);
+	p = std::stoi(points);
 	std::getline(CIN, time);
-	stats Sudoku(title, std::stoi(time), std::stoi(points));
+	t = std::stoi(time);
+	stats Sudoku(title, t, p);
 	std::getline(CIN, title);
 	std::getline(CIN, points);
+	p = std::stoi(points);
 	std::getline(CIN, time);
-	stats TTC(title, std::stoi(time), std::stoi(points));
+	t = std::stoi(time);
+	stats TTC(title, t, p);
 	std::getline(CIN, title);
 	std::getline(CIN, points);
+	p = std::stoi(points);
 	std::getline(CIN, time);
-	stats CR(title, std::stoi(time), std::stoi(points));
+	t = std::stoi(time);
+	stats CR(title, t, p);
 
 	user_account new_user(name, Sudoku, TTC, CR);
 	obj.users.push_back(new_user);
@@ -147,7 +141,10 @@ std::ostream& operator<<(std::ostream& file, database& obj)
 		file << obj.get_users()[i].get_ttc_stats().get_time() << std::endl;
 		file << "Crosswords" << std::endl;
 		file << obj.get_users()[i].get_crosswords_stats().get_points() << std::endl;
-		file << obj.get_users()[i].get_crosswords_stats().get_time() << std::endl;
+		if (i != obj.get_users().size() - 1)
+			file << obj.get_users()[i].get_crosswords_stats().get_time() << std::endl;
+		else
+			file << obj.get_users()[i].get_crosswords_stats().get_time();
 	}
 	return file;
 }

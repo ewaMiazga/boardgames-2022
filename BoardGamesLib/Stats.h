@@ -4,6 +4,7 @@
 #include <ctime>
 #include <vector>
 
+// -------------------------------------------------- Bartlomiej Niewiarowski ----------------------------------------------------------
 class stats
 {
 protected:

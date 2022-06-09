@@ -1,29 +1,10 @@
-user1
+Bartek
 Sudoku
-100
-1000
+0
+0
 Tic Tac Toe
-200
-2000
+0
+0
 Crosswords
-300
-3000
-user2
-Sudoku
-100
-1000
-Tic Tac Toe
-200
-2000
-Crosswords
-300
-3000user3
-Sudoku
-100
-1000
-Tic Tac Toe
-200
-2000
-Crosswords
-300
-3000
+0
+0

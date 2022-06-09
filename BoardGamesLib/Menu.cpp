@@ -3,8 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
+// -------------------------------------------------- Bartlomiej Niewiarowski ----------------------------------------------------------
 // MENU
-
 Menu::Menu(float width, float height, std::vector<std::string> info)
 {
 	if (!font.loadFromFile("../resources/fonts/Qarolina.ttf"))
@@ -200,6 +200,7 @@ int DecisionMenu::RunMenu(sf::RenderWindow& window)
 	}
 }
 
+//Login Menu
 LoginWindow::LoginWindow(float width, float height, std::vector<std::string> info, std::vector<std::string> options)
 {
 	if (!font.loadFromFile("../resources/fonts/Qarolina.ttf"))
@@ -252,6 +253,7 @@ void LoginWindow::draw(sf::RenderWindow& window)
 
 int LoginWindow::RunMenu(sf::RenderWindow& window)
 {
+	name = "";
 	nameInPut = "";
 	Name.setString("");
 	while (window.isOpen())
@@ -264,8 +266,12 @@ int LoginWindow::RunMenu(sf::RenderWindow& window)
 			{
 			case sf::Event::TextEntered:
 			{
-				nameInPut += event.text.unicode;
-				Name.setString(nameInPut);
+				if (event.text.unicode != 2386)
+				{
+					name += event.text.unicode;
+					nameInPut += event.text.unicode;
+					Name.setString(nameInPut);
+				}
 			}
 			case sf::Event::KeyReleased:
 				switch (event.key.code)

@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
-
+// -------------------------------------------------- Bartlomiej Niewiarowski ----------------------------------------------------------
 class Menu
 {
 public:
@@ -56,11 +56,13 @@ public:
 	void draw(sf::RenderWindow& window) override;
 	int RunMenu(sf::RenderWindow& window) override;
 	sf::String getInPut() { return nameInPut; }
+	std::string get_name() { return name; }
 
 protected:
 	sf::String nameInPut;
 	sf::Text Name;
 	sf::RectangleShape nameRect;
+	std::string name;
 };
 
 void RunApp(std::vector<Menu> windows, sf::RenderWindow& window);

@@ -1,6 +1,4 @@
-﻿// User.cpp : Definiuje funkcje biblioteki statycznej.
-//
-
+﻿#pragma once
 #include <SFML/System.hpp>
 #include <stdexcept>
 #include <string>
@@ -8,6 +6,7 @@
 #include "User.h"
 #include "Stats.h"
 
+// -------------------------------------------------- Bartlomiej Niewiarowski ----------------------------------------------------------
 // USER
 user::user()
 {
@@ -23,8 +22,10 @@ user::~user()
 
 void user::move(int x, int y)
 {
-	this->x += x;
-	this->y += y;
+	if(this->x + x >= 0)
+		this->x += x;
+	if (this->y + y >= 0)
+		this->y += y;
 }
 
 std::vector<std::string> user::show_my_stats()
@@ -150,11 +151,6 @@ bool user_account::update_to_premium()
 }
 
 // Premium user
-
-premium_user::premium_user()
-{
-}
-
 premium_user::premium_user(std::string name, stats sudoku, stats ttc, stats crosswords)
 {
 	x = 0;
@@ -168,11 +164,7 @@ premium_user::premium_user(std::string name, stats sudoku, stats ttc, stats cros
 	crosswords_stats = crosswords;
 }
 
-premium_user::~premium_user()
-{
-}
-
-premium_user premium_user::update_to_premium(user_account& user)
+premium_user update_to_premium(user_account& user)
 {
 	premium_user updated(user.get_name(), user.get_sudoku_stats(), user.get_ttc_stats(), user.get_crosswords_stats());
 	return updated;
