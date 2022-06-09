@@ -2,6 +2,8 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
+// -------------------------------------------------- Jakub Kieruczenko ----------------------------------------------------------
+
 //utility class representing the smallest element of a Board Game
 class Tile : public sf::RectangleShape
 {

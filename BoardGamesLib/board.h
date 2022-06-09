@@ -6,6 +6,8 @@
 #include "Sudoku.h"
 #include "Crossword.h"
 
+// -------------------------------------------------- Jakub Kieruczenko ----------------------------------------------------------
+
 //representation of a square game Board consisting of Tiles
 class Board
 {
