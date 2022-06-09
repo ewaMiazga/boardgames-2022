@@ -1,5 +1,6 @@
 .idea
 cmake-build-debug
+cmake-build-release
 .vs
 *.ipch
 *.db
@@ -34,3 +35,4 @@ _build
 out
 .gitattributes
 *.xml
+cmake-build-release/.ninja_deps
